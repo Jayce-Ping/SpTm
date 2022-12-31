@@ -86,9 +86,13 @@ SetMetricSymbol[metricSymbol_Symbol]:=Module[{},
 	Protect[MetricSymbol];
 ]
 
-SetMetric[Components_?ArrayQ, Coodinates_List:SCoodinates, metricSymbol_Symbol:MetricSymbol]:=Module[{},
+SetMetric[Components_?ArrayQ]:=Module[ {}, SetMetric[Components, SCoodinates] ]
+
+SetMetric[Components_?ArrayQ, Coodinates_List]:=Module[ {}, SetMetric[Components, Coodinates, MetricSymbol] ]
+
+SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[{},
 	If[
-		Coodinates=={},
+		Coodinates=={} && Head[SCoodinates] =!= List,
 		Message[SetMetric::NoCoodinates];
 		Abort[]
 	];
@@ -106,7 +110,7 @@ SetMetric[Components_?ArrayQ, Coodinates_List:SCoodinates, metricSymbol_Symbol:M
 ]
 
 GetMetric[]:=Module[{},
-	Print[ Row[ Subscript[MetricSymbol, Row[{\[Mu],\[Nu]}]], "=" , MatrixForm[MetricComponents] ] ]
+	Row[{ Subscript[MetricSymbol, Row[{"\[Mu]","\[Nu]"}]], "=" , MatrixForm[MetricComponents] }]
 ]
 
 
