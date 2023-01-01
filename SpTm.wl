@@ -43,7 +43,7 @@ SpTmHelp={
 	"\[FilledSmallCircle] \:4f7f\:7528SpTmCalculate[expr]\:5c06\:8868\:8fbe\:5f0f\:8fdb\:884c\:9002\:5f53\:8ba1\:7b97\:548c\:5316\:7b80.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528SpTmCalcComponent[expr]\:8ba1\:7b97\:8868\:8fbe\:5f0f\:7684\:5206\:91cf.\n"
 };
-SpTmHelp::usage = StringJoin[SpTmHelp]
+SpTmHelp::usage = StringJoin[SpTmHelp];
 Print[StringJoin[SpTmHelp]]
 
 (*STensor\:5199\:6cd5\:7684\:6807\:51c6\:683c\:5f0f*)
@@ -59,7 +59,7 @@ Protect[STensor];
 Unprotect[TensorComponents];
 TensorComponents = Association[];
 Protect[TensorComponents];
-SetTensor::ErrorExpression = "\:5f20\:91cf\:683c\:5f0f\:8f93\:5165\:9519\:8bef."
+SetTensor::ErrorExpression = "\:5f20\:91cf\:683c\:5f0f\:8f93\:5165\:9519\:8bef.";
 SetTensor[expr__, components_List] := Module[{},
 	T = InputExplain[expr];
 	If[Head[T] =!= STensor,
@@ -85,7 +85,7 @@ SetTensor[T_STensor, components_List] := Module[{},
 Unprotect[SCoodinates]
 SCoodinates = List[];
 Protect[SCoodinates]
-SetCoodinates::ErrorSymbol = "\:8f93\:5165\:5750\:6807\:7cfb\:4e2d\:5b58\:5728\:975e\:7b26\:53f7\:ff08Symbol\:ff09\:5143\:7d20."
+SetCoodinates::ErrorSymbol = "\:8f93\:5165\:5750\:6807\:7cfb\:4e2d\:5b58\:5728\:975e\:7b26\:53f7\:ff08Symbol\:ff09\:5143\:7d20.";
 SetCoodinates[Coodinates_List] := Module[{},
 	If[
 		!AllTrue[Coodinates,MatchQ[#,_Symbol]&],
@@ -116,12 +116,12 @@ SetMetricSymbol[metricSymbol_Symbol] := Module[{},
 	Unprotect[MetricSymbol];
 	MetricSymbol = metricSymbol;
 	Protect[MetricSymbol];
-]
+];
 
 
-SetMetric[Components_?ArrayQ]:=Module[ {}, SetMetric[Components, SCoodinates] ]
+SetMetric[Components_?ArrayQ]:=Module[ {}, SetMetric[Components, SCoodinates] ];
 
-SetMetric[Components_?ArrayQ, Coodinates_List]:=Module[ {}, SetMetric[Components, Coodinates, MetricSymbol] ]
+SetMetric[Components_?ArrayQ, Coodinates_List]:=Module[ {}, SetMetric[Components, Coodinates, MetricSymbol] ];
 
 SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[{},
 	If[
@@ -145,12 +145,12 @@ SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[{},
 	SetTensor[STensor[metricSymbol, {}, {a, b}], Inverse[Components]];
 	(*Subscript[\:8bbe\:7f6e\[Delta], a]^b*)
 	SetTensor[STensor[\[Delta], {a}, {b}], IdentityMatrix[Length[Coodinates]]];
-]
+];
 
 
 GetMetric[]:=Module[{},
 	Row[{ Subscript[MetricSymbol, Row[{"\[Mu]","\[Nu]"}]], "=" , MatrixForm[MetricComponents] }]
-]
+];
 
 
 (* ::Section:: *)
@@ -197,7 +197,7 @@ ShowSTensor[tensor_STensor] :=
 Protect[ShowForm, ShowSTensor];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97\:89c4\:5219*)
 
 
@@ -276,7 +276,8 @@ STCalculate[expr__]:= Module[
 
 
 (*\:83b7\:53d6\:4e00\:4e2a\:6ca1\:6709\:7528\:8fc7\:7684\:6307\:6807\:7b26\:53f7*)
-GetANotUsedIndex[expr__] := Module[{
+GetANotUsedIndex[expr__] := Module[
+{
 	usedIndeces,
 	unUsedIndeces,
 	alphabet = ToExpression@Alphabet[]
@@ -291,9 +292,6 @@ GetANotUsedIndex[expr__] := Module[{
 (*\:57fa\:672c\:8fd0\:7b97*)
 
 
-(*\:8bbe\:7f6e\:52a0\:6cd5\:548c\:4e58\:6cd5\:7684\:4ea4\:6362\:5f8b\:548c\:7ed3\:5408\:5f8b*)
-SetAttributes[{ATensorAdd, ATensorTimes}, {Flat, Orderless}]
-
 (*\:5c06\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97*)
 (*\:5c06\:6240\:6709STensor\:8f6c\:5316\:4e3aATensor (Anonymous Tensor) \:533f\:540d\:5f20\:91cf\:8fdb\:884c\:8ba1\:7b97*)
 (*\:7531\:4e8e\:5177\:4f53\:6307\:6807\:8ba1\:7b97\:65f6\:ff0c\:5f20\:91cf\:7684\:540d\:79f0\:4e0d\:518d\:91cd\:8981\:ff0c\:800c\:5176\:6307\:6807\:548c\:5206\:91cf\:624d\:662f\:91cd\:8981\:7684\:ff0c\:56e0\:6b64\:8f6c\:5316\:4e3aATensor[components_List, subIndex_List, superIndex_List]\:7684\:5f62\:5f0f*)
@@ -305,8 +303,11 @@ SetAttributes[{ATensorAdd, ATensorTimes}, {Flat, Orderless}]
 (*\:52a0\:6cd5*)
 
 
-ATensorAdd::Error = "\:5f20\:91cf\:4e0d\:540c\:578b\:6216\:6307\:6807\:4e0d\:4e00\:81f4.";
+(*\:8bbe\:7f6e\:52a0\:6cd5\:7684\:4ea4\:6362\:5f8b\:548c\:7ed3\:5408\:5f8b*)
+SetAttributes[ATensorAdd, {Flat, Orderless}]
 
+
+ATensorAdd::Error = "\:5f20\:91cf\:4e0d\:540c\:578b\:6216\:6307\:6807\:4e0d\:5e73\:8861.";
 
 ATensorAdd[T_ATensor, S_ATensor] := Module[{},
 	(*\:4e24\:4e2a\:5f20\:91cf\:76f8\:52a0\:8981\:6c42\:662f\:540c\:578b\:5f20\:91cf\:4e14\:6307\:6807\:76f8\:540c*)
@@ -318,7 +319,7 @@ ATensorAdd[T_ATensor, S_ATensor] := Module[{},
 	ATensor[T[[1]], T[[2]], T[[3]]+S[[3]]]
 ];
 
-ATensorAdd[T_ATensor, S__ATensor] := ATensorAdd[T, ATensorAdd[S]];
+ATensorAdd[T_ATensor, P_ATensor, Q_ATensor] := ATensorAdd[T, ATensorAdd[P, Q]];
 
 ATensorAdd[T_ATensor] := T;
 
@@ -327,10 +328,15 @@ ATensorAdd[T_ATensor] := T;
 (*\:6570\:4e58*)
 
 
-(*\:6570\:4e58*)
-ATensorTimes[k(_Symbol|_?NumberQ), T_ATensor] := Module[{},
-	ATensor[T[[1]], T[[2]], k*T[[3]]]
-]
+SetAttributes[ATensorTimes, {Flat}]
+
+(*\:6570\:4e58*)(*\:6570\:4e58\:6ee1\:8db3\:4ea4\:6362\:5f8b*)
+ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor] := ATensor[T[[1]], T[[2]], k T[[3]]];
+
+ATensorTimes[T_ATensor, k_Symbol|k_?NumberQ] := ATensor[T[[1]], T[[2]], k T[[3]]];
+
+ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor, S__ATensor] := ATensorTimes[k, ATensorTimes[T, S]];
+
 
 
 (* ::Subsubsection:: *)
@@ -338,15 +344,56 @@ ATensorTimes[k(_Symbol|_?NumberQ), T_ATensor] := Module[{},
 
 
 (*\:5f20\:91cf\:79ef\:4e0e\:7f29\:5e76*)
-ATensorTimes[T_ATensor, S_ATensor] := Module[{},
-	Print["TensorProduct and Construct"]
+ATensorTimes[T_ATensor, S_ATensor] := Module[
+{
+		commonIndex = Join[Intersection[T[[1]], S[[2]]], Intersection[T[[2]], S[[1]]]], 
+		sub = Join[T[[1]], S[[1]]],
+		sup = Join[T[[2]], S[[2]]],
+		outputIndex,
+		IndecesPos,
+		contractIndex,
+		product,
+		outputComponents,
+		unArrangedIndex,
+		TargetIndex,
+		cycle,
+		permutation
+},
+	(*\:7ed3\:679c\:5f20\:91cf\:7684\:6307\:6807*)
+	outputIndex = {Select[sub, !MemberQ[sup, #]&], Select[sup, !MemberQ[sub, #]&]};
+	(*\:8ba1\:7b97\:65f6\:5bf9\:6307\:6807\:8fdb\:884c\:7f16\:53f7,\:5f62\:5f0f\:4e3a*)
+	(*\:5bf9T\:7684\:4e0b\:6307\:6807\:7f16\:53f7\:4e3a1, 2, 3...a\:ff0c\:7136\:540e\:5bf9\:4e0a\:6307\:6807\:7f16\:53f7\:4e3aa+1, a+2...a+b*)
+	(*\:5bf9S\:7684\:4e0b\:6307\:6807\:7f16\:53f7\:4e3aa+b+1, a+b+2 ... a+b+c\:ff0c\:4e0a\:6307\:6807\:7f16\:53f7\:4e3aa+b+c+1, ... a+b+c+d*)
+	(*\:5148\:5c06\:6307\:6807\:6309\:987a\:5e8f\:6392\:597d*)(*\:8bb0\:5f55\:6bcf\:4e2a\:6307\:6807\:7684\:7f16\:53f7*)
+	IndecesPos = PositionIndex[Join[T[[1]], T[[2]], S[[1]], S[[2]]]];
+	(*\:5148\:6c42\:51fa\:5f20\:91cf\:79ef*)
+	product = TensorProduct[T[[3]], S[[3]]];
+	(*\:5c06\:9700\:8981\:7f29\:5e76\:7684\:6307\:6807\:8f6c\:5316\:4e3a\:4f4d\:7f6e\:5217\:8868*)
+	contractIndex = IndecesPos[#]& /@ commonIndex;
+	(*\:5bf9\:6307\:6807\:8fdb\:884c\:7f29\:5e76*)
+	outputComponents = TensorContract[product, contractIndex];
+	(*\:8fd8\:9700\:8981\:5c06\:4e0b\:6307\:6807\:653e\:5230\:524d\:9762\:ff0c\:4e0a\:6307\:6807\:653e\:5230\:540e\:9762\:ff0c\:5bf9\:5206\:91cf\:8fdb\:884c\:4f4d\:7f6e\:8c03\:6574*)
+	(*unArrangedIndex\:662foutputComponents\:5bf9\:5e94\:7684\:6307\:6807\:987a\:5e8f*)
+	unArrangedIndex = Keys[DeleteCases[IndecesPos, x_List /; Length[x] > 1]];
+	(*\:8f93\:51fa\:5f20\:91cf\:7684\:6307\:6807\:987a\:5e8f*)
+	TargetIndex = Flatten[outputIndex];
+	(*\:627e\:5230\:5bf9\:5e94\:8f6e\:6362*)
+	cycle = Flatten @ First @ FindPermutation[unArrangedIndex, TargetIndex];
+	(*\:5c06\:8f6e\:6362\:8f6c\:5316\:4e3a\:5bf9\:5e94\:7f6e\:6362\:7ed3\:679c*)
+	If[
+		cycle == {},
+		permutation = {},
+		permutation = Table[cycle[[i]] -> cycle[[i + 1]], {i, Length[cycle] - 1}];
+		AppendTo[permutation, Last[cycle] -> 1];
+	];
+	(*\:5c06\:7ed3\:679c\:6839\:636e\:952e\:503cKey\:6392\:5e8f\:ff0c\:5176\:503cValue\:7684\:5e8f\:5217\:5c31\:662fTranspose\:9700\:8981\:7528\:5230\:7684\:5e8f\:5217*)
+	ATensor[outputIndex[[1]], outputIndex[[2]], TensorTranspose[outputComponents, Values[KeySort[permutation]]]]
 ];
 
-
-ATensorTimes[T_ATensor, S__ATensor] := ATensorTimes[T, ATensorTimes[S]];
-
+ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P, Q]];
 
 ATensorTimes[T_ATensor] := T;
+
 
 
 (* ::Subsection:: *)
@@ -357,12 +404,11 @@ SCalcSpecific[expr__] := Module[
 {
 	expression = expr/.{T_STensor :> ATensor[T[[2]], T[[3]], TensorComponents[T]]}
 },
-	
 	Print["SCalcSpecific"]
-]
+];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:7279\:6b8a\:5f20\:91cf\:8ba1\:7b97*)
 
 
@@ -381,7 +427,7 @@ SCalcChristoffel[g_?ArrayQ, coodinateSystem_List]:=Module[
 	Array[If[#1>#2,\[CapitalGamma][[#1,#2,#3]]=\[CapitalGamma][[#2,#1,#3]]]&,{dimension,dimension,dimension}];
 	(*Print[Subsuperscript["\[CapitalGamma]","\[Mu]\[Nu]","  \[Sigma]"]->MatrixForm[\[CapitalGamma]]]*);
 	\[CapitalGamma]
-]
+];
 
 
 SCalcRiemannTensor[g_?ArrayQ,coodinateSystem_List]:=Module[
@@ -403,7 +449,7 @@ SCalcRiemannTensor[g_?ArrayQ,coodinateSystem_List]:=Module[
 	Array[If[#1>#2,Riemann[[#1,#2,#3,#4]]=-Riemann[[#2,#1,#3,#4]]]&,{dimension,dimension,dimension,dimension}];
 	(*Print[Subsuperscript["R","\[Mu]\[Nu]\[Sigma]","   \[Rho]"]->MatrixForm@Riemann]*);
 	Riemann
-]
+];
 
 
 
@@ -426,10 +472,10 @@ SCalcRicciTensor[g_?ArrayQ,coodinateSystem_List]:=Module[
 	Array[If[#1>#2,Ricci[[#1,#2]]=Ricci[[#2,#1]]]&,{dimension,dimension}];
 	(*Print[Subscript["R","\[Mu]\[Nu]"]->MatrixForm@Ricci]*);
 	Ricci
-]
+];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*End*)
 
 
