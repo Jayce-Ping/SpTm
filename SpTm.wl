@@ -21,16 +21,18 @@ GetMetric::usage = "GetMetric[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
 
 SetTensor::usage = "SetTensor[T_STensor,components_List]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf."
 
-ATensorAdd::usage = "ATensorAdd[T_ATensor, S_ATensor]"<>" "<>"\:8fd4\:56de\:4e24\:4e2aATensor\:5bf9\:8c61\:7684\:5f20\:91cf\:548c"
-
-ATensorTimes::usage = "ATensorTimes[k_Number|Symbol, T_ATensor]"<>" "<>"\:8fd4\:56dek\:6570\:4e58\:5f20\:91cfT\:7684\:7ed3\:679c"<>"\n"<>"ATensorTimes[T_ATensor, S_ATensor]"<>" "<>"\:8fd4\:56deT\:548cS\:5f20\:91cf\:79ef\:6216\:7f29\:5e76\:7684\:7ed3\:679c."
 
 
-SCalcChristoffel::usage = "SCalcChristoffel[metricComponentsMatrix,coodinateSystem]"<>"\n"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\!\(\*SuperscriptBox[SubscriptBox[\(\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
+ATensorAdd::usage = "ATensorAdd[T_ATensor, S_ATensor]"<>" "<>"\:8fd4\:56de\:4e24\:4e2aATensor\:5bf9\:8c61\:7684\:5f20\:91cf\:548c."
 
-SCalcRiemannTensor::usage = "SCalcRiemannTensor[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\!\(\*SuperscriptBox[SubscriptBox[\(\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf\:7684\:5206\:91cfR\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)-(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
+ATensorTimes::usage = "ATensorTimes[k_Number|_Symbol, T_ATensor]"<>" "<>"\:8fd4\:56dek\:6570\:4e58\:5f20\:91cfT\:7684\:7ed3\:679c"<>"\n"<>"ATensorTimes[T_ATensor, S_ATensor]"<>" "<>"\:8fd4\:56deT\:548cS\:5f20\:91cf\:79ef\:6216\:7f29\:5e76\:7684\:7ed3\:679c."
 
-SCalcRicciTensor::usage = "SCalcRicciTensor[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\!\(\*SubscriptBox[\(\:8ba1\:7b97Ricci\:5f20\:91cf\:7684\:5206\:91cfR\), \(\[Mu]\[Nu]\)]\)."
+
+SCalcChristoffel::usage = "SCalcChristoffel[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
+
+SCalcRiemannTensor::usage = "SCalcRiemannTensor[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(R\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)-(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
+
+SCalcRicciTensor::usage = "SCalcRicciTensor[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SubscriptBox[\(R\), \(\[Mu]\[Nu]\)]\)."
 
 
 Begin["Private`"]
@@ -47,9 +49,9 @@ SpTmHelp::usage = StringJoin[SpTmHelp];
 Print[StringJoin[SpTmHelp]]
 
 (*STensor\:5199\:6cd5\:7684\:6807\:51c6\:683c\:5f0f*)
-STensor[TensorName_Symbol,subindex_List,superindex_List];(*STensor\:6807\:51c6\:683c\:5f0f*)
-
-Protect[STensor];
+STensor[TensorName_Symbol, subindex_List, superindex_List];(*STensor\:6807\:51c6\:683c\:5f0f*)
+ATensor[subindex_List, superindex_List, components_List];(*ATensor\:6807\:51c6\:683c\:5f0f*)
+Protect[STensor, ATensor];
 
 
 (* ::Section:: *)
@@ -153,7 +155,7 @@ GetMetric[]:=Module[{},
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8f93\:5165\:89e3\:91ca*)
 
 
@@ -165,14 +167,14 @@ InputExplain[expr__]:=expr//.InputExplainRule;
 generateInputExplainRule[x__]:={(*\:591a\:4e2a\:6307\:6807\:66ff\:6362\:4e3a\:5217\:8868*)Times->List,(*\:5355\:4e2a\:6307\:6807\:8f6c\:4e3a\:5217\:8868*)x:>{x}/;MatchQ[x,_Symbol]};
 
 InputExplainRule:={
-	Subscript[T_Symbol,subIndex__]:>STensor[T,subIndex/.generateInputExplainRule[subIndex],{}],
-	Power[T_Symbol,superIndex__]:>STensor[T,{},superIndex/.generateInputExplainRule[superIndex]],
+	Subscript[T_Symbol,subIndex__]:>STensor[T, subIndex/.generateInputExplainRule[subIndex], {}],
+	Power[T_Symbol,superIndex__]:>STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]],
 	Power[Subscript[T_Symbol,subIndex__],superIndex__]:>
-	STensor[T,subIndex/.generateInputExplainRule[subIndex],superIndex/.generateInputExplainRule[superIndex]]
+	STensor[T, subIndex/.generateInputExplainRule[subIndex], superIndex/.generateInputExplainRule[superIndex]]
 };
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:683c\:5f0f\:5316\:8f93\:51fa*)
 
 
@@ -197,7 +199,7 @@ ShowSTensor[tensor_STensor] :=
 Protect[ShowForm, ShowSTensor];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97\:89c4\:5219*)
 
 
@@ -227,9 +229,9 @@ STensorCalcRule:={
 	(*\:81ea\:5e26\:52a0\:6cd5\:548c\:4e58\:6cd5\:7684\:4ea4\:6362\:5f8b\:3001\:7ed3\:5408\:5f8b*)
 
 	(*\:5206\:914d\:5f8b*)
-	T_STensor(P_STensor+Q_STensor):>T P+T Q,
-	T_STensor ((\[Alpha]_?NumberQ|_Symbol) P_STensor+ Q_STensor):>\[Alpha] T P+T Q,
-	T_STensor ((\[Alpha]_?NumberQ|_Symbol) P_STensor+(\[Beta]_?NumberQ|_Symbol) Q_STensor):>\[Alpha] T P+\[Beta] T Q
+	T_STensor*(P_STensor+Q_STensor):>T*P+T*Q,
+	T_STensor*((\[Alpha]_?NumberQ|_Symbol)*P_STensor+ Q_STensor):>\[Alpha]*T*P+T*Q,
+	T_STensor*((\[Alpha]_?NumberQ|_Symbol)*P_STensor+(\[Beta]_?NumberQ|_Symbol)*Q_STensor):>\[Alpha]*T*P+\[Beta]*T*Q
 };
 
 
@@ -285,18 +287,19 @@ GetANotUsedIndex[expr__] := Module[
 	usedIndeces = DeleteDuplicates@Flatten@Cases[expr, STensor[T_,subIndex_List,superIndex_List]:>Join[superIndex,subIndex], All];
 	unUsedIndeces = Complement[alphabet, usedIndeces];
 	First@unUsedIndeces
-]
+];
 
 
 (* ::Subsection:: *)
 (*\:57fa\:672c\:8fd0\:7b97*)
 
 
-(*\:5c06\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97*)
-(*\:5c06\:6240\:6709STensor\:8f6c\:5316\:4e3aATensor (Anonymous Tensor) \:533f\:540d\:5f20\:91cf\:8fdb\:884c\:8ba1\:7b97*)
-(*\:7531\:4e8e\:5177\:4f53\:6307\:6807\:8ba1\:7b97\:65f6\:ff0c\:5f20\:91cf\:7684\:540d\:79f0\:4e0d\:518d\:91cd\:8981\:ff0c\:800c\:5176\:6307\:6807\:548c\:5206\:91cf\:624d\:662f\:91cd\:8981\:7684\:ff0c\:56e0\:6b64\:8f6c\:5316\:4e3aATensor[components_List, subIndex_List, superIndex_List]\:7684\:5f62\:5f0f*)
-(*\:8fd9\:6837\:80fd\:591f\:8ba9\:52a0\:6cd5\:3001\:6570\:4e58\:548c\:5f20\:91cf\:79ef\:3001\:7f29\:5e76\:7b49\:8fd0\:7b97\:90fd\:6709\:76f8\:540c\:7684\:8f93\:5165\:548c\:8f93\:51fa\:ff1af[ATesnor]->ATensor*)
-(*\:9700\:8981\:5c06\:534f\:53d8\:5bfc\:6570\:7b97\:7b26\:8f6c\:5316\:4e3a\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684 \:666e\:901a\:5bfc\:6570\:7b97\:7b26\:4f5c\:7528\[OpenCurlyDoubleQuote]\:52a0\[CloseCurlyDoubleQuote]\:514b\:6c0f\:7b26\:7684\:4f5c\:7528*)
+(* ::Text:: *)
+(*(*\:5c06\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97*)*)
+(*(*\:5c06\:6240\:6709STensor\:8f6c\:5316\:4e3aATensor (Anonymous Tensor) \:533f\:540d\:5f20\:91cf\:8fdb\:884c\:8ba1\:7b97*)*)
+(*(*\:7531\:4e8e\:5177\:4f53\:6307\:6807\:8ba1\:7b97\:65f6\:ff0c\:5f20\:91cf\:7684\:540d\:79f0\:4e0d\:518d\:91cd\:8981\:ff0c\:800c\:5176\:6307\:6807\:548c\:5206\:91cf\:624d\:662f\:91cd\:8981\:7684\:ff0c\:56e0\:6b64\:8f6c\:5316\:4e3aATensor[components_List, subIndex_List, superIndex_List]\:7684\:5f62\:5f0f*)*)
+(*(*\:8fd9\:6837\:80fd\:591f\:8ba9\:52a0\:6cd5\:3001\:6570\:4e58\:548c\:5f20\:91cf\:79ef\:3001\:7f29\:5e76\:7b49\:8fd0\:7b97\:90fd\:6709\:76f8\:540c\:7684\:8f93\:5165\:548c\:8f93\:51fa\:ff1af[ATesnor]->ATensor*)*)
+(*(*\:9700\:8981\:5c06\:534f\:53d8\:5bfc\:6570\:7b97\:7b26\:8f6c\:5316\:4e3a\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684 \:666e\:901a\:5bfc\:6570\:7b97\:7b26\:4f5c\:7528"\:52a0"\:514b\:6c0f\:7b26\:7684\:4f5c\:7528*)*)
 
 
 (* ::Subsubsection:: *)
@@ -304,10 +307,9 @@ GetANotUsedIndex[expr__] := Module[
 
 
 (*\:8bbe\:7f6e\:52a0\:6cd5\:7684\:4ea4\:6362\:5f8b\:548c\:7ed3\:5408\:5f8b*)
-SetAttributes[ATensorAdd, {Flat, Orderless}]
+(*SetAttributes[ATensorAdd, {Flat, Orderless}]*)
 
-
-ATensorAdd::Error = "\:5f20\:91cf\:4e0d\:540c\:578b\:6216\:6307\:6807\:4e0d\:5e73\:8861.";
+ATensorAdd::Error = "\:5f20\:91cf\:4e0d\:540c\:578b\:6216\:6307\:6807\:4e0d\:5e73\:8861."
 
 ATensorAdd[T_ATensor, S_ATensor] := Module[{},
 	(*\:4e24\:4e2a\:5f20\:91cf\:76f8\:52a0\:8981\:6c42\:662f\:540c\:578b\:5f20\:91cf\:4e14\:6307\:6807\:76f8\:540c*)
@@ -319,24 +321,26 @@ ATensorAdd[T_ATensor, S_ATensor] := Module[{},
 	ATensor[T[[1]], T[[2]], T[[3]]+S[[3]]]
 ];
 
-ATensorAdd[T_ATensor, P_ATensor, Q_ATensor] := ATensorAdd[T, ATensorAdd[P, Q]];
-
 ATensorAdd[T_ATensor] := T;
+
+
+ATensorAdd[T_ATensor, P_ATensor, Q__ATensor] := ATensorAdd[T, ATensorAdd[P, Q]];
 
 
 (* ::Subsubsection:: *)
 (*\:6570\:4e58*)
 
 
-SetAttributes[ATensorTimes, {Flat}]
-
+(* ::Code::Initialization::"Tags"-><|"UppercasePattern" -> <|Enabled -> False|>|>:: *)
+(*SetAttributes[ATensorTimes, Flat]*)
 (*\:6570\:4e58*)(*\:6570\:4e58\:6ee1\:8db3\:4ea4\:6362\:5f8b*)
 ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor] := ATensor[T[[1]], T[[2]], k T[[3]]];
 
 ATensorTimes[T_ATensor, k_Symbol|k_?NumberQ] := ATensor[T[[1]], T[[2]], k T[[3]]];
 
-ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor, S__ATensor] := ATensorTimes[k, ATensorTimes[T, S]];
 
+(* ::Code::Initialization::"Tags"-><|"UppercasePattern" -> <|Enabled -> False|>|>:: *)
+ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor, S__ATensor] := ATensorTimes[k, ATensorTimes[T, S]];
 
 
 (* ::Subsubsection:: *)
@@ -390,14 +394,16 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 	ATensor[outputIndex[[1]], outputIndex[[2]], TensorTranspose[outputComponents, Values[KeySort[permutation]]]]
 ];
 
-ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P, Q]];
+
 
 ATensorTimes[T_ATensor] := T;
 
 
+ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P, Q]];
 
-(* ::Subsection:: *)
-(*\:8868\:8fbe\:5f0f\:8f6c\:5316*)
+
+(* ::Subsubsection:: *)
+(*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f*)
 
 
 SCalcSpecific[expr__] := Module[
