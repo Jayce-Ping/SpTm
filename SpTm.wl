@@ -323,7 +323,6 @@ ATensorAdd[T_ATensor, S_ATensor] := Module[{},
 
 ATensorAdd[T_ATensor] := T;
 
-
 ATensorAdd[T_ATensor, P_ATensor, Q__ATensor] := ATensorAdd[T, ATensorAdd[P, Q]];
 
 
@@ -338,8 +337,6 @@ ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor] := ATensor[T[[1]], T[[2]], k T[[3]]
 
 ATensorTimes[T_ATensor, k_Symbol|k_?NumberQ] := ATensor[T[[1]], T[[2]], k T[[3]]];
 
-
-(* ::Code::Initialization::"Tags"-><|"UppercasePattern" -> <|Enabled -> False|>|>:: *)
 ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor, S__ATensor] := ATensorTimes[k, ATensorTimes[T, S]];
 
 
@@ -359,9 +356,7 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 		product,
 		outputComponents,
 		unArrangedIndex,
-		TargetIndex,
-		cycle,
-		permutation
+		TargetIndex
 },
 	(*\:7ed3\:679c\:5f20\:91cf\:7684\:6307\:6807*)
 	outputIndex = {Select[sub, !MemberQ[sup, #]&], Select[sup, !MemberQ[sub, #]&]};
@@ -381,23 +376,12 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 	unArrangedIndex = Keys[DeleteCases[IndecesPos, x_List /; Length[x] > 1]];
 	(*\:8f93\:51fa\:5f20\:91cf\:7684\:6307\:6807\:987a\:5e8f*)
 	TargetIndex = Flatten[outputIndex];
-	(*\:627e\:5230\:5bf9\:5e94\:8f6e\:6362*)
-	cycle = Flatten @ First @ FindPermutation[unArrangedIndex, TargetIndex];
-	(*\:5c06\:8f6e\:6362\:8f6c\:5316\:4e3a\:5bf9\:5e94\:7f6e\:6362\:7ed3\:679c*)
-	If[
-		cycle == {},
-		permutation = {},
-		permutation = Table[cycle[[i]] -> cycle[[i + 1]], {i, Length[cycle] - 1}];
-		AppendTo[permutation, Last[cycle] -> 1];
-	];
-	(*\:5c06\:7ed3\:679c\:6839\:636e\:952e\:503cKey\:6392\:5e8f\:ff0c\:5176\:503cValue\:7684\:5e8f\:5217\:5c31\:662fTranspose\:9700\:8981\:7528\:5230\:7684\:5e8f\:5217*)
-	ATensor[outputIndex[[1]], outputIndex[[2]], TensorTranspose[outputComponents, Values[KeySort[permutation]]]]
+	(*\:627e\:5230\:4ece\:5f53\:524d\:6307\:6807\:96c6\:5411\:7ed3\:679c\:6307\:6807\:96c6\:8f6c\:5316\:7684\:7f6e\:6362\:ff0c\:5e76\:5c06\:5176\:4f5c\:7528\:4e8e{1,2,3...}\:521d\:59cb\:5217\:8868\:ff0c\:5f97\:5230\:8f6c\:7f6e\:5173\:7cfb\:5bf9\:5e94\:5217\:8868*)
+	p = Permute[Range[Length[TargetIndex]], FindPermutation[unArrangedIndex, TargetIndex]];
+	ATensor[outputIndex[[1]], outputIndex[[2]], Transpose[outputComponents, p]]
 ];
 
-
-
 ATensorTimes[T_ATensor] := T;
-
 
 ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P, Q]];
 
