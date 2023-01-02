@@ -167,15 +167,16 @@ GetMetric[]:=Module[{},
 
 (*\:8f93\:5165\:89e3\:91ca\:ff0c\:4e0a\:4e0b\:6807\:7528\:7a7a\:683c\:9694\:5f00\:ff0c\:9ed8\:8ba4\:89e3\:91ca\:4e3a\:4e3aTimes*)
 
-InputExplain[expr__]:=expr//.InputExplainRule;
+InputExplain[expr__]:=expr/.InputExplainRule;
 
 (*\:751f\:6210\:6307\:6807\:66ff\:6362\:5217\:8868*)
 generateInputExplainRule[x__]:={(*\:591a\:4e2a\:6307\:6807\:66ff\:6362\:4e3a\:5217\:8868*)Times->List,(*\:5355\:4e2a\:6307\:6807\:8f6c\:4e3a\:5217\:8868*)x:>{x}/;MatchQ[x,_Symbol]};
 
 InputExplainRule:={
+	Power[T_Symbol, Plus[superIndex__]] :> Apply[Times, STensor[T, {}, #]&/@ superIndex/.Plus->List],
 	Subscript[T_Symbol, subIndex__] :> STensor[T, subIndex/.generateInputExplainRule[subIndex], {}],
 	Power[T_Symbol, superIndex__] :> STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]],
-	Power[Subscript[T_Symbol, subIndex__],superIndex__] :> 
+	Power[Subscript[T_Symbol, subIndex__], superIndex__] :> 
 	STensor[T, subIndex/.generateInputExplainRule[subIndex], superIndex/.generateInputExplainRule[superIndex]]
 };
 
