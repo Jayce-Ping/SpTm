@@ -19,13 +19,15 @@ SetMetricSymbol::usage = "SetMetricSymbol[metricSymbol_Symbol]"<>" "<>"\:8bbe\:7
 
 GetMetric::usage = "GetMetric[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
 
-SetTensor::usage = "SetTensor[T_STensor,components_List]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf."
+SetTensor::usage = "SetTensor[\!\(\*SuperscriptBox[SubscriptBox[\(T\), \(sub\)], \(sup\)]\), comopents]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:53ca\:5176\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf"<>"\n"<>"SetTensor[T_STensor, components]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf."
 
 
 
 ATensorAdd::usage = "ATensorAdd[T_ATensor, S_ATensor]"<>" "<>"\:8fd4\:56de\:4e24\:4e2aATensor\:5bf9\:8c61\:7684\:5f20\:91cf\:548c."
 
 ATensorTimes::usage = "ATensorTimes[k_Number|_Symbol, T_ATensor]"<>" "<>"\:8fd4\:56dek\:6570\:4e58\:5f20\:91cfT\:7684\:7ed3\:679c"<>"\n"<>"ATensorTimes[T_ATensor, S_ATensor]"<>" "<>"\:8fd4\:56deT\:548cS\:5f20\:91cf\:79ef\:6216\:7f29\:5e76\:7684\:7ed3\:679c."
+
+SCalcSpecificExpression::usage = "SCalcSpecificExpression[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97"
 
 
 SCalcChristoffel::usage = "SCalcChristoffel[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
@@ -100,7 +102,7 @@ SetCoodinates[Coodinates_List] := Module[{},
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8bbe\:7f6e\:5ea6\:89c4*)
 
 
@@ -125,7 +127,11 @@ SetMetric[Components_?ArrayQ]:=Module[ {}, SetMetric[Components, SCoodinates] ];
 
 SetMetric[Components_?ArrayQ, Coodinates_List]:=Module[ {}, SetMetric[Components, Coodinates, MetricSymbol] ];
 
-SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[{},
+SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[
+{
+	aa = Global`a,
+	bb = Global`b
+},
 	If[
 		Coodinates=={} && Head[SCoodinates] =!= List,
 		Message[SetMetric::NoCoodinates];
@@ -143,10 +149,10 @@ SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[{},
 	MetricComponents = Components;
 	Protect[MetricComponents];
 	(*\:8bbe\:7f6e\:5ea6\:89c4\:5f20\:91cf\:7684\:5206\:91cf*)(*\:4e4b\:524d\:7684\:4f1a\:88ab\:8986\:76d6*)
-	SetTensor[STensor[metricSymbol, {a, b}, {}], Components];
-	SetTensor[STensor[metricSymbol, {}, {a, b}], Inverse[Components]];
+	SetTensor[STensor[metricSymbol, {aa, bb}, {}], Components];
+	SetTensor[STensor[metricSymbol, {}, {aa, bb}], Inverse[Components]];
 	(*Subscript[\:8bbe\:7f6e\[Delta], a]^b*)
-	SetTensor[STensor[\[Delta], {a}, {b}], IdentityMatrix[Length[Coodinates]]];
+	SetTensor[STensor[Global`\[Delta], {aa}, {bb}], IdentityMatrix[Length[Coodinates]]];
 ];
 
 
@@ -155,7 +161,7 @@ GetMetric[]:=Module[{},
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:8f93\:5165\:89e3\:91ca*)
 
 
@@ -167,9 +173,9 @@ InputExplain[expr__]:=expr//.InputExplainRule;
 generateInputExplainRule[x__]:={(*\:591a\:4e2a\:6307\:6807\:66ff\:6362\:4e3a\:5217\:8868*)Times->List,(*\:5355\:4e2a\:6307\:6807\:8f6c\:4e3a\:5217\:8868*)x:>{x}/;MatchQ[x,_Symbol]};
 
 InputExplainRule:={
-	Subscript[T_Symbol,subIndex__]:>STensor[T, subIndex/.generateInputExplainRule[subIndex], {}],
-	Power[T_Symbol,superIndex__]:>STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]],
-	Power[Subscript[T_Symbol,subIndex__],superIndex__]:>
+	Subscript[T_Symbol, subIndex__] :> STensor[T, subIndex/.generateInputExplainRule[subIndex], {}],
+	Power[T_Symbol, superIndex__] :> STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]],
+	Power[Subscript[T_Symbol, subIndex__],superIndex__] :> 
 	STensor[T, subIndex/.generateInputExplainRule[subIndex], superIndex/.generateInputExplainRule[superIndex]]
 };
 
@@ -390,11 +396,52 @@ ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P
 (*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f*)
 
 
-SCalcSpecific[expr__] := Module[
+SCalcSpecificExpression::componentsMiss = "\:5b58\:5728\:672a\:8bbe\:7f6e\:5206\:91cf\:7684\:5f20\:91cf\:6216\:5b58\:5728\:91cd\:540d\:4e14\:540c\:578b\:53f7\:7684\:5f20\:91cf."
+SCalcSpecificExpression[expr__] := Module[
 {
-	expression = expr/.{T_STensor :> ATensor[T[[2]], T[[3]], TensorComponents[T]]}
+	expression,
+	calcReplaceRule = {
+		Plus[T_ATensor, S_ATensor] :> ATensorAdd[T, S],
+		Times[k_Symbol|k_?NumericQ, T_ATensor] :> ATensorTimes[k, T],
+		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S]
+	},
+	sTensors = Cases[expr, _STensor, {0, Infinity}],
+	setTest,
+	keys = Association[]
 },
-	Print["SCalcSpecific"]
+	(*\:68c0\:67e5\:5f20\:91cfT\:662f\:5426\:5df2\:7ecf\:8bbe\:7f6e\:5206\:91cf*)
+	setTest[T_STensor] := Module[
+	{
+		tkeys,
+		tkey,
+		tas
+	},
+			(*\:627e\:5230\:7b26\:53f7\:548c\:578b\:53f7\:90fd\:76f8\:540c\:7684\:5f20\:91cf*)
+			tas = KeySelect[TensorComponents, MatchQ[#, STensor[T[[1]], ___, ___]] && Length[#[[2]]] == Length[T[[2]]] && Length[#[[3]]] == Length[T[[3]]]& ];
+			
+			(*\:4e0d\:5b58\:5728\:952e\:503c\:ff0c\:8be5\:5f20\:91cf\:672a\:8bbe\:7f6e\:5206\:91cf;\:6216\:5b58\:5728\:591a\:4e2a\:5339\:914d\:7684\:952e\:503c*)
+			If[
+				Length[tas] != 1,
+				Return[False]
+			];
+			(*\:6b64\:5904\:4fdd\:8bc1tas\:53ea\:6709\:4e00\:4e2a\:952e\:503c\:5bf9*)
+			tkey = <|T -> First@tas|>;
+			AppendTo[keys, tkey];
+			Return[True]
+		];
+		
+	(*\:68c0\:67e5\:662f\:5426\:6240\:6709\:53c2\:4e0e\:8fd0\:7b97\:7684\:5f20\:91cf\:90fd\:5df2\:7ecf\:8bbe\:7f6e\:5206\:91cf*)
+	If[
+		!AllTrue[sTensors, setTest[#]&],
+		Message[SCalcSpecificExpression::componentsMiss];
+		Abort[]
+	];
+	
+	(*\:5c06\:6240\:6709STensor\:66ff\:6362\:4e3aATensor*)
+	expression = expr/.{T_STensor :> ATensor[T[[2]], T[[3]], keys[T]]};
+	
+	(*\:4f7f\:7528\:66ff\:6362\:8ba1\:7b97\:8868\:8fbe\:5f0f*)
+	expression//.calcReplaceRule
 ];
 
 
@@ -402,7 +449,7 @@ SCalcSpecific[expr__] := Module[
 (*\:7279\:6b8a\:5f20\:91cf\:8ba1\:7b97*)
 
 
-SCalcChristoffel[g_?ArrayQ, coodinateSystem_List]:=Module[
+SCalcChristoffel[g_?ArrayQ, coodinateSystem_List] := Module[
 	{
 		invg=Inverse[g],(*inverse of metric g*)
 		dimension=First@Dimensions[coodinateSystem],(*dimension of space*)
