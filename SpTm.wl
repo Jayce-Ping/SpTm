@@ -3,7 +3,7 @@
 BeginPackage["SpTm`"]
 
 
-STensor::usage = "STensor[TensorName_Symbol, subindex_List, superindex_List] \:4e3aSTensor\:5bf9\:8c61\:7684\:6807\:51c6\:683c\:5f0f\:ff0c\:662f\:5f20\:91cf\:8ba1\:7b97\:65f6\:6240\:7528\:7684\:8868\:8fbe\:5f62\:5f0f. "<>"\:4e5f\:53ef\:4ee5\:76f4\:63a5\:91c7\:53d6ctrl+_\:8f93\:5165\:4e0b\:6807\:548cctrl+^\:8f93\:5165\:4e0a\:6807\:7684\:5f62\:5f0f\:8f93\:5165\:5f20\:91cf\:ff08\!\(\*SuperscriptBox[SubscriptBox[\(\:5982R\), \(a\\\ b\\\ c\)], \(d\)]\),\:6ce8\:610f\:6307\:6807\:4e4b\:95f4\:9700\:8981\:7528\:7a7a\:683c\:9694\:5f00\:ff09."
+STensor::usage = "STensor[TensorName_Symbol, subindex_List, superindex_List] \:4e3aSTensor\:5bf9\:8c61\:7684\:6807\:51c6\:683c\:5f0f\:ff0c\:662f\:5f20\:91cf\:8fdb\:884c\:62bd\:8c61\:6307\:6807\:8ba1\:7b97\:65f6\:6240\:7528\:7684\:8868\:8fbe\:5f62\:5f0f. "<>"\:4e5f\:53ef\:4ee5\:76f4\:63a5\:91c7\:53d6ctrl+_\:8f93\:5165\:4e0b\:6807\:548cctrl+^\:8f93\:5165\:4e0a\:6807\:7684\:5f62\:5f0f\:8f93\:5165\:5f20\:91cf\:ff08\!\(\*SuperscriptBox[SubscriptBox[\(\:5982R\), \(a\\\ b\\\ c\)], \(d\)]\),\:6ce8\:610f\:6307\:6807\:4e4b\:95f4\:9700\:8981\:7528\:7a7a\:683c\:9694\:5f00\:ff09."
 
 ShowForm::usage = "ShowForm[expr]"<>" "<>"\:5c06STensor\:8f6c\:5316\:4e3a\:6807\:51c6\:683c\:5f0f\:ff0c\:4e0e\:8868\:8fbe\:5f0f\:5176\:4f59\:90e8\:5206\:5747\:4ee5StandardForm\:683c\:5f0f\:8f93\:51fa."
 
@@ -19,15 +19,12 @@ SetMetricSymbol::usage = "SetMetricSymbol[metricSymbol_Symbol]"<>" "<>"\:8bbe\:7
 
 GetMetric::usage = "GetMetric[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
 
+
 SetTensor::usage = "SetTensor[\!\(\*SuperscriptBox[SubscriptBox[\(T\), \(sub\)], \(sup\)]\), comopents]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:53ca\:5176\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf"<>"\n"<>"SetTensor[T_STensor, components]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf."
 
+STSpecify::usage = "STSpecify[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0fexpr\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97\:ff0c\:5f97\:5230\:7ed3\:679c\:5f20\:91cf\:7684\:5177\:4f53\:6307\:6807\:5206\:91cf\:5f62\:5f0f."
 
-
-ATensorAdd::usage = "ATensorAdd[T_ATensor, S_ATensor]"<>" "<>"\:8fd4\:56de\:4e24\:4e2aATensor\:5bf9\:8c61\:7684\:5f20\:91cf\:548c."
-
-ATensorTimes::usage = "ATensorTimes[k_Number|_Symbol, T_ATensor]"<>" "<>"\:8fd4\:56dek\:6570\:4e58\:5f20\:91cfT\:7684\:7ed3\:679c"<>"\n"<>"ATensorTimes[T_ATensor, S_ATensor]"<>" "<>"\:8fd4\:56deT\:548cS\:5f20\:91cf\:79ef\:6216\:7f29\:5e76\:7684\:7ed3\:679c."
-
-SCalcSpecificExpression::usage = "SCalcSpecificExpression[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97"
+STSimSpecify::usage = "STSimSpecify[expr]"<>" "<>"\:5c06\:8868\:8fbe\:5f0f\:5148\:8fdb\:884c\:53ef\:80fd\:7684\:7b80\:5316\:518d\:8ba1\:7b97\:5176\:5177\:4f53\:6307\:6807\:7684\:5206\:91cf\:5f62\:5f0f."
 
 
 SCalcChristoffel::usage = "SCalcChristoffel[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
@@ -161,7 +158,7 @@ GetMetric[]:=Module[{},
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8f93\:5165\:89e3\:91ca*)
 
 
@@ -173,15 +170,15 @@ InputExplain[expr__]:=expr/.InputExplainRule;
 generateInputExplainRule[x__]:={(*\:591a\:4e2a\:6307\:6807\:66ff\:6362\:4e3a\:5217\:8868*)Times->List,(*\:5355\:4e2a\:6307\:6807\:8f6c\:4e3a\:5217\:8868*)x:>{x}/;MatchQ[x,_Symbol]};
 
 InputExplainRule:={
-	Power[T_Symbol, superIndex__] :> Apply[Times, STensor[T, {}, #]&/@ superIndex/.Plus->List]/;Head[superIndex]==Plus,
+	Power[T_Symbol, superIndex__] :> Apply[Times, STensor[T, {}, {#}]&/@ superIndex]/;Head[superIndex]==Plus,
 	Subscript[T_Symbol, subIndex__] :> STensor[T, subIndex/.generateInputExplainRule[subIndex], {}],
-	Power[T_Symbol, superIndex__] :> STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]],
+	Power[T_Symbol, superIndex__] :> STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]]/;Head[superIndex]=!=Plus,
 	Power[Subscript[T_Symbol, subIndex__], superIndex__] :> 
 	STensor[T, subIndex/.generateInputExplainRule[subIndex], superIndex/.generateInputExplainRule[superIndex]]
 };
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:683c\:5f0f\:5316\:8f93\:51fa*)
 
 
@@ -190,11 +187,8 @@ Superscript[x_,y_,superIndex__]:=Superscript[x,Row[{y,superIndex}]];(*Good !!!*)
 Subscript[x_,y_,subIndex__]:=Subscript[x,Row[{y,subIndex},""]];
 
 
-Unprotect[ShowForm, ShowSTensor];
 
-SetAttributes[ShowSTensor, Listable];
-
-ShowForm[expr___] := StandardForm[expr /. {T_STensor -> ShowSTensor[T]}];
+ShowForm[expr___] := StandardForm[expr /. {T_STensor :> ShowSTensor[T]}];
 
 ShowSTensor[tensor_STensor] :=
     Module[{out = tensor[[1]], r = {{} -> "", List -> Sequence}},
@@ -203,14 +197,14 @@ ShowSTensor[tensor_STensor] :=
         out
     ];
 
-Protect[ShowForm, ShowSTensor];
+ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
 (* ::Section::Closed:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97\:89c4\:5219*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:5ea6\:89c4\:8fd0\:7b97\:5f8b*)
 
 
@@ -227,7 +221,7 @@ MetricCalcRule:={
 };
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:5f20\:91cf\:8fd0\:7b97\:5f8b*)
 
 
@@ -280,12 +274,12 @@ STCalculate[expr__]:= Module[
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:5177\:4f53\:6307\:6807\:8f6c\:5316\:4e0e\:8fd0\:7b97*)
 
 
 (*\:83b7\:53d6\:4e00\:4e2a\:6ca1\:6709\:7528\:8fc7\:7684\:6307\:6807\:7b26\:53f7*)
-GetANotUsedIndex[expr__] := Module[
+GetanUnusedIndex[expr__] := Module[
 {
 	usedIndeces,
 	unUsedIndeces,
@@ -298,8 +292,16 @@ GetANotUsedIndex[expr__] := Module[
 	First@unUsedIndeces
 ];
 
+GetanUnusedIndex[lis__List] := Module[
+{
+	usedIndeces = Flatten @ Join[lis],
+	alphabet = ToExpression @ Alphabet[]
+},
+	First @ Complement[alphabet, usedIndeces]
+]
 
-(* ::Subsection:: *)
+
+(* ::Subsection::Closed:: *)
 (*\:57fa\:672c\:8fd0\:7b97*)
 
 
@@ -318,16 +320,28 @@ GetANotUsedIndex[expr__] := Module[
 (*\:8bbe\:7f6e\:52a0\:6cd5\:7684\:4ea4\:6362\:5f8b\:548c\:7ed3\:5408\:5f8b*)
 (*SetAttributes[ATensorAdd, {Flat, Orderless}]*)
 
-ATensorAdd::Error = "\:5f20\:91cf\:4e0d\:540c\:578b\:6216\:6307\:6807\:4e0d\:5e73\:8861."
+ATensorAdd::Error = "\:5f20\:91cf\:4e0d\:540c\:578b\:6216\:6307\:6807\:4e0d\:5e73\:8861.";
 
-ATensorAdd[T_ATensor, S_ATensor] := Module[{},
+ATensorAdd[T_ATensor, S_ATensor] := Module[
+{
+	sortTsub = Sort[T[[1]]],
+	sortTsup = Sort[T[[2]]],
+	sortSsub = Sort[S[[1]]],
+	sortSsup = Sort[S[[2]]],
+	indexT = Join[T[[1]], T[[2]]],
+	indexS = Join[S[[1]], S[[2]]],
+	p
+},
 	(*\:4e24\:4e2a\:5f20\:91cf\:76f8\:52a0\:8981\:6c42\:662f\:540c\:578b\:5f20\:91cf\:4e14\:6307\:6807\:76f8\:540c*)
 	If[
-		T[[1]] =!= S[[1]] || T[[2]] =!= S[[2]] || Dimensions[T[[3]]] != Dimensions[S[[3]]],
+		sortTsub =!= sortSsub || sortTsup =!= sortSsup || Dimensions[T[[3]]] != Dimensions[S[[3]]],
 		Message[ATensorAdd::Error];
 		Abort[]
 	];
-	ATensor[T[[1]], T[[2]], T[[3]]+S[[3]]]
+	(*\:6307\:6807\:4e4b\:95f4\:6700\:591a\:5dee\:4e00\:4e2a\:7f6e\:6362*)
+	(*\:627e\:5230\:6307\:6807\:7f6e\:6362*)
+	p = Permute[Range[Length[indexT]], FindPermutation[indexS, indexT]];
+	ATensor[T[[1]], T[[2]], T[[3]]+Transpose[S[[3]], p]]
 ];
 
 ATensorAdd[T_ATensor] := T;
@@ -387,7 +401,7 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 	TargetIndex = Flatten[outputIndex];
 	(*\:627e\:5230\:4ece\:5f53\:524d\:6307\:6807\:96c6\:5411\:7ed3\:679c\:6307\:6807\:96c6\:8f6c\:5316\:7684\:7f6e\:6362\:ff0c\:5e76\:5c06\:5176\:4f5c\:7528\:4e8e{1,2,3...}\:521d\:59cb\:5217\:8868\:ff0c\:5f97\:5230\:8f6c\:7f6e\:5173\:7cfb\:5bf9\:5e94\:5217\:8868*)
 	p = Permute[Range[Length[TargetIndex]], FindPermutation[unArrangedIndex, TargetIndex]];
-	ATensor[outputIndex[[1]], outputIndex[[2]], Transpose[outputComponents, p]]
+	ATensor[outputIndex[[1]], outputIndex[[2]], If[NumberQ[outputComponents], outputComponents, Transpose[outputComponents, p]]]
 ];
 
 ATensorTimes[T_ATensor] := T;
@@ -395,34 +409,112 @@ ATensorTimes[T_ATensor] := T;
 ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P, Q]];
 
 
-(* ::Subsubsection:: *)
+
+
+(* ::Subsubsection::Closed:: *)
 (*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97*)
 
 
 (*\:534f\:53d8\:5bfc\:6570\[Del]*)
-CovariantDerivative::metricMiss ="\:672a\:8bbe\:7f6e\:5ea6\:89c4\:5206\:91cf."
-CovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
+SCovariantDerivative::metricMiss ="\:672a\:8bbe\:7f6e\:5ea6\:89c4\:5206\:91cf.";
+SCovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 {
 	\[CapitalGamma],
-	Christoffel
+	subIndex = T[[1]],(*\:4e0b\:6807*)
+	supIndex = T[[2]],(*\:4e0a\:6807*)
+	tempSub = T[[1]],(*\:4e34\:65f6\:4e0b\:6807*)
+	tempSup = T[[2]],(*\:4e34\:65f6\:4e0a\:6807*)
+	Christoffel,
+	tempIndex = GetanUnusedIndex[T[[1]], T[[2]], {dIndex}],
+	ordinaryPart,
+	upContractPart,
+	downContractPart
 },
 	(*\:68c0\:67e5\:662f\:5426\:8bbe\:7f6e\:4e86\:5ea6\:89c4\:5206\:91cf*)
 	If[
 		Head[MetricComponents] == Symbol,
-		Message[CovariantDerivative::metricMiss];
+		Message[SCovariantDerivative::metricMiss];
 		Abort[]
 	];
 	(*\:8ba1\:7b97\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5ea6\:89c4\:5bf9\:5e94\:7684\:514b\:6c0f\:7b26\:5206\:91cf*)
 	\[CapitalGamma] = SCalcChristoffel[MetricComponents, coodinates];
+
+	(*\:5148\:6c42\:51fa\:666e\:901a\:5bfc\:6570\:7b97\:7b26\:90e8\:5206*)
+	ordinaryPart = SOrdinaryDerivative[T, dIndex, coodinates];
+	
+	(*\:5982\:679c\:514b\:6c0f\:7b26\:5168\:4e3a0\:5219\:65e0\:9700\:518d\:8ba1\:7b97\:4e0b\:53bb\:ff0c\:5426\:5219\:9700\:8981\:7ee7\:7eed\:8ba1\:7b97\:53e6\:5916\:4e24\:90e8\:5206*)
+	If[
+		!TrueQ[Thread[\[CapitalGamma] == Array[0&,Dimensions[\[CapitalGamma]]]]],
+		(*\:7b97\:51fa\:548c\:4e0a\:6307\:6807\:7f29\:5e76\:7684\:90e8\:5206*)
+		If[supIndex != {},
+			upContractPart = ATensorAdd @@ Table[
+				tempSup = T[[2]];
+				tempSup[[i]] = tempIndex;
+				ATensorTimes[ATensor[{dIndex, tempIndex}, {supIndex[[i]]}, \[CapitalGamma]], ATensor[subIndex, tempSup, T[[3]]]],
+				{i, Length[supIndex]}
+				],
+			upContractPart = {}
+		];
+		
+		(*\:7b97\:51fa\:548c\:4e0b\:6307\:6807\:7f29\:5e76\:7684\:90e8\:5206*)
+		If[subIndex != {},
+			downContractPart = ATensorAdd @@ Table[
+				tempSub = T[[1]];
+				tempSub[[i]] = tempIndex;
+				ATensorTimes[ATensor[{dIndex, subIndex[[i]]}, {tempIndex}, \[CapitalGamma]], ATensor[tempSub, supIndex, T[[3]]]],
+				{i, Length[subIndex]}
+			];
+			(*\:5bf9\:4e0b\:6807\:6c42\:548c\:7684\:7ed3\:679c\:90e8\:5206\:524d\:9762\:4e3a\:8d1f\:53f7*)
+			downContractPart = ATensorTimes[-1, downContractPart],
+			downContractPart = {}
+		];
+		(*\:5c06\:5404\:90e8\:5206\:52a0\:8d77\:6765*)
+		If[subIndex != {}, ordinaryPart = ATensorAdd[ordinaryPart, downContractPart]];
+		If[supIndex != {}, ordinaryPart = ATensorAdd[ordinaryPart, upContractPart]];
+	];
+	ordinaryPart
+];
+
+
+(*\:666e\:901a\:5bfc\:6570\:7b97\:7b26*)
+SOrdinaryDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
+{
+	components = T[[3]],
+	dimension = Length[coodinates]
+},
+	ATensor[Prepend[T[[1]], dIndex], T[[2]], Array[D[components, coodinates[[#]]]&, dimension]]
 ]
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f*)
 
 
-SCalcSpecificExpression::componentsMiss = "\:5b58\:5728\:672a\:8bbe\:7f6e\:5206\:91cf\:7684\:5f20\:91cf\:6216\:5b58\:5728\:91cd\:540d\:4e14\:540c\:578b\:53f7\:7684\:5f20\:91cf."
-SCalcSpecificExpression::coodinatesMiss = "\:672a\:9009\:53d6\:5750\:6807\:7cfb."
+(*\:76f4\:63a5\:8ba1\:7b97\:8868\:8fbe\:5f0f\:7684\:5206\:91cf*)
+STSpecify[expr__] := Module[{},
+	SCalcSpecificExpression @ InputExplain @ expr
+]
+
+
+(*\:5148\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:4e00\:5b9a\:7684\:7b80\:5316*)
+STSimSpecify[expr__] := Module[
+{
+	t
+},
+	(*\:5148\:8fdb\:884c\:7b80\:5316*)
+	t = STCalculate[expr];
+	(*\:5982\:679c\:8fd4\:56de\:4e860,\:5373\:96f6\:5411\:91cf*)
+	If[
+		t === 0,
+		Row[{"Result is a None Tensor"}],
+		SCalcSpecificExpression[t]
+	]
+]
+
+
+SCalcSpecificExpression::componentsMiss = "\:5b58\:5728\:672a\:8bbe\:7f6e\:5206\:91cf\:7684\:5f20\:91cf\:6216\:5b58\:5728\:91cd\:540d\:4e14\:540c\:578b\:53f7\:7684\:5f20\:91cf.";
+SCalcSpecificExpression::coodinatesMiss = "\:672a\:9009\:53d6\:5750\:6807\:7cfb.";
+
 SCalcSpecificExpression[expr__] := Module[
 {
 	expression,
@@ -430,7 +522,11 @@ SCalcSpecificExpression[expr__] := Module[
 	calcReplaceRule,
 	sTensors = Cases[expr, _STensor, {0, Infinity}],
 	setTest,
-	keys = Association[]
+	keys = Association[],
+	output,
+	components,
+	(*\:7528\:5e0c\:814a\:5b57\:6bcd\:8868\:793a\:5206\:91cf*)
+	specificReplaceRule = Thread[#1->#2&[ToExpression@Alphabet[][[1;;24]],ToExpression@Alphabet["Greek"][[1;;24]]]]
 },
 	(*\:68c0\:67e5\:662f\:5426\:9009\:53d6\:4e86\:5750\:6807\:7cfb*)
 	If[
@@ -443,7 +539,8 @@ SCalcSpecificExpression[expr__] := Module[
 	calcReplaceRule = {
 		Plus[T_ATensor, S_ATensor] :> ATensorAdd[T, S],
 		Times[k_Symbol|k_?NumericQ, T_ATensor] :> ATensorTimes[k, T],
-		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S]
+		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S],
+		Grad[T_ATensor, dIndex_Symbol] :> SCovariantDerivative[T, dIndex, coodinates]
 	};
 	
 	(*\:68c0\:67e5\:5f20\:91cfT\:662f\:5426\:5df2\:7ecf\:8bbe\:7f6e\:5206\:91cf\:7684\:51fd\:6570*)
@@ -475,9 +572,17 @@ SCalcSpecificExpression[expr__] := Module[
 	
 	(*\:5c06\:6240\:6709STensor\:66ff\:6362\:4e3aATensor*)
 	expression = expr/.{T_STensor :> ATensor[T[[2]], T[[3]], keys[T]]};
-	
 	(*\:4f7f\:7528\:66ff\:6362\:8ba1\:7b97\:8868\:8fbe\:5f0f*)
-	expression//.calcReplaceRule
+	expression = expression//.calcReplaceRule;
+	If[
+		NumberQ[expression],
+		ShowTensor[STensor[Global`\[ScriptCapitalT], {}, {}], 0],
+		(*\:7ed3\:679c\:7684expression\:5e94\:8be5\:4e3a\:4e00\:4e2aATensor*)
+		components = Last[expression];(*\:8bb0\:5f55\:5206\:91cf*)
+		(*\:5c06ATensor\:66ff\:6362\:56deSTensor*)
+		output = expression//.{T_ATensor :> STensor[Global`\[ScriptCapitalT], T[[1]]/.specificReplaceRule, T[[2]]/.specificReplaceRule]};
+		ShowSTensor[output, components]
+	]
 ];
 
 
@@ -492,57 +597,51 @@ SCalcChristoffel[g_?ArrayQ, coodinateSystem_List] := Module[
 		\[Gamma],(*Christoffel Symbol Component Calculating Function*)
 		\[CapitalGamma](*Christoffel Symbol Component Matrix*)
 	},
-	(*Subscript[\:7528x, i]\:6765\:8bb0\:5f55\:5750\:6807\:7cfb,\:548c\:6570\:5b66\:516c\:5f0f\:66f4\:76f8\:7b26*)
-	Evaluate[Array[Subscript[x, #]&,dimension]]=coodinateSystem;
-	\[Gamma][\[Mu]_,\[Nu]_,\[Sigma]_]:=1/2 Sum[invg[[\[Sigma],\[Rho]]] (D[g[[\[Rho],\[Mu]]],Subscript[x, \[Nu]]]+D[g[[\[Rho],\[Nu]]],Subscript[x, \[Mu]]]-D[g[[\[Mu],\[Nu]]],Subscript[x, \[Rho]]]),{\[Rho],dimension}];(*Subscript[\:514b\:6c0f\:7b26\:5206\:91cf\[CapitalGamma], \[Mu]\[Nu]]^\[Sigma]*)
+	\[Gamma][\[Mu]_,\[Nu]_,\[Sigma]_]:=1/2 Sum[ invg[[\[Sigma],\[Rho]]] (D[ g[[\[Rho],\[Mu]]], coodinateSystem[[\[Nu]]] ]+D[ g[[\[Rho],\[Nu]]], coodinateSystem[[\[Mu]]] ]-D[ g[[\[Mu],\[Nu]]], coodinateSystem[[\[Rho]]] ]),{\[Rho],dimension}];(*Subscript[\:514b\:6c0f\:7b26\:5206\:91cf\[CapitalGamma], \[Mu]\[Nu]]^\[Sigma]*)
 	(*\:5229\:7528\:4e0b\:6307\:6807\:7684\:5bf9\:79f0\:6027\:6765\:964d\:4f4e\:8ba1\:7b97\:590d\:6742\:5ea6*)
-	\[CapitalGamma]=Simplify@Array[If[#1<=#2,\[Gamma][#1,#2,#3],Null]&,{dimension,dimension,dimension}];(*\:514b\:6c0f\:7b26\:5206\:91cf\:77e9\:9635*)
-	Array[If[#1>#2,\[CapitalGamma][[#1,#2,#3]]=\[CapitalGamma][[#2,#1,#3]]]&,{dimension,dimension,dimension}];
+	\[CapitalGamma]=Simplify@Array[If[ #1<=#2, \[Gamma][#1,#2,#3], Null]&, {dimension,dimension,dimension}];(*\:514b\:6c0f\:7b26\:5206\:91cf\:77e9\:9635*)
+	Array[If[#1>#2, \[CapitalGamma][[#1,#2,#3]]=\[CapitalGamma][[#2,#1,#3]]]&, {dimension,dimension,dimension}];
 	(*Print[Subsuperscript["\[CapitalGamma]","\[Mu]\[Nu]","  \[Sigma]"]->MatrixForm[\[CapitalGamma]]]*);
 	\[CapitalGamma]
 ];
 
 
-SCalcRiemannTensor[g_?ArrayQ,coodinateSystem_List]:=Module[
+SCalcRiemannTensor[g_?ArrayQ, coodinateSystem_List] := Module[
 	{
-		invg=Inverse[g],(*inverse of metric g*)
-		dimension=First@Dimensions[coodinateSystem],(*dimension of space*)
+		invg = Inverse[g],(*inverse of metric g*)
+		dimension = First@Dimensions[coodinateSystem],(*dimension of space*)
 		\[CapitalGamma],(*Christoffel Symbol Component Matrix*)
 		r,(*Riemann Tensor Conponent Calculating Function*)
 		Riemann(*Riemann Tensor Component Matrix*)
 	},
 	(*\:7528\:5750\:6807\:6cd5\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf*)
 	(*\:5148\:8ba1\:7b97\:514b\:6c0f\:7b26*)
-	\[CapitalGamma]=SCalcChristoffel[g,coodinateSystem];
-	(*\:8bb0\:5f55\:5750\:6807\:7cfb*)
-	Evaluate[Array[Subscript[x, #]&,dimension]]=coodinateSystem;
-	r[\[Mu]_,\[Nu]_,\[Sigma]_,\[Rho]_]:=D[\[CapitalGamma][[\[Mu],\[Sigma],\[Rho]]],Subscript[x, \[Nu]]]-D[\[CapitalGamma][[\[Sigma],\[Nu],\[Rho]]],Subscript[x, \[Mu]]]+Sum[\[CapitalGamma][[\[Sigma],\[Mu],\[Lambda]]] \[CapitalGamma][[\[Nu],\[Lambda],\[Rho]]]-\[CapitalGamma][[\[Sigma],\[Nu],\[Lambda]]] \[CapitalGamma][[\[Mu],\[Lambda],\[Rho]]],{\[Lambda],dimension}];(*Subscript[\:9ece\:66fc\:5f20\:91cf\:7684\:5206\:91cfR, \[Mu]\[Nu]\[Sigma]]^\[Rho]*)
+	\[CapitalGamma] = SCalcChristoffel[g, coodinateSystem];
+	r[\[Mu]_,\[Nu]_,\[Sigma]_,\[Rho]_] := D[ \[CapitalGamma][[\[Mu],\[Sigma],\[Rho]]], coodinateSystem[[\[Nu]]]]-D[ \[CapitalGamma][[\[Sigma],\[Nu],\[Rho]]], coodinateSystem[[\[Mu]]]]+Sum[\[CapitalGamma][[\[Sigma],\[Mu],\[Lambda]]] \[CapitalGamma][[\[Nu],\[Lambda],\[Rho]]] - \[CapitalGamma][[\[Sigma],\[Nu],\[Lambda]]] \[CapitalGamma][[\[Mu],\[Lambda],\[Rho]]],{\[Lambda],dimension}];(*Subscript[\:9ece\:66fc\:5f20\:91cf\:7684\:5206\:91cfR, \[Mu]\[Nu]\[Sigma]]^\[Rho]*)
 	(*\:5229\:7528\:7b2c1\:30012\:4e0b\:6307\:6807\:7684\:53cd\:79f0\:6027\:6765\:964d\:4f4e\:8ba1\:7b97\:590d\:6742\:5ea6*)
-	Riemann=Simplify@Array[If[#1<=#2,r[#1,#2,#3,#4],Null]&,{dimension,dimension,dimension,dimension}];
-	Array[If[#1>#2,Riemann[[#1,#2,#3,#4]]=-Riemann[[#2,#1,#3,#4]]]&,{dimension,dimension,dimension,dimension}];
+	Riemann = Simplify@Array[If[#1<=#2,r[#1,#2,#3,#4],Null]&,{dimension,dimension,dimension,dimension}];
+	Array[If[#1>#2,Riemann[[#1,#2,#3,#4]] = -Riemann[[#2,#1,#3,#4]]]&,{dimension,dimension,dimension,dimension}];
 	(*Print[Subsuperscript["R","\[Mu]\[Nu]\[Sigma]","   \[Rho]"]->MatrixForm@Riemann]*);
 	Riemann
 ];
 
 
 
-SCalcRicciTensor[g_?ArrayQ,coodinateSystem_List]:=Module[
+SCalcRicciTensor[g_?ArrayQ, coodinateSystem_List]:=Module[
 	{
-		invg=Inverse[g],(*inverse of metric g*)
-		dimension=First@Dimensions[coodinateSystem],(*dimension of space*)
+		invg = Inverse[g],(*inverse of metric g*)
+		dimension = First@Dimensions[coodinateSystem],(*dimension of space*)
 		R,(*Riemann Tensor Component Matrix*)
 		ricci,(*Ricci Tensor Component Calculating Function*)
 		Ricci(*Ricci Tensor Component Matrix*)
 	},
 	(*\:8ba1\:7b97Ricci\:5f20\:91cf*)
 	(*\:5148\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf*)
-	R=SCalcRiemannTensor[g,coodinateSystem];
-	(*Subscript[\:7528x, #]\:6765\:8bb0\:5f55\:5750\:6807\:7cfb*)
-	Evaluate[Array[Subscript[x, #]&,dimension]]=coodinateSystem;
-	ricci[\[Mu]_,\[Nu]_]:=Sum[R[[\[Mu],\[Sigma],\[Nu],\[Sigma]]],{\[Sigma],dimension}];
+	R = SCalcRiemannTensor[g,coodinateSystem];
+	ricci[\[Mu]_,\[Nu]_] := Sum[ R[[\[Mu],\[Sigma],\[Nu],\[Sigma]]], {\[Sigma],dimension}];
 	(*\:5229\:7528\:5bf9\:79f0\:6027\:6765\:964d\:4f4e\:8ba1\:7b97\:590d\:6742\:5ea6*)
-	Ricci=Simplify@Array[If[#1<=#2,ricci[#1,#2],Null]&,{dimension,dimension}];
-	Array[If[#1>#2,Ricci[[#1,#2]]=Ricci[[#2,#1]]]&,{dimension,dimension}];
+	Ricci = Simplify@Array[If[#1<=#2, ricci[#1,#2], Null]&, {dimension,dimension}];
+	Array[If[#1>#2, Ricci[[#1,#2]] = Ricci[[#2,#1]]]&, {dimension,dimension}];
 	(*Print[Subscript["R","\[Mu]\[Nu]"]->MatrixForm@Ricci]*);
 	Ricci
 ];
