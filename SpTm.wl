@@ -9,7 +9,10 @@ ShowForm::usage = "ShowForm[expr]"<>" "<>"\:5c06STensor\:8f6c\:5316\:4e3a\:6807\
 
 InputExplain::usage = "InputExplain[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8f6c\:5316\:4e3a\:5185\:90e8\:8ba1\:7b97\:65f6\:4f7f\:7528\:7684\:5f62\:5f0f."
 
-STCalculate::usage = "SpTmCalculate[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80."
+STensorInfo::usage = "STensorInfo[expr]"<>" "<>"\!\(\*SuperscriptBox[SubscriptBox[\(expr\:662f\:4e00\:4e2a\:5f62\:5982T\), \(a\)], \(b\)]\)\:7684\:5f20\:91cf\:ff0c\:7ed9\:51fa\:8be5\:5f20\:91cf\:7684\:5206\:91cf\:4fe1\:606f."<>"\n"<>"STensorInfo[T]"<>" "<>"\:7ed9\:51fa\:540d\:4e3aT\:7684\:6240\:6709\:5f20\:91cf\:7684\:5206\:91cf\:4fe1\:606f\:5217\:8868."<>"\n"<>"STensorInfo[T_STensor]"<>" "<>"\:7ed9\:51faSTensor\:5bf9\:8c61T\:7684\:5206\:91cf\:4fe1\:606f."
+
+MetricInfo::usage = "MetricInfo[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
+
 
 SetCoodinates::usage = "SetCoodinates[coodinates_List]"<>" "<>"coodinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
 
@@ -17,32 +20,33 @@ SetMetric::usage = "SetMetric[components_Array]"<>" "<>"\:5728\:8bbe\:7f6e\:5750
 
 SetMetricSymbol::usage = "SetMetricSymbol[metricSymbol_Symbol]"<>" "<>"\:8bbe\:7f6e\:5ea6\:89c4\:7b26\:53f7."
 
-GetMetric::usage = "GetMetric[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
-
-
 SetTensor::usage = "SetTensor[\!\(\*SuperscriptBox[SubscriptBox[\(T\), \(sub\)], \(sup\)]\), comopents]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:53ca\:5176\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf"<>"\n"<>"SetTensor[T_STensor, components]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf."
+
+
+STCalculate::usage = "SpTmCalculate[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80."
 
 STSpecify::usage = "STSpecify[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0fexpr\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97\:ff0c\:5f97\:5230\:7ed3\:679c\:5f20\:91cf\:7684\:5177\:4f53\:6307\:6807\:5206\:91cf\:5f62\:5f0f."
 
 STSimSpecify::usage = "STSimSpecify[expr]"<>" "<>"\:5c06\:8868\:8fbe\:5f0f\:5148\:8fdb\:884c\:53ef\:80fd\:7684\:7b80\:5316\:518d\:8ba1\:7b97\:5176\:5177\:4f53\:6307\:6807\:7684\:5206\:91cf\:5f62\:5f0f."
 
 
-SCalcChristoffel::usage = "SCalcChristoffel[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
+SCalcChristoffel::usage = "SCalcChristoffel[metricComponentsMatrix,coodinateSystem]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
 
-SCalcRiemannTensor::usage = "SCalcRiemannTensor[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(R\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)-(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
+SCalcRiemannTensor::usage = "SCalcRiemannTensor[metricComponentsMatrix,coodinateSystem]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(R\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)-(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
 
-SCalcRicciTensor::usage = "SCalcRicciTensor[metricComponentsMatrix,coodinateSystem]"<>"\t"<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SubscriptBox[\(R\), \(\[Mu]\[Nu]\)]\)."
+SCalcRicciTensor::usage = "SCalcRicciTensor[metricComponentsMatrix,coodinateSystem]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SubscriptBox[\(R\), \(\[Mu]\[Nu]\)]\)."
 
 
 Begin["Private`"]
 
 
 SpTmHelp={
-	"\:5728\:672c\:7a0b\:5e8f\:5305\:4e2d\:ff0c\:7b26\:53f7g\:5c06\:88ab\:8ba4\:4e3a\:662f\:9ed8\:8ba4\:7684\:5ea6\:89c4\:5f20\:91cf\:8868\:793a\:7b26\:53f7\:ff0c\:53ef\:4ee5\:901a\:8fc7SetMetric\:6765\:4fee\:6539. \[Del]\:4e3a\:4e0e\:5176\:76f8\:9002\:914d\:7684\:534f\:53d8\:5bfc\:6570\:7b97\:7b26. \:56e0\:6b64\:ff0c\:8be5\:7a0b\:5e8f\:5305\:4e2d\:540c\:65f6\:53ea\:80fd\:5b58\:5728\:4e00\:4e2a\:5ea6\:89c4.\n",
-	"\[FilledSmallCircle] \:4f7f\:7528SpTmCalculate[expr]\:6765\:8ba1\:7b97\:62bd\:8c61\:6307\:6807\:7684\:5f20\:91cf\:8868\:8fbe\:5f0fexpr.\n",
+	"\:5728\:672c\:7a0b\:5e8f\:5305\:4e2d\:ff0c\:7b26\:53f7g\:5c06\:88ab\:8ba4\:4e3a\:662f\:9ed8\:8ba4\:7684\:5ea6\:89c4\:5f20\:91cf\:8868\:793a\:7b26\:53f7\:ff0c\:53ef\:4ee5\:901a\:8fc7SetMetric\:6765\:4fee\:6539. \[Del]\:4e3a\:4e0e\:5176\:76f8\:9002\:914d\:7684\:534f\:53d8\:5bfc\:6570\:7b97\:7b26.\n",
+	"\[FilledSmallCircle] \:4f7f\:7528STensorInfor[T]\:6765\:83b7\:53d6\:5f20\:91cfT\:7684\:5206\:91cf\:4fe1\:606f.\n",
+	"\[FilledSmallCircle] \:4f7f\:7528STCalculate[expr]\:6765\:5316\:7b80\:62bd\:8c61\:6307\:6807\:7684\:5f20\:91cf\:8868\:8fbe\:5f0fexpr.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528ShowForm[expr]\:5c06\:8868\:8fbe\:5f0f\:663e\:793a\:4e3a\:6807\:51c6\:683c\:5f0f.\n",
-	"\[FilledSmallCircle] \:4f7f\:7528SpTmCalculate[expr]\:5c06\:8868\:8fbe\:5f0f\:8fdb\:884c\:9002\:5f53\:8ba1\:7b97\:548c\:5316\:7b80.\n",
-	"\[FilledSmallCircle] \:4f7f\:7528SpTmCalcComponent[expr]\:8ba1\:7b97\:8868\:8fbe\:5f0f\:7684\:5206\:91cf.\n"
+	"\[FilledSmallCircle] \:4f7f\:7528STSpecifye[expr]\:5c06\:8868\:8fbe\:5f0f\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:5e76\:8ba1\:7b97.\n",
+	"\[FilledSmallCircle] \:4f7f\:7528STSimSpecify[expr]\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:9002\:5f53\:5316\:7b80\:540e\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:8ba1\:7b97.\n"
 };
 SpTmHelp::usage = StringJoin[SpTmHelp];
 Print[StringJoin[SpTmHelp]]
@@ -53,13 +57,79 @@ ATensor[subindex_List, superindex_List, components_List];(*ATensor\:6807\:51c6\:
 Protect[STensor, ATensor];
 
 
+(* ::Section:: *)
+(*\:5168\:5c40\:53d8\:91cf*)
+
+
+(*\:5f20\:91cf\:5206\:91cf*)
+Unprotect[TensorComponents]
+TensorComponents = Association[];
+Protect[TensorComponents]
+
+(*\:5168\:5c40\:5750\:6807\:7cfb*)
+Unprotect[SCoodinates]
+SCoodinates = List[];
+Protect[SCoodinates]
+
+(*\:5ea6\:89c4\:5206\:91cf*)
+Unprotect[MetricComponents]
+MetricComponents = List[];
+Protect[MetricComponents]
+
+(*\:5ea6\:89c4\:7b26\:53f7*)
+Unprotect[MetricSymbol]
+MetricSymbol = Global`g;
+Protect[MetricSymbol]
+
+(*\:62bd\:8c61\:6307\:6807\:5411\:5177\:4f53\:6307\:6807\:7684\:8f6c\:5316\:89c4\:5219*)
+specificReplaceRule = Thread[#1->#2&[ToExpression@Alphabet[][[1;;24]],ToExpression@Alphabet["Greek"][[1;;24]]]];
+
+
+(* ::Section:: *)
+(*\:83b7\:53d6\:5f20\:91cf\:4fe1\:606f*)
+
+
+STensorInfo::ErrorInput = "\:8f93\:5165\:683c\:5f0f\:6709\:8bef.";
+STensorInfo::NoSuchTensor = "\:8be5\:5f20\:91cf\:672a\:8bbe\:7f6e\:5206\:91cf.";
+(*\:83b7\:53d6\:5f20\:91cf\:4fe1\:606f*)
+STensorInfo[expr__] := Module[
+{
+	tensor = InputExplain[expr]
+},
+	If[Head @ tensor =!= STensor|Symbol,
+		Message[STensorInfo::ErrorInput];
+		Abort[]
+	];
+	
+	STensorInfo[tensor]
+];
+
+(*\:83b7\:53d6\:7279\:5b9aSTensor\:7684\:4fe1\:606f*)
+STensorInfo[T_STensor] := Module[{},
+	If[
+		!KeyExistsQ[TensorComponents, T],
+		Message[STensorInfo::NoSuchTensor];
+		Abort[]
+	];
+	
+	ShowSTensor[T, TensorComponents[T]]
+]
+(*\:83b7\:53d6\:540d\:4e3aT\:7684\:5f20\:91cf\:4fe1\:606f*)
+STensorInfo[T_Symbol] := Module[
+{
+	keys
+},
+	keys = KeySelect[TensorComponents, MatchQ[#, STensor[T, __, __]]& ];
+	
+	ShowSTensor[#1, #2]&@@@(keys//.{Association|Rule -> List})
+]
+
+
+
 (* ::Section::Closed:: *)
 (*\:8bbe\:7f6e\:5f20\:91cf\:5206\:91cf*)
 
 
-Unprotect[TensorComponents];
-TensorComponents = Association[];
-Protect[TensorComponents];
 SetTensor::ErrorExpression = "\:5f20\:91cf\:683c\:5f0f\:8f93\:5165\:9519\:8bef.";
 SetTensor[expr__, components_List] := Module[{},
 	T = InputExplain[expr];
@@ -83,9 +153,6 @@ SetTensor[T_STensor, components_List] := Module[{},
 (*\:8bbe\:7f6e\:5750\:6807\:7cfb*)
 
 
-Unprotect[SCoodinates]
-SCoodinates = List[];
-Protect[SCoodinates]
 SetCoodinates::ErrorSymbol = "\:8f93\:5165\:5750\:6807\:7cfb\:4e2d\:5b58\:5728\:975e\:7b26\:53f7\:ff08Symbol\:ff09\:5143\:7d20.";
 SetCoodinates[Coodinates_List] := Module[{},
 	If[
@@ -99,15 +166,9 @@ SetCoodinates[Coodinates_List] := Module[{},
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:8bbe\:7f6e\:5ea6\:89c4*)
 
-
-Protect[MetricComponents]
-
-Unprotect[MetricSymbol]
-MetricSymbol = Global`g;
-Protect[MetricSymbol]
 
 SetMetric::NoCoodinates = "\:6ca1\:6709\:8bbe\:7f6e\:5750\:6807\:7cfb.";
 SetMetric::ErrorDimensions = "\:5206\:91cf\:77e9\:9635\:548c\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
@@ -153,7 +214,7 @@ SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[
 ];
 
 
-GetMetric[]:=Module[{},
+MetricInfo[]:=Module[{},
 	Row[{ Subscript[MetricSymbol, Row[{"\[Mu]","\[Nu]"}]], "=" , MatrixForm[MetricComponents] }]
 ];
 
@@ -182,18 +243,18 @@ InputExplainRule:={
 (*\:683c\:5f0f\:5316\:8f93\:51fa*)
 
 
-Superscript[x_,y_,superIndex__]:=Superscript[x,Row[{y,superIndex}]];(*Good !!!*)
+Superscript[x_,y_,superIndex__]:=Superscript[x, Row[{y,superIndex}]];(*Good !!!*)
 
-Subscript[x_,y_,subIndex__]:=Subscript[x,Row[{y,subIndex},""]];
+Subscript[x_,y_,subIndex__]:=Subscript[x, Row[{y,subIndex},""]];
 
 
 
 ShowForm[expr___] := StandardForm[expr /. {T_STensor :> ShowSTensor[T]}];
 
-ShowSTensor[tensor_STensor] :=
-    Module[{out = tensor[[1]], r = {{} -> "", List -> Sequence}},
-        If[Length[tensor[[2]]] > 0, out = Subscript[out, tensor[[2]] /. r]];
-        If[Length[tensor[[3]]] > 0, out = Superscript[out, tensor[[3]] /. r]];
+ShowSTensor[T_STensor] :=
+    Module[{out = T[[1]], r = {{} -> "", List -> Sequence}},
+        If[Length[T[[2]]] > 0, out = Subscript[out, T[[2]] /.r]];
+        If[Length[T[[3]]] > 0, out = Superscript[out, T[[3]] /.r]];
         out
     ];
 
@@ -274,7 +335,7 @@ STCalculate[expr__]:= Module[
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:5177\:4f53\:6307\:6807\:8f6c\:5316\:4e0e\:8fd0\:7b97*)
 
 
@@ -301,7 +362,7 @@ GetanUnusedIndex[lis__List] := Module[
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:57fa\:672c\:8fd0\:7b97*)
 
 
@@ -411,7 +472,7 @@ ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P
 
 
 
-(* ::Subsubsection::Closed:: *)
+(* ::Subsubsection:: *)
 (*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97*)
 
 
@@ -432,7 +493,7 @@ SCovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 },
 	(*\:68c0\:67e5\:662f\:5426\:8bbe\:7f6e\:4e86\:5ea6\:89c4\:5206\:91cf*)
 	If[
-		Head[MetricComponents] == Symbol,
+		Length[MetricComponents] == 0,
 		Message[SCovariantDerivative::metricMiss];
 		Abort[]
 	];
@@ -486,7 +547,7 @@ SOrdinaryDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f*)
 
 
@@ -524,9 +585,7 @@ SCalcSpecificExpression[expr__] := Module[
 	setTest,
 	keys = Association[],
 	output,
-	components,
-	(*\:7528\:5e0c\:814a\:5b57\:6bcd\:8868\:793a\:5206\:91cf*)
-	specificReplaceRule = Thread[#1->#2&[ToExpression@Alphabet[][[1;;24]],ToExpression@Alphabet["Greek"][[1;;24]]]]
+	components
 },
 	(*\:68c0\:67e5\:662f\:5426\:9009\:53d6\:4e86\:5750\:6807\:7cfb*)
 	If[
