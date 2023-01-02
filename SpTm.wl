@@ -56,7 +56,7 @@ ATensor[subindex_List, superindex_List, components_List];(*ATensor\:6807\:51c6\:
 Protect[STensor, ATensor];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8bbe\:7f6e\:5f20\:91cf\:5206\:91cf*)
 
 
@@ -82,7 +82,7 @@ SetTensor[T_STensor, components_List] := Module[{},
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8bbe\:7f6e\:5750\:6807\:7cfb*)
 
 
@@ -133,7 +133,7 @@ SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[
 	bb = Global`b
 },
 	If[
-		Coodinates=={} && Head[SCoodinates] =!= List,
+		Coodinates=={} && Length[SCoodinates] == 0,
 		Message[SetMetric::NoCoodinates];
 		Abort[]
 	];
@@ -173,7 +173,7 @@ InputExplain[expr__]:=expr/.InputExplainRule;
 generateInputExplainRule[x__]:={(*\:591a\:4e2a\:6307\:6807\:66ff\:6362\:4e3a\:5217\:8868*)Times->List,(*\:5355\:4e2a\:6307\:6807\:8f6c\:4e3a\:5217\:8868*)x:>{x}/;MatchQ[x,_Symbol]};
 
 InputExplainRule:={
-	Power[T_Symbol, Plus[superIndex__]] :> Apply[Times, STensor[T, {}, #]&/@ superIndex/.Plus->List],
+	Power[T_Symbol, superIndex__] :> Apply[Times, STensor[T, {}, #]&/@ superIndex/.Plus->List]/;Head[superIndex]==Plus,
 	Subscript[T_Symbol, subIndex__] :> STensor[T, subIndex/.generateInputExplainRule[subIndex], {}],
 	Power[T_Symbol, superIndex__] :> STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]],
 	Power[Subscript[T_Symbol, subIndex__], superIndex__] :> 
@@ -216,8 +216,8 @@ Protect[ShowForm, ShowSTensor];
 
 (*\:5ea6\:89c4\:8fd0\:7b97\:5f8b*)
 MetricCalcRule:={
-	(*Subscript[\:5ea6\:89c4g, ab]\:4e0e\:5176\:9006\:6620\:5c04g^ab*)
-	STensor[g_,{a_,b_},{}] STensor[g_,{},{a_,c_}]:>STensor[\[Delta],{a},{c}]/;g==MetricSymbol,
+	(*g\:4e0e\:5176\:9006\:6620\:5c04g*)
+	STensor[g_,{a_,b_},{}] STensor[g_,{},{a_,c_}] :> STensor[\[Delta],{a},{c}]/;g==MetricSymbol,
 	
 	(*\:5ea6\:89c4\:964d\:6307\:6807*)
 	STensor[T_,Tsub__,Tsup__]STensor[g_,{a_,b_} ,Null|{}]:>STensor[T,Append[Tsub,b],DeleteElements[Tsup,{a}]]/;g==MetricSymbol && MemberQ[Tsup,a],
@@ -289,10 +289,12 @@ GetANotUsedIndex[expr__] := Module[
 {
 	usedIndeces,
 	unUsedIndeces,
+	gradIndeces,
 	alphabet = ToExpression@Alphabet[]
 },
-	usedIndeces = DeleteDuplicates@Flatten@Cases[expr, STensor[T_,subIndex_List,superIndex_List]:>Join[superIndex,subIndex], All];
-	unUsedIndeces = Complement[alphabet, usedIndeces];
+	usedIndeces = DeleteDuplicates@Flatten@Cases[expr, STensor[T_, subIndex_List, superIndex_List] :> Join[superIndex,subIndex], All];
+	gradIndeces = DeleteDuplicates@Flatten@Cases[expr, Grad[any__, subIndex_] :> subIndex, All];
+	unUsedIndeces = Complement[alphabet, usedIndeces, gradIndeces];
 	First@unUsedIndeces
 ];
 
@@ -309,7 +311,7 @@ GetANotUsedIndex[expr__] := Module[
 (*(*\:9700\:8981\:5c06\:534f\:53d8\:5bfc\:6570\:7b97\:7b26\:8f6c\:5316\:4e3a\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684 \:666e\:901a\:5bfc\:6570\:7b97\:7b26\:4f5c\:7528"\:52a0"\:514b\:6c0f\:7b26\:7684\:4f5c\:7528*)*)
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*\:52a0\:6cd5*)
 
 
@@ -333,7 +335,7 @@ ATensorAdd[T_ATensor] := T;
 ATensorAdd[T_ATensor, P_ATensor, Q__ATensor] := ATensorAdd[T, ATensorAdd[P, Q]];
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*\:6570\:4e58*)
 
 
@@ -347,7 +349,7 @@ ATensorTimes[T_ATensor, k_Symbol|k_?NumberQ] := ATensor[T[[1]], T[[2]], k T[[3]]
 ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor, S__ATensor] := ATensorTimes[k, ATensorTimes[T, S]];
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*\:5f20\:91cf\:79ef\:4e0e\:7f29\:5e76*)
 
 
@@ -394,23 +396,57 @@ ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P
 
 
 (* ::Subsubsection:: *)
+(*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97*)
+
+
+(*\:534f\:53d8\:5bfc\:6570\[Del]*)
+CovariantDerivative::metricMiss ="\:672a\:8bbe\:7f6e\:5ea6\:89c4\:5206\:91cf."
+CovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
+{
+	\[CapitalGamma],
+	Christoffel
+},
+	(*\:68c0\:67e5\:662f\:5426\:8bbe\:7f6e\:4e86\:5ea6\:89c4\:5206\:91cf*)
+	If[
+		Head[MetricComponents] == Symbol,
+		Message[CovariantDerivative::metricMiss];
+		Abort[]
+	];
+	(*\:8ba1\:7b97\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5ea6\:89c4\:5bf9\:5e94\:7684\:514b\:6c0f\:7b26\:5206\:91cf*)
+	\[CapitalGamma] = SCalcChristoffel[MetricComponents, coodinates];
+]
+
+
+(* ::Subsubsection::Closed:: *)
 (*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f*)
 
 
 SCalcSpecificExpression::componentsMiss = "\:5b58\:5728\:672a\:8bbe\:7f6e\:5206\:91cf\:7684\:5f20\:91cf\:6216\:5b58\:5728\:91cd\:540d\:4e14\:540c\:578b\:53f7\:7684\:5f20\:91cf."
+SCalcSpecificExpression::coodinatesMiss = "\:672a\:9009\:53d6\:5750\:6807\:7cfb."
 SCalcSpecificExpression[expr__] := Module[
 {
 	expression,
-	calcReplaceRule = {
-		Plus[T_ATensor, S_ATensor] :> ATensorAdd[T, S],
-		Times[k_Symbol|k_?NumericQ, T_ATensor] :> ATensorTimes[k, T],
-		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S]
-	},
+	coodinates,
+	calcReplaceRule,
 	sTensors = Cases[expr, _STensor, {0, Infinity}],
 	setTest,
 	keys = Association[]
 },
-	(*\:68c0\:67e5\:5f20\:91cfT\:662f\:5426\:5df2\:7ecf\:8bbe\:7f6e\:5206\:91cf*)
+	(*\:68c0\:67e5\:662f\:5426\:9009\:53d6\:4e86\:5750\:6807\:7cfb*)
+	If[
+		Length[SCoodinates] == 0,
+		Message[SCalcSpecificExpression::coodinatesMiss];
+		Abort[]
+	];
+	coodinates = SCoodinates;
+	
+	calcReplaceRule = {
+		Plus[T_ATensor, S_ATensor] :> ATensorAdd[T, S],
+		Times[k_Symbol|k_?NumericQ, T_ATensor] :> ATensorTimes[k, T],
+		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S]
+	};
+	
+	(*\:68c0\:67e5\:5f20\:91cfT\:662f\:5426\:5df2\:7ecf\:8bbe\:7f6e\:5206\:91cf\:7684\:51fd\:6570*)
 	setTest[T_STensor] := Module[
 	{
 		tkeys,
@@ -419,7 +455,6 @@ SCalcSpecificExpression[expr__] := Module[
 	},
 			(*\:627e\:5230\:7b26\:53f7\:548c\:578b\:53f7\:90fd\:76f8\:540c\:7684\:5f20\:91cf*)
 			tas = KeySelect[TensorComponents, MatchQ[#, STensor[T[[1]], ___, ___]] && Length[#[[2]]] == Length[T[[2]]] && Length[#[[3]]] == Length[T[[3]]]& ];
-			
 			(*\:4e0d\:5b58\:5728\:952e\:503c\:ff0c\:8be5\:5f20\:91cf\:672a\:8bbe\:7f6e\:5206\:91cf;\:6216\:5b58\:5728\:591a\:4e2a\:5339\:914d\:7684\:952e\:503c*)
 			If[
 				Length[tas] != 1,
@@ -446,14 +481,14 @@ SCalcSpecificExpression[expr__] := Module[
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:7279\:6b8a\:5f20\:91cf\:8ba1\:7b97*)
 
 
 SCalcChristoffel[g_?ArrayQ, coodinateSystem_List] := Module[
 	{
-		invg=Inverse[g],(*inverse of metric g*)
-		dimension=First@Dimensions[coodinateSystem],(*dimension of space*)
+		invg = Inverse[g],(*inverse of metric g*)
+		dimension = First@Dimensions[coodinateSystem],(*dimension of space*)
 		\[Gamma],(*Christoffel Symbol Component Calculating Function*)
 		\[CapitalGamma](*Christoffel Symbol Component Matrix*)
 	},
