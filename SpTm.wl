@@ -1,5 +1,8 @@
 (* ::Package:: *)
 
+(*It is made by Jayce Ping (\:5e73\:535a\:6587), a student in XJTU, who is in interested in both Mathematica and General Relativity. *)
+
+
 BeginPackage["SpTm`"]
 
 
@@ -42,11 +45,10 @@ SCalcRicciScalar::usage = "SCalcRicciScalar[metric, coodinates]"<>" "<>"\:7ed9\:
 
 
 
-
 Begin["Private`"]
 
 
-SpTmHelp={
+SpTmHelp = {
 	"\:5728\:672c\:7a0b\:5e8f\:5305\:4e2d\:ff0c\:7b26\:53f7g\:5c06\:88ab\:8ba4\:4e3a\:662f\:9ed8\:8ba4\:7684\:5ea6\:89c4\:5f20\:91cf\:8868\:793a\:7b26\:53f7\:ff0c\:53ef\:4ee5\:901a\:8fc7SetMetric\:6765\:4fee\:6539. \[Del]\:4e3a\:4e0e\:5176\:76f8\:9002\:914d\:7684\:534f\:53d8\:5bfc\:6570\:7b97\:7b26.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528STensorInfor[T]\:6765\:83b7\:53d6\:5f20\:91cfT\:7684\:5206\:91cf\:4fe1\:606f.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528STCalculate[expr]\:6765\:5316\:7b80\:62bd\:8c61\:6307\:6807\:7684\:5f20\:91cf\:8868\:8fbe\:5f0fexpr.\n",
@@ -63,7 +65,7 @@ ATensor[subindex_List, superindex_List, components_List];(*ATensor\:6807\:51c6\:
 Protect[STensor, ATensor];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:5168\:5c40\:53d8\:91cf*)
 
 
@@ -245,7 +247,7 @@ InputExplainRule:={
 };
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:683c\:5f0f\:5316\:8f93\:51fa*)
 
 
@@ -651,7 +653,7 @@ SCalcSpecificExpression[expr__] := Module[
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:7279\:6b8a\:5f20\:91cf\:8ba1\:7b97*)
 
 
