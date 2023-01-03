@@ -30,11 +30,18 @@ STSpecify::usage = "STSpecify[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868
 STSimSpecify::usage = "STSimSpecify[expr]"<>" "<>"\:5c06\:8868\:8fbe\:5f0f\:5148\:8fdb\:884c\:53ef\:80fd\:7684\:7b80\:5316\:518d\:8ba1\:7b97\:5176\:5177\:4f53\:6307\:6807\:7684\:5206\:91cf\:5f62\:5f0f."
 
 
-SCalcChristoffel::usage = "SCalcChristoffel[metricComponentsMatrix,coodinateSystem]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
+STCalcTensor::usage = "STCalcTensor[\"Tensor\"]"<>" "<>"\:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar."
 
-SCalcRiemannTensor::usage = "SCalcRiemannTensor[metricComponentsMatrix,coodinateSystem]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(R\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)-(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
+(*
+SCalcChristoffel::usage = "SCalcChristoffel[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
 
-SCalcRicciTensor::usage = "SCalcRicciTensor[metricComponentsMatrix,coodinateSystem]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SubscriptBox[\(R\), \(\[Mu]\[Nu]\)]\)."
+SCalcRiemannTensor::usage = "SCalcRiemannTensor[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(R\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)-(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
+
+SCalcRicciTensor::usage = "SCalcRicciTensor[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SubscriptBox[\(R\), \(\[Mu]\[Nu]\)]\)."
+
+SCalcRicciTensor::usage = "SCalcRicciScalar[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:6807\:91cf."
+*)
+
 
 
 Begin["Private`"]
@@ -85,7 +92,7 @@ Protect[MetricSymbol]
 specificReplaceRule = Thread[#1->#2&[ToExpression@Alphabet[][[1;;24]],ToExpression@Alphabet["Greek"][[1;;24]]]];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:83b7\:53d6\:5f20\:91cf\:4fe1\:606f*)
 
 
@@ -166,7 +173,7 @@ SetCoodinates[Coodinates_List] := Module[{},
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8bbe\:7f6e\:5ea6\:89c4*)
 
 
@@ -335,7 +342,7 @@ STCalculate[expr__]:= Module[
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:5177\:4f53\:6307\:6807\:8f6c\:5316\:4e0e\:8fd0\:7b97*)
 
 
@@ -645,10 +652,47 @@ SCalcSpecificExpression[expr__] := Module[
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:7279\:6b8a\:5f20\:91cf\:8ba1\:7b97*)
 
 
+STCalcTensor::NoMetric = "\:672a\:8bbe\:7f6e\:5ea6\:89c4\:5206\:91cf."
+STCalcTensor::NoCoodinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb."
+
+STCalcTensor[name_String] := STCalcTensor[name, MetricComponents, SCoodinates];
+
+STCalcTensor[name_String, components_?ArrayQ] := STCalcTensor[name, components, SCoodinates];
+
+STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
+{
+	func,
+	record
+},
+	If[
+		Length @ components == 0,
+		Message[STCalcTensor::NoMetric];
+		Abort[]
+	];
+	If[
+		Length @ coodinates == 0,
+		Message[STCalcTensor::NoCoodinates];
+		Abort[]
+	];
+	
+	record = <|
+		"Christoffel" -> STensor["\[CapitalGamma]", {"\[Mu]","\[Nu]"}, {"\[Sigma]"}],
+		"RiemannTensor" -> STensor["R", {"\[Mu]","\[Nu]","\[Sigma]"},{"\[Rho]"}],
+		"RicciTensor" -> STensor["R", {"\[Mu]","\[Nu]"},{}],
+		"RicciScalar" -> STensor["R", {}, {}]
+		|>;
+	
+	func = ToExpression @ StringJoin[{"SCalc",name}];
+	
+	ShowSTensor[record[name], func[components, coodinates]]
+]
+
+
+(*\:514b\:6c0f\:7b26*)
 SCalcChristoffel[g_?ArrayQ, coodinateSystem_List] := Module[
 	{
 		invg = Inverse[g],(*inverse of metric g*)
@@ -665,6 +709,7 @@ SCalcChristoffel[g_?ArrayQ, coodinateSystem_List] := Module[
 ];
 
 
+(*\:9ece\:66fc\:5f20\:91cf*)
 SCalcRiemannTensor[g_?ArrayQ, coodinateSystem_List] := Module[
 	{
 		invg = Inverse[g],(*inverse of metric g*)
@@ -686,6 +731,7 @@ SCalcRiemannTensor[g_?ArrayQ, coodinateSystem_List] := Module[
 
 
 
+(*\:91cc\:5947\:5f20\:91cf*)
 SCalcRicciTensor[g_?ArrayQ, coodinateSystem_List]:=Module[
 	{
 		invg = Inverse[g],(*inverse of metric g*)
@@ -703,6 +749,16 @@ SCalcRicciTensor[g_?ArrayQ, coodinateSystem_List]:=Module[
 	Array[If[#1>#2, Ricci[[#1,#2]] = Ricci[[#2,#1]]]&, {dimension,dimension}];
 	(*Print[Subscript["R","\[Mu]\[Nu]"]->MatrixForm@Ricci]*);
 	Ricci
+];
+
+
+(*\:91cc\:5947\:6807\:91cf*)
+SCalcRicciScalar[g_?ArrayQ, coodinateSystem_List] := Module[
+{
+	invg = Invers[g],
+	dimension = First@Dimensions[coodinateSystem]
+},
+	Tr[SCalcRicciTensor[g, coodinateSystem]]
 ];
 
 
