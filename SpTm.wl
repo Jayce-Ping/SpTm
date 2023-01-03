@@ -165,14 +165,14 @@ SetTensor[T_STensor, components_List] := Module[{},
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:8bbe\:7f6e\:5750\:6807\:7cfb*)
 
 
 SetCoodinates::ErrorSymbol = "\:8f93\:5165\:5750\:6807\:7cfb\:4e2d\:5b58\:5728\:975e\:7b26\:53f7\:ff08Symbol\:ff09\:5143\:7d20.";
 SetCoodinates[Coodinates_List] := Module[{},
 	If[
-		!AllTrue[Coodinates,MatchQ[#,_Symbol]&],
+		!AllTrue[Coodinates, MatchQ[#,_Symbol]&],
 		Message[SetCoodinates::ErrorSymbol];
 		Abort[]
 	];
@@ -183,6 +183,10 @@ SetCoodinates[Coodinates_List] := Module[{},
 	(*\:4fdd\:62a4\:5750\:6807\:7cfb\:4e2d\:7528\:5230\:7684\:7b26\:53f7*)
 	Protect@@SCoodinates;
 	Protect[SCoodinates];
+	(*\:6e05\:7a7a\:4e4b\:524d\:5750\:6807\:7cfb\:4e0b\:8bbe\:5b9a\:7684\:6240\:6709\:5f20\:91cf\:5206\:91cf*)
+	Unprotect[TensorComponents];
+	TensorComponents = Association[];
+	Protect[TensorComponents];
 ]
 
 
