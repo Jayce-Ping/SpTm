@@ -653,7 +653,7 @@ SCalcSpecificExpression[expr__] := Module[
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:7279\:6b8a\:5f20\:91cf\:8ba1\:7b97*)
 
 
@@ -757,9 +757,11 @@ SCalcRicciTensor[g_?ArrayQ, coodinateSystem_List]:=Module[
 SCalcRicciScalar[g_?ArrayQ, coodinateSystem_List] := Module[
 {
 	invg = Invers[g],
-	dimension = First@Dimensions[coodinateSystem]
+	dimension = First@Dimensions[coodinateSystem],
+	Ricci
 },
-	Tr[SCalcRicciTensor[g, coodinateSystem]]
+	Ricci = [SCalcRicciTensor[g, coodinateSystem]];
+	Sum[Ricci[[\[Mu],\[Nu]]] g[[\[Mu],\[Nu]]],{\[Mu], dimension},{\[Nu], dimension}]
 ];
 
 
