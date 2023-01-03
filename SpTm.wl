@@ -30,17 +30,16 @@ STSpecify::usage = "STSpecify[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868
 STSimSpecify::usage = "STSimSpecify[expr]"<>" "<>"\:5c06\:8868\:8fbe\:5f0f\:5148\:8fdb\:884c\:53ef\:80fd\:7684\:7b80\:5316\:518d\:8ba1\:7b97\:5176\:5177\:4f53\:6307\:6807\:7684\:5206\:91cf\:5f62\:5f0f."
 
 
-STCalcTensor::usage = "STCalcTensor[\"Tensor\"]"<>" "<>"\:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar."
+STCalcTensor::usage = "STCalcTensor[\"Tensor\"]"<>" "<>"\:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar."<>"\n"<>"SCalcTensor[\"Tensor\", metric]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:ff0c\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:8ba1\:7b97\:5f20\:91cfTensor."<>"\n"<>"SCalcTensor[\"Tensor\", metric, coodinates]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:548c\:5750\:6807\:7cfb\:ff0c\:8ba1\:7b97\:5f20\:91cfTensor."
 
-(*
 SCalcChristoffel::usage = "SCalcChristoffel[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
 
 SCalcRiemannTensor::usage = "SCalcRiemannTensor[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(R\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)-(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
 
 SCalcRicciTensor::usage = "SCalcRicciTensor[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SubscriptBox[\(R\), \(\[Mu]\[Nu]\)]\)."
 
-SCalcRicciTensor::usage = "SCalcRicciScalar[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:6807\:91cf."
-*)
+SCalcRicciScalar::usage = "SCalcRicciScalar[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:6807\:91cf."
+
 
 
 
