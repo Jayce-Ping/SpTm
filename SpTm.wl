@@ -295,24 +295,25 @@ ShowSTensor[T_STensor] :=
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97\:89c4\:5219*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:5ea6\:89c4\:8fd0\:7b97\:5f8b*)
 
 
 (*\:5ea6\:89c4\:8fd0\:7b97\:5f8b*)
-MetricCalcRule:={
-	(*g\:4e0e\:5176\:9006\:6620\:5c04g*)
-	STensor[g_,{a_,b_},{}] STensor[g_,{},{a_,c_}] :> STensor[\[Delta],{a},{c}]/;g==MetricSymbol,
-	
+MetricInverseRule := {
+	(*g\:4e0e\:5176\:9006\:6620\:5c04\:7f29\:5e76\:5f97\:5230\[Delta]*)
+	STensor[g_, {a_,b_} ,{}] STensor[g_, {}, {a_,c_}] :> STensor[\[Delta], {a}, {c}] /; g == MetricSymbol,
+};
+MetricUpDownIndex := {
 	(*\:5ea6\:89c4\:964d\:6307\:6807*)
-	STensor[T_,Tsub__,Tsup__]STensor[g_,{a_,b_} ,Null|{}]:>STensor[T,Append[Tsub,b],DeleteElements[Tsup,{a}]]/;g==MetricSymbol && MemberQ[Tsup,a],
+	STensor[T_, Tsub__, Tsup__]STensor[g_,{a_,b_} ,Null|{}] :> STensor[T, Append[Tsub,b], DeleteElements[Tsup,{a}]] /; g == MetricSymbol && MemberQ[Tsup,a],
 	
 	(*\:5ea6\:89c4\:5347\:6307\:6807*)
-	STensor[T_,Tsub__,Tsup__] STensor[g_,Null|{},{a_,b_}]:>STensor[T,DeleteElements[Tsup,{a}],Append[Tsub,b]]/;g==MetricSymbol && MemberQ[Tsub,a]
+	STensor[T_, Tsub__, Tsup__] STensor[g_, Null|{}, {a_,b_}] :> STensor[T, DeleteElements[Tsup,{a}], Append[Tsub,b]] /; g == MetricSymbol && MemberQ[Tsub,a]
 };
 
 
@@ -331,7 +332,7 @@ STensorCalcRule:={
 };
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97\:5f8b*)
 
 
@@ -361,9 +362,13 @@ DerivativeCalcRule:={
 };
 
 
+(* ::Subsection:: *)
+(*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:5316\:7b80*)
+
+
 STCalculate[expr__]:= Module[
 {
-	CalcRule = Join[DerivativeCalcRule, STensorCalcRule]
+	CalcRule = Join[DerivativeCalcRule, STensorCalcRule, MetricInverseRule]
 },
 	InputExplain[expr]//.CalcRule
 ];
@@ -371,6 +376,10 @@ STCalculate[expr__]:= Module[
 
 (* ::Section::Closed:: *)
 (*\:5177\:4f53\:6307\:6807\:8f6c\:5316\:4e0e\:8fd0\:7b97*)
+
+
+(* ::Subsection::Closed:: *)
+(*\:83b7\:53d6\:672a\:4f7f\:7528\:7684\:6307\:6807\:7b26\:53f7*)
 
 
 (*\:83b7\:53d6\:4e00\:4e2a\:6ca1\:6709\:7528\:8fc7\:7684\:6307\:6807\:7b26\:53f7*)
@@ -396,7 +405,7 @@ GetanUnusedIndex[lis__List] := Module[
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:57fa\:672c\:8fd0\:7b97*)
 
 
@@ -506,7 +515,7 @@ ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P
 
 
 
-(* ::Subsubsection:: *)
+(* ::Subsubsection::Closed:: *)
 (*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97*)
 
 
@@ -811,7 +820,7 @@ SCalcEinsteinTensor[g_?ArrayQ, coodinateSystem_List] := Module[
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*End*)
 
 
