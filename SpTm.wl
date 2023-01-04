@@ -6,6 +6,10 @@
 BeginPackage["SpTm`"]
 
 
+(* ::Section::Closed:: *)
+(*::usage information*)
+
+
 STensor::usage = "STensor[TensorName_Symbol, subindex_List, superindex_List] \:4e3aSTensor\:5bf9\:8c61\:7684\:6807\:51c6\:683c\:5f0f\:ff0c\:662f\:5f20\:91cf\:8fdb\:884c\:62bd\:8c61\:6307\:6807\:8ba1\:7b97\:65f6\:6240\:7528\:7684\:8868\:8fbe\:5f62\:5f0f. "<>"\:4e5f\:53ef\:4ee5\:76f4\:63a5\:91c7\:53d6ctrl+_\:8f93\:5165\:4e0b\:6807\:548cctrl+^\:8f93\:5165\:4e0a\:6807\:7684\:5f62\:5f0f\:8f93\:5165\:5f20\:91cf\:ff08\!\(\*SuperscriptBox[SubscriptBox[\(\:5982R\), \(a\\\ b\\\ c\)], \(d\)]\),\:6ce8\:610f\:6307\:6807\:4e4b\:95f4\:9700\:8981\:7528\:7a7a\:683c\:9694\:5f00\:ff09."
 
 ShowForm::usage = "ShowForm[expr]"<>" "<>"\:5c06STensor\:8f6c\:5316\:4e3a\:6807\:51c6\:683c\:5f0f\:ff0c\:4e0e\:8868\:8fbe\:5f0f\:5176\:4f59\:90e8\:5206\:5747\:4ee5StandardForm\:683c\:5f0f\:8f93\:51fa."
@@ -49,6 +53,10 @@ SCalcEinsteinTensor::usage = "SCalcEinsteinTensor[metric, coodinates]"<>" "<>"\:
 Begin["Private`"]
 
 
+(* ::Section::Closed:: *)
+(*SpTmHelp*)
+
+
 SpTmHelp = {
 	"\:5728\:672c\:7a0b\:5e8f\:5305\:4e2d\:ff0c\:7b26\:53f7g\:5c06\:88ab\:8ba4\:4e3a\:662f\:9ed8\:8ba4\:7684\:5ea6\:89c4\:5f20\:91cf\:8868\:793a\:7b26\:53f7\:ff0c\:53ef\:4ee5\:901a\:8fc7SetMetric\:6765\:4fee\:6539. \[Del]\:4e3a\:4e0e\:5176\:76f8\:9002\:914d\:7684\:534f\:53d8\:5bfc\:6570\:7b97\:7b26.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528STensorInfor[T]\:6765\:83b7\:53d6\:5f20\:91cfT\:7684\:5206\:91cf\:4fe1\:606f.\n",
@@ -67,7 +75,7 @@ ATensor[subindex_List, superindex_List, components_List];(*ATensor\:6807\:51c6\:
 Protect[STensor, ATensor];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:5168\:5c40\:53d8\:91cf*)
 
 
@@ -295,11 +303,11 @@ ShowSTensor[T_STensor] :=
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97\:89c4\:5219*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:5ea6\:89c4\:8fd0\:7b97\:5f8b*)
 
 
@@ -362,7 +370,7 @@ DerivativeCalcRule:={
 };
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:5316\:7b80*)
 
 
