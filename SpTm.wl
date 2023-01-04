@@ -55,7 +55,8 @@ SpTmHelp = {
 	"\[FilledSmallCircle] \:4f7f\:7528STCalculate[expr]\:6765\:5316\:7b80\:62bd\:8c61\:6307\:6807\:7684\:5f20\:91cf\:8868\:8fbe\:5f0fexpr.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528ShowForm[expr]\:5c06\:8868\:8fbe\:5f0f\:663e\:793a\:4e3a\:6807\:51c6\:683c\:5f0f.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528STSpecifye[expr]\:5c06\:8868\:8fbe\:5f0f\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:5e76\:8ba1\:7b97.\n",
-	"\[FilledSmallCircle] \:4f7f\:7528STSimSpecify[expr]\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:9002\:5f53\:5316\:7b80\:540e\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:8ba1\:7b97.\n"
+	"\[FilledSmallCircle] \:4f7f\:7528STSimSpecify[expr]\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:9002\:5f53\:5316\:7b80\:540e\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:8ba1\:7b97.\n",
+	"\[FilledSmallCircle] \:5728\:4f7f\:7528SpTm\:65f6\:ff0c\:6240\:6709\:5c0f\:5199\:82f1\:6587\:5b57\:6bcd(a,b...)\:548c\:5e0c\:814a\:5b57\:6bcd(\[Alpha],\[Beta]...)\:90fd\:4f1a\:88ab\:4fdd\:62a4\:ff0c\:7528\:4e8e\:8868\:793a\:5f20\:91cf\:6307\:6807\:ff0c\:8bf7\:4e0d\:8981\:5c06\:5b83\:4eec\:4f5c\:4e3a\:53d8\:91cf\:540d\:ff0c\:4f46\:53ef\:4ee5\:4f5c\:4e3a\:5750\:6807\:7cfb\:7b26\:53f7.\n"
 };
 SpTmHelp::usage = StringJoin[SpTmHelp];
 Print[StringJoin[SpTmHelp]]
@@ -91,6 +92,15 @@ Unprotect[Global`g]
 MetricSymbol = Global`g;
 Protect[MetricSymbol]
 Protect[Global`g]
+
+(*\:8be5\:6b65\:727a\:7272\:8f83\:591a\:ff0c\:5728\:8003\:8651\:662f\:5426\:8fd9\:4e48\:505a*)
+
+(*\:4fdd\:62a4\:5168\:5c40\:53d8\:91cf\:4e2d\:7684\:6240\:6709\:5c0f\:5199\:82f1\:6587\:5b57\:6bcd\:548c\:5e0c\:814a\:5b57\:6bcd\:7528\:4f5c\:6307\:6807*)
+globalabc = ToExpression //@ StringJoin["Global`",#]& /@ Join[Alphabet[],Alphabet["Greek"]];
+Unprotect[##]& //@ globalabc;
+Protect[#]& //@ globalabc;
+
+
 
 (*\:62bd\:8c61\:6307\:6807\:5411\:5177\:4f53\:6307\:6807\:7684\:8f6c\:5316\:89c4\:5219*)
 specificReplaceRule = Thread[#1->#2&[ToExpression@Alphabet[][[1;;24]], ToExpression@Alphabet["Greek"][[1;;24]]]];
@@ -165,7 +175,7 @@ SetTensor[T_STensor, components_List] := Module[{},
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8bbe\:7f6e\:5750\:6807\:7cfb*)
 
 
@@ -669,7 +679,7 @@ SCalcSpecificExpression[expr__] := Module[
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:7279\:6b8a\:5f20\:91cf\:8ba1\:7b97*)
 
 
