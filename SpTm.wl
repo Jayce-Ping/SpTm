@@ -303,7 +303,7 @@ ShowSTensor[T_STensor] :=
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97\:89c4\:5219*)
 
 
@@ -314,7 +314,7 @@ ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[comp
 (*\:5ea6\:89c4\:8fd0\:7b97\:5f8b*)
 MetricInverseRule := {
 	(*g\:4e0e\:5176\:9006\:6620\:5c04\:7f29\:5e76\:5f97\:5230\[Delta]*)
-	STensor[g_, {a_,b_} ,{}] STensor[g_, {}, {a_,c_}] :> STensor[\[Delta], {a}, {c}] /; g == MetricSymbol,
+	STensor[g_, {a_,b_} ,{}] STensor[g_, {}, {a_,c_}] :> STensor[\[Delta], {a}, {c}] /; g == MetricSymbol
 };
 MetricUpDownIndex := {
 	(*\:5ea6\:89c4\:964d\:6307\:6807*)
