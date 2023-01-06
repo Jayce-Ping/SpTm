@@ -6,7 +6,7 @@
 BeginPackage["SpTm`"]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*::usage information*)
 
 
@@ -20,7 +20,7 @@ STensorInfo::usage = "STensorInfo[expr]"<>" "<>"\!\(\*SuperscriptBox[SubscriptBo
 
 MetricInfo::usage = "MetricInfo[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
 
-GetCoodinates::usage = "GetCoodinates[]"<>" "<>"\:83b7\:53d6\:5750\:6807\:7cfb\:5217\:8868."
+CoodinatesInfo::usage = "CoodinatesInfo[]"<>" "<>"\:83b7\:53d6\:5750\:6807\:7cfb\:5217\:8868."
 
 
 SetCoodinates::usage = "SetCoodinates[coodinates_List]"<>" "<>"coodinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
@@ -42,6 +42,7 @@ STSimSpecify::usage = "STSimSpecify[expr]"<>" "<>"\:5c06\:8868\:8fbe\:5f0f\:5148
 
 
 STCalcTensor::usage = "STCalcTensor[\"Tensor\"]"<>" "<>"\:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar\:ff0cEinsteinTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:ff0c\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:8ba1\:7b97\:5f20\:91cfTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric, coodinates]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:548c\:5750\:6807\:7cfb\:ff0c\:8ba1\:7b97\:5f20\:91cfTensor."
+
 
 SCalcChristoffel::usage = "SCalcChristoffel[metric, coodinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
 
@@ -159,12 +160,14 @@ STensorInfo[T_Symbol] := Module[
 
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:8bbe\:7f6e\:5f20\:91cf\:5206\:91cf*)
 
 
 SetTensor::ErrorExpression = "\:5f20\:91cf\:683c\:5f0f\:8f93\:5165\:9519\:8bef.";
 SetTensor::NoCoodinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
+SetTensor::WrongDimension = "\:5f20\:91cf\:5206\:91cf\:7684\:7ef4\:6570\:4e0e\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
+SetTensor::WrongShape = "\:5f20\:91cf\:5206\:91cf\:7684\:5c42\:6570\:4e0e\:5f20\:91cf\:578b\:53f7\:4e0d\:5339\:914d.";
 SetTensor[expr__, components_List] := Module[{},
 	T = InputExplain[expr];
 	If[Head[T] =!= STensor,
@@ -179,7 +182,17 @@ SetTensor[T_STensor, components_List] := Module[{},
 	If[
 		Length[CurrentCoodinates] == 0,
 		Message[SetTensor::NoCoodinates];
-		Abort[];
+		Abort[]
+	];
+	If[
+		First @ Dimensions @ components != Length @ CurrentCoodinates,
+		Message[SetTensor::WrongDimension];
+		Abort[]
+	];
+	If[
+		Length @ Dimensions @ components != Length @ Join[T[[2]], T[[3]]],
+		Message[SetTensor::WrongShape]
+		Abort[]
 	];
 	Unprotect[TensorComponents];
 	AppendTo[TensorComponents, T->components];
@@ -187,7 +200,7 @@ SetTensor[T_STensor, components_List] := Module[{},
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:8bbe\:7f6e\:5750\:6807\:7cfb*)
 
 
@@ -211,15 +224,15 @@ SetCoodinates[Coodinates_List] := Module[{},
 	Protect[TensorComponents];
 ]
 (*\:83b7\:53d6\:5f53\:524d\:5750\:6807\:7cfb\:5217\:8868*)
-GetCoodinates[] := CurrentCoodinates;
+CoodinatesInfo[] := CurrentCoodinates;
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:5750\:6807\:53d8\:6362*)
 
 
-(* ::Subsection:: *)
-(*\:63a5\:53e3\:51fd\:6570*)
+(* ::Subsection::Closed:: *)
+(*\:4e3b\:53d8\:6362\:51fd\:6570*)
 
 
 SCoodinateTransform::DimensionNotMatch = "\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
@@ -276,8 +289,8 @@ SCoodinateTransform[target_List, transformation_List] := Module[
 ];
 
 
-(* ::Subsection:: *)
-(*\:5c06STensor\:8fdb\:884c\:53d8\:6362\:ff0c\:8fd4\:56de\:7684\:7ed3\:679c\:4ecd\:9700\:5904\:7406*)
+(* ::Subsection::Closed:: *)
+(*\:5c06STensor\:8fdb\:884c\:53d8\:6362*)
 
 
 (*\:5c06STensor\:7684\:5206\:91cf\:8fdb\:884c\:5750\:6807\:53d8\:6362*)
@@ -306,7 +319,7 @@ STensorTrans[T_STensor, target_List, transformation_List] := Module[
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:5c06(0,n)\:578b\:5f20\:91cf\:8fdb\:884c\:5750\:6807\:53d8\:6362\:ff0c\:4e0d\:9700\:8981\:6d89\:53ca\:5750\:6807\:7cfb\:7684\:9006\:53d8\:6362*)
 
 
