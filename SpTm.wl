@@ -187,7 +187,7 @@ SetTensor[T_STensor, components_List] := Module[{},
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8bbe\:7f6e\:5750\:6807\:7cfb*)
 
 
@@ -214,8 +214,12 @@ SetCoodinates[Coodinates_List] := Module[{},
 GetCoodinates[] := CurrentCoodinates;
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:5750\:6807\:53d8\:6362*)
+
+
+(* ::Subsection:: *)
+(*\:63a5\:53e3\:51fd\:6570*)
 
 
 SCoodinateTransform::DimensionNotMatch = "\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
@@ -266,11 +270,14 @@ SCoodinateTransform[target_List, transformation_List] := Module[
 	record = record/.{Times[t_ATensor, s_ATensor] :> ATensorTimes[t,s]};
 	(*\:5c06\:4e24\:90e8\:5206\:8fdb\:884c\:5f20\:91cf\:4e58\:79ef*)
 	newTensorComponents = Array[keys[[#]] -> Simplify@(ATensorTimes[#1, #2]&[record[[#,1]], record[[#,2]]][[3]])& , Length[record], 1, Association];
-	(*newTensorComponents = Array[keys[[#]] -> Simplify@record[[#,1]]& , Length[record], 1, Association];*)
 	Unprotect[TensorComponents];
 	Table[TensorComponents[keys[[i]]] = newTensorComponents[keys[[i]]], {i, Length[keys]}];
 	Protect[TensorComponents];
 ];
+
+
+(* ::Subsection:: *)
+(*\:5c06STensor\:8fdb\:884c\:53d8\:6362\:ff0c\:8fd4\:56de\:7684\:7ed3\:679c\:4ecd\:9700\:5904\:7406*)
 
 
 (*\:5c06STensor\:7684\:5206\:91cf\:8fdb\:884c\:5750\:6807\:53d8\:6362*)
@@ -297,6 +304,10 @@ STensorTrans[T_STensor, target_List, transformation_List] := Module[
 	(*\:5148\:8fd4\:56de\:964d\:4e0b\:6307\:6807\:540e\:8ba1\:7b97\:65b0\:5206\:91cf\:7684\:5f20\:91cf\:ff0c\:4ee5\:53ca\:5347\:6307\:6807\:6240\:7528\:7684\:5ea6\:89c4\:5217\:8868*)
 	{ATensor[Join[T[[2]], T[[3]]], {}, newDownTComponents], metriclis}
 ]
+
+
+(* ::Subsection:: *)
+(*\:5c06(0,n)\:578b\:5f20\:91cf\:8fdb\:884c\:5750\:6807\:53d8\:6362\:ff0c\:4e0d\:9700\:8981\:6d89\:53ca\:5750\:6807\:7cfb\:7684\:9006\:53d8\:6362*)
 
 
 (*\:5c06(0, n)\:578b\:5f20\:91cf\:7684\:5206\:91cf\:8fdb\:884c\:5750\:6807\:53d8\:6362*)
