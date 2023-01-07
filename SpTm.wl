@@ -20,18 +20,30 @@ STensorInfo::usage = "STensorInfo[expr]"<>" "<>"\!\(\*SuperscriptBox[SubscriptBo
 
 MetricInfo::usage = "MetricInfo[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
 
-CoodinatesInfo::usage = "CoodinatesInfo[]"<>" "<>"\:83b7\:53d6\:5750\:6807\:7cfb\:5217\:8868."
+CoordinatesInfo::usage = "CoordinatesInfo[]"<>" "<>"\:83b7\:53d6\:5750\:6807\:7cfb\:5217\:8868."
 
 
-SetCoodinates::usage = "SetCoodinates[coodinates_List]"<>" "<>"coodinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
+(* ::InheritFromParent:: *)
+(*"CoordinatesInfo[] \:83b7\:53d6\:5750\:6807\:7cfb\:5217\:8868."*)
 
-SCoodinateTransform::usage = "SCoodinateTransform[targetCoodinates, transformation]"<>" "<>"targetCoodinates\:662f\:76ee\:6807\:5750\:6807\:7cfb\:5217\:8868\:ff0ctransformation\:4e3a\:53d8\:6362\:89c4\:5219."
+
+SetCoordinates::usage = "SetCoordinates[coodinates_List]"<>" "<>"coodinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
+
+SCoordinateTransform::usage = "SCoordinateTransform[targetCoordinates, transformation]"<>" "<>"targetCoordinates\:662f\:76ee\:6807\:5750\:6807\:7cfb\:5217\:8868\:ff0ctransformation\:4e3a\:53d8\:6362\:89c4\:5219."
 
 SetMetric::usage = "SetMetric[components_Array]"<>" "<>"\:5728\:8bbe\:7f6e\:5750\:6807\:7cfb\:540e\:ff0c\:8bbe\:7f6e\:5ea6\:89c4g\:5728\:8be5\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635components"<>"\n"<>"SetMetric[components_Array, coodinates_List]"<>" "<>"\:8bbe\:7f6e\:5ea6\:89c4g\:5728\:5750\:6807\:7cfbcoodinates\:4e0b\:7684\:5206\:91cf\:77e9\:9635components.\n"<>"SetMetric[components_Array, coodinates_List, metricSymbol_Symbol] \:8bbe\:7f6e\:5ea6\:89c4g\:5728\:5750\:6807\:7cfbcoodinates\:4e0b\:7684\:5206\:91cf\:77e9\:9635components\:ff0c\:548c\:5ea6\:89c4\:7684\:8868\:793a\:7b26\:53f7metricSymbol. "
 
 SetMetricSymbol::usage = "SetMetricSymbol[metricSymbol_Symbol]"<>" "<>"\:8bbe\:7f6e\:5ea6\:89c4\:7b26\:53f7."
 
 SetTensor::usage = "SetTensor[\!\(\*SuperscriptBox[SubscriptBox[\(T\), \(sub\)], \(sup\)]\), comopents]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:53ca\:5176\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf"<>"\n"<>"SetTensor[T_STensor, components]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf."
+
+
+(* ::InheritFromParent:: *)
+(*"SetCoordinates[coodinates_List] coodinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."*)
+
+
+(* ::InheritFromParent:: *)
+(*"SCoordinateTransform[targetCoordinates, transformation] targetCoordinates\:662f\:76ee\:6807\:5750\:6807\:7cfb\:5217\:8868\:ff0ctransformation\:4e3a\:53d8\:6362\:89c4\:5219."*)
 
 
 STCalculate::usage = "SpTmCalculate[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80."
@@ -81,7 +93,7 @@ Protect[STensor, ATensor];
 
 
 (* ::Section::Closed:: *)
-(*\:5168\:5c40\:53d8\:91cf*)
+(*\:5168\:5c40\:53d8\:91cf Global Variables in this Package*)
 
 
 (*\:5f20\:91cf\:5206\:91cf*)
@@ -90,9 +102,9 @@ TensorComponents = Association[];
 Protect[TensorComponents]
 
 (*\:5f53\:524d\:5750\:6807\:7cfb*)
-Unprotect[CurrentCoodinates]
-CurrentCoodinates = List[];
-Protect[CurrentCoodinates]
+Unprotect[CurrentCoordinates]
+CurrentCoordinates = List[];
+Protect[CurrentCoordinates]
 
 (*\:5ea6\:89c4\:5206\:91cf*)
 Unprotect[MetricComponents]
@@ -115,12 +127,16 @@ Protect[#]& //@ globalabc;
 
 
 
+(* ::InheritFromParent:: *)
+(*{"CurrentCoordinates"}*)
+
+
 (*\:62bd\:8c61\:6307\:6807\:5411\:5177\:4f53\:6307\:6807\:7684\:8f6c\:5316\:89c4\:5219*)
 specificReplaceRule = Thread[#1->#2&[ToExpression@Alphabet[][[1;;24]], ToExpression@Alphabet["Greek"][[1;;24]]]];
 
 
 (* ::Section::Closed:: *)
-(*\:83b7\:53d6\:5f20\:91cf\:4fe1\:606f*)
+(*\:83b7\:53d6\:5f20\:91cf\:4fe1\:606f Get Information of Tensors*)
 
 
 STensorInfo::ErrorInput = "\:8f93\:5165\:683c\:5f0f\:6709\:8bef.";
@@ -160,12 +176,12 @@ STensorInfo[T_Symbol] := Module[
 
 
 
-(* ::Section:: *)
-(*\:8bbe\:7f6e\:5f20\:91cf\:5206\:91cf*)
+(* ::Section::Closed:: *)
+(*\:8bbe\:7f6e\:5f20\:91cf\:5206\:91cf Set Components of Tensors*)
 
 
 SetTensor::ErrorExpression = "\:5f20\:91cf\:683c\:5f0f\:8f93\:5165\:9519\:8bef.";
-SetTensor::NoCoodinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
+SetTensor::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
 SetTensor::WrongDimension = "\:5f20\:91cf\:5206\:91cf\:7684\:7ef4\:6570\:4e0e\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
 SetTensor::WrongShape = "\:5f20\:91cf\:5206\:91cf\:7684\:5c42\:6570\:4e0e\:5f20\:91cf\:578b\:53f7\:4e0d\:5339\:914d.";
 SetTensor[expr__, components_List] := Module[{},
@@ -180,12 +196,12 @@ SetTensor[expr__, components_List] := Module[{},
 SetTensor[T_STensor, components_List] := Module[{},
 	(*\:5f02\:5e38\:5904\:7406 undone*)
 	If[
-		Length[CurrentCoodinates] == 0,
-		Message[SetTensor::NoCoodinates];
+		Length[CurrentCoordinates] == 0,
+		Message[SetTensor::NoCoordinates];
 		Abort[]
 	];
 	If[
-		First @ Dimensions @ components != Length @ CurrentCoodinates,
+		First @ Dimensions @ components != Length @ CurrentCoordinates,
 		Message[SetTensor::WrongDimension];
 		Abort[]
 	];
@@ -200,47 +216,47 @@ SetTensor[T_STensor, components_List] := Module[{},
 ]
 
 
-(* ::Section:: *)
-(*\:8bbe\:7f6e\:5750\:6807\:7cfb*)
+(* ::Section::Closed:: *)
+(*\:8bbe\:7f6e\:5750\:6807\:7cfb Set Coordinate System*)
 
 
-SetCoodinates::ErrorSymbol = "\:8f93\:5165\:5750\:6807\:7cfb\:4e2d\:5b58\:5728\:975e\:7b26\:53f7\:ff08Symbol\:ff09\:5143\:7d20.";
-SetCoodinates[Coodinates_List] := Module[{},
+SetCoordinates::ErrorSymbol = "\:8f93\:5165\:5750\:6807\:7cfb\:4e2d\:5b58\:5728\:975e\:7b26\:53f7\:ff08Symbol\:ff09\:5143\:7d20.";
+SetCoordinates[Coordinates_List] := Module[{},
 	If[
-		!AllTrue[Coodinates, MatchQ[#,_Symbol]&],
-		Message[SetCoodinates::ErrorSymbol];
+		!AllTrue[Coordinates, MatchQ[#,_Symbol]&],
+		Message[SetCoordinates::ErrorSymbol];
 		Abort[]
 	];
-	Unprotect[CurrentCoodinates];
+	Unprotect[CurrentCoordinates];
 	(*\:91ca\:653e\:5750\:6807\:7cfb\:4e2d\:7528\:5230\:7684\:7b26\:53f7*)
-	If[Length @ CurrentCoodinates > 0, Unprotect@@CurrentCoodinates];
-	CurrentCoodinates = Coodinates;
+	If[Length @ CurrentCoordinates > 0, Unprotect@@CurrentCoordinates];
+	CurrentCoordinates = Coordinates;
 	(*\:4fdd\:62a4\:5750\:6807\:7cfb\:4e2d\:7528\:5230\:7684\:7b26\:53f7*)
-	Protect@@CurrentCoodinates;
-	Protect[CurrentCoodinates];
+	Protect@@CurrentCoordinates;
+	Protect[CurrentCoordinates];
 	(*\:6e05\:7a7a\:4e4b\:524d\:5750\:6807\:7cfb\:4e0b\:8bbe\:5b9a\:7684\:6240\:6709\:5f20\:91cf\:5206\:91cf*)
 	Unprotect[TensorComponents];
 	TensorComponents = Association[];
 	Protect[TensorComponents];
 ]
 (*\:83b7\:53d6\:5f53\:524d\:5750\:6807\:7cfb\:5217\:8868*)
-CoodinatesInfo[] := CurrentCoodinates;
+CoordinatesInfo[] := CurrentCoordinates;
 
 
 (* ::Section::Closed:: *)
-(*\:5750\:6807\:53d8\:6362*)
+(*\:5750\:6807\:53d8\:6362 Coordinates Transformation*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:4e3b\:53d8\:6362\:51fd\:6570*)
 
 
-SCoodinateTransform::DimensionNotMatch = "\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
-SCoodinateTransform::ErrorSymbol = "\:5750\:6807\:7cfb\:4e2d\:5b58\:5728\:975e\:7b26\:53f7\:ff08Symbol\:ff09\:5143\:7d20.";
-SCoodinateTransform::ErrorTransformation = "\:5750\:6807\:53d8\:6362\:683c\:5f0f\:9519\:8bef.";
-SCoodinateTransform::NoMetricComonents = "\:672a\:8bbe\:7f6e\:5ea6\:89c4\:5206\:91cf.";
+SCoordinateTransform::DimensionNotMatch = "\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
+SCoordinateTransform::ErrorSymbol = "\:5750\:6807\:7cfb\:4e2d\:5b58\:5728\:975e\:7b26\:53f7\:ff08Symbol\:ff09\:5143\:7d20.";
+SCoordinateTransform::ErrorTransformation = "\:5750\:6807\:53d8\:6362\:683c\:5f0f\:9519\:8bef.";
+SCoordinateTransform::NoMetricComonents = "\:672a\:8bbe\:7f6e\:5ea6\:89c4\:5206\:91cf.";
 
-SCoodinateTransform[target_List, transformation_List] := Module[
+SCoordinateTransform[target_List, transformation_List] := Module[
 {
 	record,
 	keys,
@@ -249,23 +265,23 @@ SCoodinateTransform[target_List, transformation_List] := Module[
 	newMetricComponentsInv
 },
 	If[
-		Length[target] != Length[CurrentCoodinates],
-		Message[SCoodinateTransform::DimensionNotMatch];
+		Length[target] != Length[CurrentCoordinates],
+		Message[SCoordinateTransform::DimensionNotMatch];
 		Abort[]
 	];
 	If[
 		!AllTrue[target, MatchQ[#,_Symbol]&],
-		Message[SCoodinateTransform::ErrorSymbol];
+		Message[SCoordinateTransform::ErrorSymbol];
 		Abort[]
 	];
 	If[
 		!AllTrue[transformation, MatchQ[#, __->__]&],
-		Message[SCoodinateTransform::ErrorTransformation];
+		Message[SCoordinateTransform::ErrorTransformation];
 		Abort[]
 	];
 	If[
 		Length[MetricComponents] == 0,
-		Message[SCoodinateTransform::NoMetricComonents];
+		Message[SCoordinateTransform::NoMetricComonents];
 		Abort[]
 	];
 	(*\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:6240\:6709\:8bbe\:7f6e\:4e86\:5206\:91cf\:7684\:5f20\:91cf,\:9664\:53bb\:5ea6\:89c4\:5f20\:91cf\:548c\[Delta]*)
@@ -297,11 +313,11 @@ SCoodinateTransform[target_List, transformation_List] := Module[
 STensorTrans[T_STensor, target_List, transformation_List] := Module[
 {
 	(*\:5c06T\:7684\:6307\:6807\:5168\:90e8\:964d\:4e0b*)
-	DownT = IndecesDown[T],
+	DownT = IndicesDown[T],
 	oldDownTComponents,
 	newDownTComponents,
-	usedIndeces,
-	usableIndeces,
+	usedIndices,
+	usableIndices,
 	metriclis
 },
 	(*\:65e7\:5750\:6807\:7cfb\:4e0b\:7684downT\:7684\:5206\:91cf*)
@@ -309,11 +325,11 @@ STensorTrans[T_STensor, target_List, transformation_List] := Module[
 	(*\:65b0\:5750\:6807\:7cfb\:4e0b\:7684downT\:7684\:5206\:91cf*)
 	newDownTComponents = componentsTrans[oldDownTComponents, target, transformation];
 	(*\:4f7f\:7528\:8fc7\:7684\:7b26\:53f7*)
-	usedIndeces = Flatten @ DeleteDuplicates @ Cases[DownT, tensor_STensor :> {tensor[[2]], tensor[[3]]}];
+	usedIndices = Flatten @ DeleteDuplicates @ Cases[DownT, tensor_STensor :> {tensor[[2]], tensor[[3]]}];
 	(*\:53ef\:4f7f\:7528\:7684\:7b26\:53f7*)
-	usableIndeces = Complement[ToExpression @ Alphabet[], usedIndeces];
+	usableIndices = Complement[ToExpression @ Alphabet[], usedIndices];
 	(*\:7528\:4e8e\:5347\:6307\:6807\:7684\:5ea6\:89c4\:5217\:8868*)
-	metriclis = Array[ STensor[MetricSymbol, {}, {#1, #2}]&[T[[3]][[#]], usableIndeces[[#]]]&, {Length[T[[3]]]}, 1, Times];
+	metriclis = Array[ STensor[MetricSymbol, {}, {#1, #2}]&[T[[3]][[#]], usableIndices[[#]]]&, {Length[T[[3]]]}, 1, Times];
 	(*\:5148\:8fd4\:56de\:964d\:4e0b\:6307\:6807\:540e\:8ba1\:7b97\:65b0\:5206\:91cf\:7684\:5f20\:91cf\:ff0c\:4ee5\:53ca\:5347\:6307\:6807\:6240\:7528\:7684\:5ea6\:89c4\:5217\:8868*)
 	{ATensor[Join[T[[2]], T[[3]]], {}, newDownTComponents], metriclis}
 ]
@@ -349,10 +365,10 @@ componentsTrans[components_?ArrayQ, target_List, transformation_List] := Module[
 
 
 (* ::Section::Closed:: *)
-(*\:8bbe\:7f6e\:5ea6\:89c4*)
+(*\:8bbe\:7f6e\:5ea6\:89c4 Set Metric*)
 
 
-SetMetric::NoCoodinates = "\:6ca1\:6709\:8bbe\:7f6e\:5750\:6807\:7cfb.";
+SetMetric::NoCoordinates = "\:6ca1\:6709\:8bbe\:7f6e\:5750\:6807\:7cfb.";
 SetMetric::ErrorDimensions = "\:5206\:91cf\:77e9\:9635\:548c\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
 
 
@@ -363,26 +379,26 @@ SetMetricSymbol[metricSymbol_Symbol] := Module[{},
 ];
 
 
-SetMetric[Components_?ArrayQ]:=Module[ {}, SetMetric[Components, CurrentCoodinates] ];
+SetMetric[Components_?ArrayQ]:=Module[ {}, SetMetric[Components, CurrentCoordinates] ];
 
-SetMetric[Components_?ArrayQ, Coodinates_List]:=Module[ {}, SetMetric[Components, Coodinates, MetricSymbol] ];
+SetMetric[Components_?ArrayQ, Coordinates_List]:=Module[ {}, SetMetric[Components, Coordinates, MetricSymbol] ];
 
-SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[
+SetMetric[Components_?ArrayQ, Coordinates_List, metricSymbol_Symbol]:=Module[
 {
 	aa = Global`a,
 	bb = Global`b
 },
 	If[
-		Coodinates=={} && Length[CurrentCoodinates] == 0,
-		Message[SetMetric::NoCoodinates];
+		Coordinates=={} && Length[CurrentCoordinates] == 0,
+		Message[SetMetric::NoCoordinates];
 		Abort[]
 	];
 	If[
-		First@Dimensions[Components]!=Length[Coodinates],
+		First@Dimensions[Components]!=Length[Coordinates],
 		Message[SetMetric::ErrorDimensions];
 		Abort[]
 	];
-	If[Coodinates =!= CurrentCoodinates, SetCoodinates[Coodinates]];
+	If[Coordinates =!= CurrentCoordinates, SetCoordinates[Coordinates]];
 	If[metricSymbol =!= MetricSymbol, SetMetricSymbol[metricSymbol]];
 	
 	Unprotect[MetricComponents];
@@ -392,7 +408,7 @@ SetMetric[Components_?ArrayQ, Coodinates_List, metricSymbol_Symbol]:=Module[
 	SetTensor[STensor[metricSymbol, {aa, bb}, {}], Components];
 	SetTensor[STensor[metricSymbol, {}, {aa, bb}], Inverse[Components]];
 	(*Subscript[\:8bbe\:7f6e\[Delta], a]^b*)
-	SetTensor[STensor[Global`\[Delta], {aa}, {bb}], IdentityMatrix[Length[Coodinates]]];
+	SetTensor[STensor[Global`\[Delta], {aa}, {bb}], IdentityMatrix[Length[Coordinates]]];
 ];
 
 
@@ -402,7 +418,7 @@ MetricInfo[]:=Module[{},
 
 
 (* ::Section::Closed:: *)
-(*\:8f93\:5165\:89e3\:91ca*)
+(*\:8f93\:5165\:89e3\:91ca Input Explain*)
 
 
 (*\:8f93\:5165\:89e3\:91ca\:ff0c\:4e0a\:4e0b\:6807\:7528\:7a7a\:683c\:9694\:5f00\:ff0c\:9ed8\:8ba4\:89e3\:91ca\:4e3a\:4e3aTimes*)
@@ -422,7 +438,7 @@ InputExplainRule:={
 
 
 (* ::Section::Closed:: *)
-(*\:683c\:5f0f\:5316\:8f93\:51fa*)
+(*\:683c\:5f0f\:5316\:8f93\:51fa Show Form*)
 
 
 Superscript[x_,y_,superIndex__]:=Superscript[x, Row[{y,superIndex}]];(*Good !!!*)
@@ -444,7 +460,7 @@ ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[comp
 
 
 (* ::Section::Closed:: *)
-(*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97*)
+(*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97 Calculation of Abstract Indices Expression*)
 
 
 (* ::Subsection::Closed:: *)
@@ -452,18 +468,18 @@ ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[comp
 
 
 (*\:5c06\:6240\:6709\:4e0a\:6307\:6807\:7528\:5ea6\:89c4\:964d\:4e0b\:6765\:ff0c\:8fd4\:56de(0,n)\:578b\:540c\:540d\:5f20\:91cf\:8868\:8fbe\:5f0f*)
-IndecesDown[T_STensor] := Module[
+IndicesDown[T_STensor] := Module[
 {
 	alphabet = ToExpression @ Alphabet[],
 	Tsub = T[[2]],
 	Tsup = T[[3]],
-	usedIndeces = DeleteDuplicates @ Join[T[[2]], T[[3]]],
-	usableIndeces,
+	usedIndices = DeleteDuplicates @ Join[T[[2]], T[[3]]],
+	usableIndices,
 	metriclis
 },
-	usableIndeces = Complement[alphabet, usedIndeces];
-	metriclis = Table[ STensor[MetricSymbol, {#1, #2}, {}]&[Tsup[[i]], usableIndeces[[i]]], {i, Length[Tsup]}];
-	Times @@ Prepend[metriclis, STensor[T[[1]], Tsub, usableIndeces[[1;;Length[Tsup]]]]]
+	usableIndices = Complement[alphabet, usedIndices];
+	metriclis = Table[ STensor[MetricSymbol, {#1, #2}, {}]&[Tsup[[i]], usableIndices[[i]]], {i, Length[Tsup]}];
+	Times @@ Prepend[metriclis, STensor[T[[1]], Tsub, usableIndices[[1;;Length[Tsup]]]]]
 ]
 
 
@@ -544,7 +560,7 @@ STCalculate[expr__]:= Module[
 
 
 (* ::Section::Closed:: *)
-(*\:5177\:4f53\:6307\:6807\:8f6c\:5316\:4e0e\:8fd0\:7b97*)
+(*\:5177\:4f53\:6307\:6807\:8f6c\:5316\:4e0e\:8fd0\:7b97 Abstract Indices Expression's Transformation and Calculation*)
 
 
 (* ::Subsection::Closed:: *)
@@ -554,23 +570,23 @@ STCalculate[expr__]:= Module[
 (*\:83b7\:53d6\:4e00\:4e2a\:6ca1\:6709\:7528\:8fc7\:7684\:6307\:6807\:7b26\:53f7*)
 GetanUnusedIndex[expr__] := Module[
 {
-	usedIndeces,
-	unUsedIndeces,
-	gradIndeces,
+	usedIndices,
+	unUsedIndices,
+	gradIndices,
 	alphabet = ToExpression@Alphabet[]
 },
-	usedIndeces = DeleteDuplicates@Flatten@Cases[expr, STensor[T_, subIndex_List, superIndex_List] :> Join[superIndex,subIndex], All];
-	gradIndeces = DeleteDuplicates@Flatten@Cases[expr, Grad[any__, subIndex_] :> subIndex, All];
-	unUsedIndeces = Complement[alphabet, usedIndeces, gradIndeces];
-	First@unUsedIndeces
+	usedIndices = DeleteDuplicates@Flatten@Cases[expr, STensor[T_, subIndex_List, superIndex_List] :> Join[superIndex,subIndex], All];
+	gradIndices = DeleteDuplicates@Flatten@Cases[expr, Grad[any__, subIndex_] :> subIndex, All];
+	unUsedIndices = Complement[alphabet, usedIndices, gradIndices];
+	First @ unUsedIndices
 ];
 
 GetanUnusedIndex[lis__List] := Module[
 {
-	usedIndeces = Flatten @ Join[lis],
+	usedIndices = Flatten @ Join[lis],
 	alphabet = ToExpression @ Alphabet[]
 },
-	First @ Complement[alphabet, usedIndeces]
+	First @ Complement[alphabet, usedIndices]
 ]
 
 
@@ -647,7 +663,7 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 		sub = Join[T[[1]], S[[1]]],
 		sup = Join[T[[2]], S[[2]]],
 		outputIndex,
-		IndecesPos,
+		IndicesPos,
 		contractIndex,
 		product,
 		outputComponents,
@@ -660,16 +676,16 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 	(*\:5bf9T\:7684\:4e0b\:6307\:6807\:7f16\:53f7\:4e3a1, 2, 3...a\:ff0c\:7136\:540e\:5bf9\:4e0a\:6307\:6807\:7f16\:53f7\:4e3aa+1, a+2...a+b*)
 	(*\:5bf9S\:7684\:4e0b\:6307\:6807\:7f16\:53f7\:4e3aa+b+1, a+b+2 ... a+b+c\:ff0c\:4e0a\:6307\:6807\:7f16\:53f7\:4e3aa+b+c+1, ... a+b+c+d*)
 	(*\:5148\:5c06\:6307\:6807\:6309\:987a\:5e8f\:6392\:597d*)(*\:8bb0\:5f55\:6bcf\:4e2a\:6307\:6807\:7684\:7f16\:53f7*)
-	IndecesPos = PositionIndex[Join[T[[1]], T[[2]], S[[1]], S[[2]]]];
+	IndicesPos = PositionIndex[Join[T[[1]], T[[2]], S[[1]], S[[2]]]];
 	(*\:5148\:6c42\:51fa\:5f20\:91cf\:79ef*)
 	product = TensorProduct[T[[3]], S[[3]]];
 	(*\:5c06\:9700\:8981\:7f29\:5e76\:7684\:6307\:6807\:8f6c\:5316\:4e3a\:4f4d\:7f6e\:5217\:8868*)
-	contractIndex = IndecesPos[#]& /@ commonIndex;
+	contractIndex = IndicesPos[#]& /@ commonIndex;
 	(*\:5bf9\:6307\:6807\:8fdb\:884c\:7f29\:5e76*)
 	outputComponents = Simplify @ TensorContract[product, contractIndex];
 	(*\:8fd8\:9700\:8981\:5c06\:4e0b\:6307\:6807\:653e\:5230\:524d\:9762\:ff0c\:4e0a\:6307\:6807\:653e\:5230\:540e\:9762\:ff0c\:5bf9\:5206\:91cf\:8fdb\:884c\:4f4d\:7f6e\:8c03\:6574*)
 	(*unArrangedIndex\:662foutputComponents\:5bf9\:5e94\:7684\:6307\:6807\:987a\:5e8f*)
-	unArrangedIndex = Keys[DeleteCases[IndecesPos, x_List /; Length[x] > 1]];
+	unArrangedIndex = Keys[DeleteCases[IndicesPos, x_List /; Length[x] > 1]];
 	(*\:8f93\:51fa\:5f20\:91cf\:7684\:6307\:6807\:987a\:5e8f*)
 	TargetIndex = Flatten[outputIndex];
 	(*\:627e\:5230\:4ece\:5f53\:524d\:6307\:6807\:96c6\:5411\:7ed3\:679c\:6307\:6807\:96c6\:8f6c\:5316\:7684\:7f6e\:6362\:ff0c\:5e76\:5c06\:5176\:4f5c\:7528\:4e8e{1,2,3...}\:521d\:59cb\:5217\:8868\:ff0c\:5f97\:5230\:8f6c\:7f6e\:5173\:7cfb\:5bf9\:5e94\:5217\:8868*)
@@ -801,11 +817,11 @@ SCalcSpecificExpression[expr__] := Module[
 },
 	(*\:68c0\:67e5\:662f\:5426\:9009\:53d6\:4e86\:5750\:6807\:7cfb*)
 	If[
-		Length[CurrentCoodinates] == 0,
+		Length[CurrentCoordinates] == 0,
 		Message[SCalcSpecificExpression::coodinatesMiss];
 		Abort[]
 	];
-	coodinates = CurrentCoodinates;
+	coodinates = CurrentCoordinates;
 	
 	calcReplaceRule = {
 		Plus[T_ATensor, S_ATensor] :> ATensorAdd[T, S],
@@ -857,17 +873,21 @@ SCalcSpecificExpression[expr__] := Module[
 ];
 
 
-(* ::Section:: *)
-(*\:7279\:6b8a\:5f20\:91cf\:8ba1\:7b97*)
+(* ::Section::Closed:: *)
+(*\:5e38\:7528\:5f20\:91cf\:8ba1\:7b97 Common Tensor Calculation *)
+
+
+(* ::Subsection::Closed:: *)
+(*Main Function*)
 
 
 STCalcTensor::NoMetric = "\:672a\:8bbe\:7f6e\:5ea6\:89c4\:5206\:91cf."
-STCalcTensor::NoCoodinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb."
+STCalcTensor::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb."
 STCalcTensor::CanNotCalc = "\:65e0\:6cd5\:8ba1\:7b97\:8be5\:5f20\:91cf\:ff0c\:56e0\:4e3a\:5176\:8d85\:51fa\:53ef\:9009\:8303\:56f4."
 STCalcTensor::DimensionError = "\:5206\:91cf\:77e9\:9635\:7684\:7ef4\:6570\:4e0e\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d."
-STCalcTensor[name_String] := STCalcTensor[name, MetricComponents, CurrentCoodinates];
+STCalcTensor[name_String] := STCalcTensor[name, MetricComponents, CurrentCoordinates];
 
-STCalcTensor[name_String, components_?ArrayQ] := STCalcTensor[name, components, CurrentCoodinates];
+STCalcTensor[name_String, components_?ArrayQ] := STCalcTensor[name, components, CurrentCoordinates];
 
 STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
 {
@@ -887,7 +907,7 @@ STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
 	];
 	If[
 		Length @ coodinates == 0,
-		Message[STCalcTensor::NoCoodinates];
+		Message[STCalcTensor::NoCoordinates];
 		Abort[]
 	];
 	If[
@@ -904,6 +924,10 @@ STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
 	
 	ShowSTensor[record[name], func[components, coodinates]]
 ]
+
+
+(* ::Subsection::Closed:: *)
+(*Christoffel Symbol*)
 
 
 (*\:514b\:6c0f\:7b26*)
@@ -930,6 +954,10 @@ SCalcChristoffel[g_?ArrayQ, coodinateSystem_List] := Module[
 	(*Print[Subsuperscript["\[CapitalGamma]","\[Mu]\[Nu]","  \[Sigma]"]->MatrixForm[\[CapitalGamma]]]*);
 	\[CapitalGamma]
 ];
+
+
+(* ::Subsection::Closed:: *)
+(*Riemann Tensor*)
 
 
 (*\:9ece\:66fc\:5f20\:91cf*)
@@ -964,6 +992,10 @@ SCalcRiemannTensor[g_?ArrayQ, coodinateSystem_List] := Module[
 
 
 
+(* ::Subsection::Closed:: *)
+(*Ricci Tensor*)
+
+
 (*\:91cc\:5947\:5f20\:91cf*)
 SCalcRicciTensor[g_?ArrayQ, coodinateSystem_List]:=Module[
 	{
@@ -994,6 +1026,10 @@ SCalcRicciTensor[g_?ArrayQ, coodinateSystem_List]:=Module[
 ];
 
 
+(* ::Subsection::Closed:: *)
+(*Ricci Scalar*)
+
+
 (*\:91cc\:5947\:6807\:91cf*)
 SCalcRicciScalar[g_?ArrayQ, coodinateSystem_List] := Module[
 {
@@ -1009,6 +1045,10 @@ SCalcRicciScalar[g_?ArrayQ, coodinateSystem_List] := Module[
 	Ricci = SCalcRicciTensor[g, coodinateSystem];
 	Sum[Ricci[[\[Mu],\[Nu]]] g[[\[Mu],\[Nu]]],{\[Mu], dimension},{\[Nu], dimension}]
 ];
+
+
+(* ::Subsection::Closed:: *)
+(*Einstein Tensor*)
 
 
 (*\:7231\:56e0\:65af\:5766\:5f20\:91cf*)
