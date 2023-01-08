@@ -6,7 +6,7 @@
 BeginPackage["SpTm`"]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*::usage information*)
 
 
@@ -438,11 +438,11 @@ MetricInfo[]:=Module[{},
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:7ebf\:5143\:548c\:4f53\:5143*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:7ebf\:5143\:8868\:8fbe\:5f0f*)
 
 
@@ -509,8 +509,48 @@ ShowSTensor[T_STensor] :=
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97 Calculation of Abstract Indices Expression*)
+
+
+(* ::Subsection:: *)
+(*\:5bf9\:79f0\:5316*)
+
+
+STSymmetrize[T_STensor, perList_List] := Module[
+{
+	sublen = Length @ T[[2]],
+	suplen = Length @ T[[3]],
+	indices = Join[T[[2]], T[[3]]],
+	perRule = Table[perList[[i]]->#[[i]], {i,Length[perList]} ]& /@ Permutations[perList],
+	resultIndices
+},
+	resultIndices = Table[indices/.perRule[[i]],{i, Length[perRule]}];
+	1/Length[resultIndices] * Array[STensor[T[[1]], resultIndices[[#, 1;;sublen]], resultIndices[[#, sublen+1;;sublen+suplen]]]&, Length[resultIndices], 1, Plus]
+]
+
+
+(* ::Subsection:: *)
+(*\:53cd\:79f0\:5316*)
+
+
+STAntiSymmetrize[T_STensor, perList_List] := Module[
+{
+	sublen = Length @ T[[2]],
+	suplen = Length @ T[[3]],
+	indices = Join[T[[2]], T[[3]]],
+	perRule = Table[perList[[i]]->#[[i]], {i,Length[perList]} ]& /@ Permutations[perList],
+	resultIndices,
+	originSign,
+	perSign
+},
+	(*\:539f\:6307\:6807\:6392\:5217\:7684\:7f6e\:6362\:7b26\:53f7*)
+	originSign = Signature[indices];
+	(*\:6307\:6807\:7f6e\:6362\:7ed3\:679c\:5217\:8868*)
+	resultIndices = Table[indices/.perRule[[i]],{i, Length[perRule]}];
+	perSign = originSign * Signature /@ resultIndices;
+	1/Length[resultIndices] * Array[perSign[[#]] * STensor[T[[1]], resultIndices[[#, 1;;sublen]], resultIndices[[#, sublen+1;;sublen+suplen]]]&, Length[resultIndices], 1, Plus]
+]
 
 
 (* ::Subsection::Closed:: *)
