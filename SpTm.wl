@@ -6,7 +6,7 @@
 BeginPackage["SpTm`"]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*::usage information*)
 
 
@@ -472,16 +472,18 @@ LineElementInfo[] := Module[
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:8f93\:5165\:89e3\:91ca Input Explain*)
 
 
 (*\:8f93\:5165\:89e3\:91ca\:ff0c\:4e0a\:4e0b\:6807\:7528\:7a7a\:683c\:9694\:5f00\:ff0c\:9ed8\:8ba4\:89e3\:91ca\:4e3a\:4e3aTimes*)
-
-InputExplain[expr__] := expr /. InputExplainRule;
+(*\:8fd9\:91cc\:4f1a\:51fa\:73b0\:95ee\:9898\:ff0c\:5982h^ba\:4f1a\:88ab\:89e3\:91ca\:4e3aSTensor[h, {}, {a,b}]\:ff0c \:8fd9\:662f\:5168\:5c40\:4e58\:6cd5\:7684\:4ea4\:6362\:5f8b\:9020\:6210\:7684.*)
+InputExplain[expr__] := Module[{},
+	expr /. InputExplainRule
+];
 
 (*\:751f\:6210\:6307\:6807\:66ff\:6362\:5217\:8868*)
-generateInputExplainRule[x__]:={(*\:591a\:4e2a\:6307\:6807\:66ff\:6362\:4e3a\:5217\:8868*)Times->List,(*\:5355\:4e2a\:6307\:6807\:8f6c\:4e3a\:5217\:8868*)x:>{x}/;MatchQ[x,_Symbol]};
+generateInputExplainRule[x__] := {(*\:591a\:4e2a\:6307\:6807\:66ff\:6362\:4e3a\:5217\:8868*)Times->List,(*\:5355\:4e2a\:6307\:6807\:8f6c\:4e3a\:5217\:8868*)x:>{x}/;MatchQ[x, _Symbol]};
 
 InputExplainRule := {
 	Power[T_Symbol, superIndex__] :> Apply[Times, STensor[T, {}, {#}]&/@ superIndex] /; Head[superIndex] == Plus,
@@ -514,11 +516,11 @@ ShowSTensor[T_STensor] :=
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97 Calculation of Abstract Indices Expression*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:5bf9\:79f0\:5316*)
 
 
@@ -549,7 +551,7 @@ STSymmetrize[T_STensor, perList_List] := Module[
 ]
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:53cd\:79f0\:5316*)
 
 
