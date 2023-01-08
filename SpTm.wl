@@ -438,11 +438,11 @@ MetricInfo[]:=Module[{},
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:7ebf\:5143\:548c\:4f53\:5143*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:7ebf\:5143\:8868\:8fbe\:5f0f*)
 
 
@@ -462,7 +462,7 @@ LineElementInfo[] := Module[
 		Message[LineElementInfo::NoMetric];
 		Abort[]
 	];
-	diffCoordinatesVector = DifferentialD[#]& /@ CurrentCoordinates;
+	diffCoordinatesVector = DifferentialD /@ CurrentCoordinates;
 	diffCoordinatesVector . MetricComponents . diffCoordinatesVector
 ]
 
