@@ -6,7 +6,7 @@
 BeginPackage["SpTm`"]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*::usage information*)
 
 
@@ -16,11 +16,15 @@ ShowForm::usage = "ShowForm[expr]"<>" "<>"\:5c06STensor\:8f6c\:5316\:4e3a\:6807\
 
 InputExplain::usage = "InputExplain[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8f6c\:5316\:4e3a\:5185\:90e8\:8ba1\:7b97\:65f6\:4f7f\:7528\:7684\:5f62\:5f0f."
 
+
 STensorInfo::usage = "STensorInfo[expr]"<>" "<>"\!\(\*SuperscriptBox[SubscriptBox[\(expr\:662f\:4e00\:4e2a\:5f62\:5982T\), \(a\)], \(b\)]\)\:7684\:5f20\:91cf\:ff0c\:7ed9\:51fa\:8be5\:5f20\:91cf\:7684\:5206\:91cf\:4fe1\:606f."<>"\n"<>"STensorInfo[T]"<>" "<>"\:7ed9\:51fa\:540d\:4e3aT\:7684\:6240\:6709\:5f20\:91cf\:7684\:5206\:91cf\:4fe1\:606f\:5217\:8868."<>"\n"<>"STensorInfo[T_STensor]"<>" "<>"\:7ed9\:51faSTensor\:5bf9\:8c61T\:7684\:5206\:91cf\:4fe1\:606f."
 
 MetricInfo::usage = "MetricInfo[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
 
 CoordinatesInfo::usage = "CoordinatesInfo[]"<>" "<>"\:83b7\:53d6\:5750\:6807\:7cfb\:5217\:8868."
+
+
+LineElementInfo::usage = "STLineElement[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:7ebf\:5143\:8868\:8fbe\:5f0f."
 
 
 SetCoordinates::usage = "SetCoordinates[coodinates_List]"<>" "<>"coodinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
@@ -406,7 +410,7 @@ SetMetric[Components_?ArrayQ, Coordinates_List, metricSymbol_Symbol]:=Module[
 	bb = Global`b
 },
 	If[
-		Coordinates=={} && Length[CurrentCoordinates] == 0,
+		Coordinates == {} && Length[CurrentCoordinates] == 0,
 		Message[SetMetric::NoCoordinates];
 		Abort[]
 	];
@@ -432,6 +436,35 @@ SetMetric[Components_?ArrayQ, Coordinates_List, metricSymbol_Symbol]:=Module[
 MetricInfo[]:=Module[{},
 	Row[{ Subscript[MetricSymbol, Row[{"\[Mu]","\[Nu]"}]], "=" , MatrixForm[MetricComponents] }]
 ];
+
+
+(* ::Section::Closed:: *)
+(*\:7ebf\:5143\:548c\:4f53\:5143*)
+
+
+(* ::Subsection::Closed:: *)
+(*\:7ebf\:5143\:8868\:8fbe\:5f0f*)
+
+
+LineElementInfo::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
+LineElementInfo::NoMetric = "\:672a\:8bbe\:7f6e\:5f20\:91cf.";
+LineElementInfo[] := Module[
+{
+	diffCoordinatesVector
+},
+	If[
+		Length @ CurrentCoordinates == 0,
+		Message[LineElementInfo::NoCoordinates];
+		Abort[]
+	];
+	If[
+		Length @ MetricComponents == 0,
+		Message[LineElementInfo::NoMetric];
+		Abort[]
+	];
+	diffCoordinatesVector = DifferentialD[#]& /@ CurrentCoordinates;
+	diffCoordinatesVector . MetricComponents . diffCoordinatesVector
+]
 
 
 (* ::Section::Closed:: *)
