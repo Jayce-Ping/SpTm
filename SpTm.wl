@@ -472,14 +472,33 @@ LineElementInfo[] := Module[
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:8f93\:5165\:89e3\:91ca Input Explain*)
 
 
 (*\:8f93\:5165\:89e3\:91ca\:ff0c\:4e0a\:4e0b\:6807\:7528\:7a7a\:683c\:9694\:5f00\:ff0c\:9ed8\:8ba4\:89e3\:91ca\:4e3a\:4e3aTimes*)
-(*\:8fd9\:91cc\:4f1a\:51fa\:73b0\:95ee\:9898\:ff0c\:5982h^ba\:4f1a\:88ab\:89e3\:91ca\:4e3aSTensor[h, {}, {a,b}]\:ff0c \:8fd9\:662f\:5168\:5c40\:4e58\:6cd5\:7684\:4ea4\:6362\:5f8b\:9020\:6210\:7684.*)
-InputExplain[expr__] := Module[{},
-	expr /. InputExplainRule
+(*\:8fd9\:91cc\:4f1a\:51fa\:73b0\:95ee\:9898\:ff0c\:5982h^(ba)\:4f1a\:88ab\:89e3\:91ca\:4e3aSTensor[h, {}, {a,b}]\:ff0c \:8fd9\:662f\:4e58\:6cd5\:7684\:4ea4\:6362\:5f8b\:9020\:6210\:7684.*)
+
+InputExplain::DuplicateSubIndex = "\:4e0b\:6307\:6807\:4e2d\:6709\:91cd\:590d.";
+InputExplain::DuplicateSupIndex = "\:4e0a\:6307\:6807\:4e2d\:6709\:91cd\:590d.";
+InputExplain[expr__] := Module[
+{
+	res,
+	sup,
+	sub
+},
+	res = expr /. InputExplainRule;
+	sub = Flatten @ Cases[res, T_STensor :> T[[2]], All];
+	sup = Flatten @ Cases[res, T_STensor :> T[[3]], All];
+	If[
+		!AllTrue[sub, Count[sub, #] == 1&],
+		Message[InputExplain::DuplicateSubIndex]
+	];
+	If[
+		!AllTrue[sup, Count[sup, #] == 1&],
+		Message[InputExplain::DuplicateSupIndex]
+	];
+	res
 ];
 
 (*\:751f\:6210\:6307\:6807\:66ff\:6362\:5217\:8868*)
