@@ -472,7 +472,7 @@ LineElementInfo[] := Module[
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8f93\:5165\:89e3\:91ca Input Explain*)
 
 
@@ -768,7 +768,7 @@ ATensorAdd[T_ATensor, P_ATensor, Q__ATensor] := ATensorAdd[T, ATensorAdd[P, Q]];
 
 
 (* ::Code::Initialization::"Tags"-><|"UppercasePattern" -> <|Enabled -> False|>|>:: *)
-(*SetAttributes[ATensorTimes, Flat]*)
+(*SetAttributes[ATensorTimes, Orderless]*)
 (*\:6570\:4e58*)(*\:6570\:4e58\:6ee1\:8db3\:4ea4\:6362\:5f8b*)
 ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor] := ATensor[T[[1]], T[[2]], k T[[3]]];
 
