@@ -6,7 +6,7 @@
 BeginPackage["SpTm`"]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*::usage information*)
 
 
@@ -36,6 +36,11 @@ SetMetric::usage = "SetMetric[components_Array]"<>" "<>"\:5728\:8bbe\:7f6e\:5750
 SetMetricSymbol::usage = "SetMetricSymbol[metricSymbol_Symbol]"<>" "<>"\:8bbe\:7f6e\:5ea6\:89c4\:7b26\:53f7."
 
 SetTensor::usage = "SetTensor[\!\(\*SuperscriptBox[SubscriptBox[\(T\), \(sub\)], \(sup\)]\), comopents]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:53ca\:5176\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf"<>"\n"<>"SetTensor[T_STensor, components]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf."
+
+
+STSymmetrize::usage = "STSymmetrize[expr__, permutation_List]"<>" "<>"\:5c06expr\:8868\:793a\:7684\:5f20\:91cf\:8fdb\:884c\:5bf9\:79f0\:5316\:ff0c\:5bf9\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."<>"\n"<>"STSymmetrize[T_STensor, permutation_List]"<>" "<>"\:5c06STensor T\:8fdb\:884c\:5bf9\:79f0\:5316\:ff0c\:5bf9\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."
+
+STAntiSymmetrize::usage = "STAntiSymmetrize[expr__, permutation_List]"<>" "<>"\:5c06expr\:8868\:793a\:7684\:5f20\:91cf\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807.\:8fd9\:91cc\:5efa\:8bae\:5c06\:6307\:6807\:6309\:5b57\:5178\:5e8f\:6392\:5217\:ff0c\:5426\:5219\:53ef\:80fd\:51fa\:73b0\:95ee\:9898\:ff1b\:53ef\:4ee5\:4f7f\:7528InputExplain\:770b\:5230\:8f93\:5165\:89e3\:91ca\:540e\:7684\:5f62\:5f0f."<>"\n"<>"STAntiSymmetrize[T_STensor, permutation_List]"<>" "<>"\:5c06STensor T\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."
 
 
 STCalculate::usage = "SpTmCalculate[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80."
@@ -473,15 +478,15 @@ LineElementInfo[] := Module[
 
 (*\:8f93\:5165\:89e3\:91ca\:ff0c\:4e0a\:4e0b\:6807\:7528\:7a7a\:683c\:9694\:5f00\:ff0c\:9ed8\:8ba4\:89e3\:91ca\:4e3a\:4e3aTimes*)
 
-InputExplain[expr__]:=expr/.InputExplainRule;
+InputExplain[expr__] := expr /. InputExplainRule;
 
 (*\:751f\:6210\:6307\:6807\:66ff\:6362\:5217\:8868*)
 generateInputExplainRule[x__]:={(*\:591a\:4e2a\:6307\:6807\:66ff\:6362\:4e3a\:5217\:8868*)Times->List,(*\:5355\:4e2a\:6307\:6807\:8f6c\:4e3a\:5217\:8868*)x:>{x}/;MatchQ[x,_Symbol]};
 
-InputExplainRule:={
-	Power[T_Symbol, superIndex__] :> Apply[Times, STensor[T, {}, {#}]&/@ superIndex]/;Head[superIndex]==Plus,
+InputExplainRule := {
+	Power[T_Symbol, superIndex__] :> Apply[Times, STensor[T, {}, {#}]&/@ superIndex] /; Head[superIndex] == Plus,
 	Subscript[T_Symbol, subIndex__] :> STensor[T, subIndex/.generateInputExplainRule[subIndex], {}],
-	Power[T_Symbol, superIndex__] :> STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]]/;Head[superIndex]=!=Plus,
+	Power[T_Symbol, superIndex__] :> STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]] /; Head[superIndex] =!= Plus,
 	Power[Subscript[T_Symbol, subIndex__], superIndex__] :> 
 	STensor[T, subIndex/.generateInputExplainRule[subIndex], superIndex/.generateInputExplainRule[superIndex]]
 };
@@ -517,6 +522,20 @@ ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[comp
 (*\:5bf9\:79f0\:5316*)
 
 
+STSymmetrize::WrongInput = "\:8f93\:5165\:683c\:5f0f\:9519\:8bef.";
+STSymmetrize[expr__, perList_List] := Module[
+{
+	T = InputExplain[expr]
+},
+	If[
+		Head @ T =!= STensor,
+		Message[STSymmetrize::WrongInput];
+		Abort[]
+	];
+	STSymmetrize[T, perList]
+]
+
+
 STSymmetrize[T_STensor, perList_List] := Module[
 {
 	sublen = Length @ T[[2]],
@@ -534,12 +553,26 @@ STSymmetrize[T_STensor, perList_List] := Module[
 (*\:53cd\:79f0\:5316*)
 
 
+STAntiSymmetrize::WrongInput = "\:8f93\:5165\:683c\:5f0f\:9519\:8bef.";
+STAntiSymmetrize[expr__, perList_List] := Module[
+{
+	T = InputExplain[expr]
+},
+	If[
+		Head @ T =!= STensor,
+		Message[STAntiSymmetrize::WrongInput];
+		Abort[]
+	];
+	STAntiSymmetrize[T, perList]
+]
+
+
 STAntiSymmetrize[T_STensor, perList_List] := Module[
 {
 	sublen = Length @ T[[2]],
 	suplen = Length @ T[[3]],
 	indices = Join[T[[2]], T[[3]]],
-	perRule = Table[perList[[i]]->#[[i]], {i,Length[perList]} ]& /@ Permutations[perList],
+	perRule = Table[perList[[i]]->#[[i]], {i, Length[perList]} ]& /@ Permutations[perList],
 	resultIndices,
 	originSign,
 	perSign
