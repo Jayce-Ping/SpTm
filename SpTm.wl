@@ -472,7 +472,7 @@ LineElementInfo[] := Module[
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8f93\:5165\:89e3\:91ca Input Explain*)
 
 
@@ -543,6 +543,7 @@ STSymmetrize[expr__, perList_List] := Module[
 {
 	T = InputExplain[expr]
 },
+	
 	If[
 		Head @ T =!= STensor,
 		Message[STSymmetrize::WrongInput];
@@ -557,15 +558,16 @@ STSymmetrize[T_STensor, perList_List] := Module[
 	sublen = Length @ T[[2]],
 	suplen = Length @ T[[3]],
 	indices = Join[T[[2]], T[[3]]],
-	perRule = Table[perList[[i]]->#[[i]], {i,Length[perList]} ]& /@ Permutations[perList],
+	perRule,
 	resultIndices
 },
+	perRule = Table[perList[[i]]->#[[i]], {i,Length[perList]} ]& /@ Permutations[perList]
 	resultIndices = Table[indices/.perRule[[i]],{i, Length[perRule]}];
 	1/Length[resultIndices] * Array[STensor[T[[1]], resultIndices[[#, 1;;sublen]], resultIndices[[#, sublen+1;;sublen+suplen]]]&, Length[resultIndices], 1, Plus]
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:53cd\:79f0\:5316*)
 
 
@@ -588,11 +590,12 @@ STAntiSymmetrize[T_STensor, perList_List] := Module[
 	sublen = Length @ T[[2]],
 	suplen = Length @ T[[3]],
 	indices = Join[T[[2]], T[[3]]],
-	perRule = Table[perList[[i]]->#[[i]], {i, Length[perList]} ]& /@ Permutations[perList],
+	perRule,
 	resultIndices,
 	originSign,
 	perSign
 },
+	perRule = Table[perList[[i]]->#[[i]], {i, Length[perList]} ]& /@ Permutations[perList];
 	(*\:539f\:6307\:6807\:6392\:5217\:7684\:7f6e\:6362\:7b26\:53f7*)
 	originSign = Signature[indices];
 	(*\:6307\:6807\:7f6e\:6362\:7ed3\:679c\:5217\:8868*)
