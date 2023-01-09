@@ -489,16 +489,6 @@ InputExplain[expr__] := Module[
 	sub
 },
 	res = expr /. InputExplainRule;
-	sub = Flatten @ Cases[res, T_STensor :> T[[2]], All];
-	sup = Flatten @ Cases[res, T_STensor :> T[[3]], All];
-	If[
-		!AllTrue[sub, Count[sub, #] == 1&],
-		Message[InputExplain::DuplicateSubIndex]
-	];
-	If[
-		!AllTrue[sup, Count[sup, #] == 1&],
-		Message[InputExplain::DuplicateSupIndex]
-	];
 	res
 ];
 
@@ -540,11 +530,11 @@ ShowSTensor[T_STensor] :=
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97 Calculation of Abstract Indices Expression*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:5bf9\:79f0\:5316*)
 
 
