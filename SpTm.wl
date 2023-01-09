@@ -478,6 +478,7 @@ LineElementInfo[] := Module[
 
 (*\:8f93\:5165\:89e3\:91ca\:ff0c\:4e0a\:4e0b\:6807\:7528\:7a7a\:683c\:9694\:5f00\:ff0c\:9ed8\:8ba4\:89e3\:91ca\:4e3a\:4e3aTimes*)
 (*\:8fd9\:91cc\:4f1a\:51fa\:73b0\:95ee\:9898\:ff0c\:5982h^(ba)\:4f1a\:88ab\:89e3\:91ca\:4e3aSTensor[h, {}, {a,b}]\:ff0c \:8fd9\:662f\:4e58\:6cd5\:7684\:4ea4\:6362\:5f8b\:9020\:6210\:7684.*)
+(*\:5728\:8fd9\:91cc\:6709\:65f6\:9700\:8981\:9009\:62e9\:727a\:7272\:4e58\:6cd5\:4ea4\:6362\:5f8b\:ff0c\:4f46\:5728\:505a\:5177\:4f53\:8fd0\:7b97\:65f6\:53ef\:4ee5\:5c06\:4e58\:6cd5\:4ea4\:6362\:5f8b\:91cd\:65b0\:8bbe\:7f6e*)
 
 InputExplain::DuplicateSubIndex = "\:4e0b\:6307\:6807\:4e2d\:6709\:91cd\:590d.";
 InputExplain::DuplicateSupIndex = "\:4e0a\:6307\:6807\:4e2d\:6709\:91cd\:590d.";
@@ -501,15 +502,19 @@ InputExplain[expr__] := Module[
 	res
 ];
 
-(*\:751f\:6210\:6307\:6807\:66ff\:6362\:5217\:8868*)
-generateInputExplainRule[x__] := {(*\:591a\:4e2a\:6307\:6807\:66ff\:6362\:4e3a\:5217\:8868*)Times->List,(*\:5355\:4e2a\:6307\:6807\:8f6c\:4e3a\:5217\:8868*)x:>{x}/;MatchQ[x, _Symbol]};
-
 InputExplainRule := {
 	Power[T_Symbol, superIndex__] :> Apply[Times, STensor[T, {}, {#}]&/@ superIndex] /; Head[superIndex] == Plus,
-	Subscript[T_Symbol, subIndex__] :> STensor[T, subIndex/.generateInputExplainRule[subIndex], {}],
-	Power[T_Symbol, superIndex__] :> STensor[T, {}, superIndex/.generateInputExplainRule[superIndex]] /; Head[superIndex] =!= Plus,
-	Power[Subscript[T_Symbol, subIndex__], superIndex__] :> 
-	STensor[T, subIndex/.generateInputExplainRule[subIndex], superIndex/.generateInputExplainRule[superIndex]]
+	
+	Subscript[T_Symbol, subIndex_] :> STensor[T, {subIndex}, {}] /;Depth[subIndex]==1,
+	Subscript[T_Symbol, subIndex__] :> STensor[T, subIndex/.{Times -> List}, {}],
+	
+	Power[T_Symbol, superIndex_] :> STensor[T, {}, {superIndex}]/;Depth[superIndex]==1 ,
+	Power[T_Symbol, superIndex__] :> STensor[T, {}, superIndex/.{Times -> List}] /; Head[superIndex] =!= Plus,
+	
+	Power[Subscript[T_Symbol, subIndex_], superIndex_] :> STensor[T, {subIndex}, {superIndex}]/;Depth[subIndex]==1 && Depth[superIndex]==1,
+	Power[Subscript[T_Symbol, subIndex__], superIndex_] :> STensor[T, subIndex/.{Times -> List}, {superIndex}]/;Depth[superIndex]==1 && Head[subIndex] == Times,
+	Power[Subscript[T_Symbol, subIndex_], superIndex__] :> STensor[T, {subIndex}, superIndex/.{Times -> List}]/;Depth[subIndex]==1 && Head[superIndex] == Times,
+	Power[Subscript[T_Symbol, subIndex__], superIndex__] :> STensor[T, subIndex/.{Times -> List}, superIndex/.{Times -> List}]
 };
 
 
