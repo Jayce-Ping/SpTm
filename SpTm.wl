@@ -530,26 +530,27 @@ ShowSTensor[T_STensor] :=
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97 Calculation of Abstract Indices Expression*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:5bf9\:79f0\:5316*)
 
 
-STSymmetrize::WrongInput = "\:8f93\:5165\:683c\:5f0f\:9519\:8bef.";
+(*\:5173\:4e8eperlist\:7684\:6307\:6807\:5bf9\:79f0\:5316\:67d0\:4e2a\:8868\:8fbe\:5f0f*)
 STSymmetrize[expr__, perList_List] := Module[
 {
-	T = InputExplain[expr]
+	exp = InputExplain[expr],
+	terms
 },
-	
+	terms = Flatten[exp //.{Plus[x_,y_] :> {x,y}}];
 	If[
-		Head @ T =!= STensor,
-		Message[STSymmetrize::WrongInput];
-		Abort[]
-	];
-	STSymmetrize[T, perList]
+		(*\:4ec5\:6709\:4e00\:9879*)
+		Head[terms] =!= List,
+		STSymmetrizeTerm[terms, perList],
+		Plus @@ (STSymmetrizeTerm[#, perList]& /@ terms)
+	]
 ]
 
 
@@ -561,27 +562,49 @@ STSymmetrize[T_STensor, perList_List] := Module[
 	perRule,
 	resultIndices
 },
-	perRule = Table[perList[[i]]->#[[i]], {i,Length[perList]} ]& /@ Permutations[perList]
+	perRule = Table[perList[[i]]->#[[i]], {i,Length[perList]} ]& /@ Permutations[perList];
 	resultIndices = Table[indices/.perRule[[i]],{i, Length[perRule]}];
 	1/Length[resultIndices] * Array[STensor[T[[1]], resultIndices[[#, 1;;sublen]], resultIndices[[#, sublen+1;;sublen+suplen]]]&, Length[resultIndices], 1, Plus]
 ]
 
 
-(* ::Subsection:: *)
+(*\:5bf9\:79f0\:5316\:67d0\:4e00\:9879*)
+STSymmetrizeTerm[term_, perList_List] := Module[
+{
+	perRule,
+	outputTerms
+},
+	(*\:7f6e\:6362\:89c4\:5219*)
+	perRule = Table[perList[[i]]->#[[i]], {i,Length[perList]} ]& /@ Permutations[perList];
+	(*\:7f6e\:6362\:7ed3\:679c\:5404\:9879\:7ec4\:6210\:7684\:5217\:8868*)
+	outputTerms = Table[
+		Replace[term,
+		{
+			STensor[x_, subIndex__, supIndex__] :> STensor[x, subIndex/.perRule[[i]], supIndex/.perRule[[i]] ],
+			Grad[x_, subIndex_] :> Grad[x, subIndex/.perRule[[i]]]
+		},All],
+	{i,Length[perRule]}];
+	1 / Length[perRule] * Plus @@ outputTerms
+]
+
+
+(* ::Subsection::Closed:: *)
 (*\:53cd\:79f0\:5316*)
 
 
 STAntiSymmetrize::WrongInput = "\:8f93\:5165\:683c\:5f0f\:9519\:8bef.";
-STAntiSymmetrize[expr__, perList_List] := Module[
+STAntiSymmetrize[expr__, perList_List]  := Module[
 {
-	T = InputExplain[expr]
+	exp = InputExplain[expr],
+	terms
 },
+	terms = Flatten[exp //.{Plus[x_,y_] :> {x,y}}];
 	If[
-		Head @ T =!= STensor,
-		Message[STAntiSymmetrize::WrongInput];
-		Abort[]
-	];
-	STAntiSymmetrize[T, perList]
+		(*\:4ec5\:6709\:4e00\:9879*)
+		Head[terms] =!= List,
+		STAntiSymmetrizeTerm[terms, perList],
+		Plus @@ (STAntiSymmetrizeTerm[#, perList]& /@ terms)
+	]
 ]
 
 
@@ -596,12 +619,47 @@ STAntiSymmetrize[T_STensor, perList_List] := Module[
 	perSign
 },
 	perRule = Table[perList[[i]]->#[[i]], {i, Length[perList]} ]& /@ Permutations[perList];
+	
 	(*\:539f\:6307\:6807\:6392\:5217\:7684\:7f6e\:6362\:7b26\:53f7*)
 	originSign = Signature[indices];
+	
 	(*\:6307\:6807\:7f6e\:6362\:7ed3\:679c\:5217\:8868*)
 	resultIndices = Table[indices/.perRule[[i]],{i, Length[perRule]}];
+	
+	(*\:7f6e\:6362\:7ed3\:679c\:6bcf\:4e00\:9879\:7684\:7b26\:53f7*)
 	perSign = originSign * Signature /@ resultIndices;
+	
 	1/Length[resultIndices] * Array[perSign[[#]] * STensor[T[[1]], resultIndices[[#, 1;;sublen]], resultIndices[[#, sublen+1;;sublen+suplen]]]&, Length[resultIndices], 1, Plus]
+]
+
+
+(*\:53cd\:79f0\:5316\:67d0\:4e00\:9879*)(*\:9700\:8981\:5904\:7406\:7b26\:53f7\:95ee\:9898*)
+STAntiSymmetrizeTerm[term__, perList_List] := Module[
+{
+	perRule,
+	outputTerms,
+	originSign,
+	perSign
+},
+	(*\:7f6e\:6362\:89c4\:5219*)
+	perRule = Table[perList[[i]]->#[[i]], {i, Length[perList]} ]& /@ Permutations[perList];
+
+	(*\:539f\:6307\:6807\:6392\:5217\:7684\:7f6e\:6362\:7b26\:53f7*)
+	originSign = Signature[perList];
+
+	(*\:7f6e\:6362\:7ed3\:679c\:6bcf\:4e00\:9879\:7684\:7b26\:53f7*)
+	perSign = originSign * Signature /@ Table[perList/.perRule[[i]],{i, Length[perRule]}];
+
+	(*\:7f6e\:6362\:7ed3\:679c\:5404\:9879\:7ec4\:6210\:7684\:5217\:8868*)
+	outputTerms = Table[
+		perSign[[i]] * Replace[term,
+		{
+			STensor[x_, subIndex__, supIndex__] :> STensor[x, subIndex/.perRule[[i]], supIndex/.perRule[[i]] ],
+			Grad[x_, subIndex_] :> Grad[x, subIndex/.perRule[[i]]]
+		},All],
+	{i, Length[perRule]}];
+	
+	1 / Length[perRule] * Plus @@ outputTerms
 ]
 
 
