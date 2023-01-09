@@ -530,11 +530,11 @@ ShowSTensor[T_STensor] :=
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97 Calculation of Abstract Indices Expression*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:5bf9\:79f0\:5316*)
 
 
@@ -576,19 +576,21 @@ STSymmetrizeTerm[term_, perList_List] := Module[
 },
 	(*\:7f6e\:6362\:89c4\:5219*)
 	perRule = Table[perList[[i]]->#[[i]], {i,Length[perList]} ]& /@ Permutations[perList];
-	(*\:7f6e\:6362\:7ed3\:679c\:5404\:9879\:7ec4\:6210\:7684\:5217\:8868*)
-	outputTerms = Table[
+	
+	(*\:7f6e\:6362\:7ed3\:679c\:5404\:9879\:7ec4\:6210\:7684\:5217\:8868,\:7528Plus\:76f8\:52a0*)
+	outputTerms = Array[
 		Replace[term,
 		{
-			STensor[x_, subIndex__, supIndex__] :> STensor[x, subIndex/.perRule[[i]], supIndex/.perRule[[i]] ],
-			Grad[x_, subIndex_] :> Grad[x, subIndex/.perRule[[i]]]
-		},All],
-	{i,Length[perRule]}];
-	1 / Length[perRule] * Plus @@ outputTerms
+			STensor[x_, subIndex__, supIndex__] :> STensor[x, subIndex/.perRule[[#]], supIndex/.perRule[[#]] ],
+			Grad[x_, subIndex_] :> Grad[x, subIndex/.perRule[[#]]]
+		}, All]&,
+	Length[perRule], 1, Plus];
+	
+	1 / Length[perRule] * outputTerms
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:53cd\:79f0\:5316*)
 
 
@@ -650,16 +652,16 @@ STAntiSymmetrizeTerm[term__, perList_List] := Module[
 	(*\:7f6e\:6362\:7ed3\:679c\:6bcf\:4e00\:9879\:7684\:7b26\:53f7*)
 	perSign = originSign * Signature /@ Table[perList/.perRule[[i]],{i, Length[perRule]}];
 
-	(*\:7f6e\:6362\:7ed3\:679c\:5404\:9879\:7ec4\:6210\:7684\:5217\:8868*)
-	outputTerms = Table[
-		perSign[[i]] * Replace[term,
+	(*\:7f6e\:6362\:7ed3\:679c\:5404\:9879\:7ec4\:6210\:7684\:5217\:8868,\:7528Plus\:76f8\:52a0*)
+	outputTerms = Array[
+		perSign[[#]] * Replace[term,
 		{
-			STensor[x_, subIndex__, supIndex__] :> STensor[x, subIndex/.perRule[[i]], supIndex/.perRule[[i]] ],
-			Grad[x_, subIndex_] :> Grad[x, subIndex/.perRule[[i]]]
-		},All],
-	{i, Length[perRule]}];
+			STensor[x_, subIndex__, supIndex__] :> STensor[x, subIndex/.perRule[[#]], supIndex/.perRule[[#]] ],
+			Grad[x_, subIndex_] :> Grad[x, subIndex/.perRule[[#]]]
+		}, All]&,
+	Length[perRule], 1, Plus];
 	
-	1 / Length[perRule] * Plus @@ outputTerms
+	1 / Length[perRule] * outputTerms
 ]
 
 
