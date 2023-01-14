@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(*It is made by Jayce Ping (\:5e73\:535a\:6587), a student in XJTU, who is in interested in both Mathematica and General Relativity. *)
+(*It is made by Jayce Ping (Chinese name: \:5e73\:535a\:6587), a student in XJTU, who is interested in both Mathematica and General Relativity. *)
 
 
 BeginPackage["SpTm`"]
@@ -131,7 +131,7 @@ specificReplaceRule = Thread[#1->#2&[ToExpression @ StringJoin["Global`",#]& /@ 
 
 
 (* ::Subsection::Closed:: *)
-(*\:683c\:5f0f\:5316\:6307\:6807*)
+(*\:683c\:5f0f\:5316\:6307\:6807 Indices Format*)
 
 
 (*\:5c06STensor\:91cd\:65b0\:7528abc\:5c06\:6307\:6807\:6309\:987a\:5e8f\:8fdb\:884c\:6539\:5199*)
@@ -146,7 +146,7 @@ STensorReIndex[T_STensor] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*\:83b7\:53d6\:5f20\:91cf\:4fe1\:606f*)
+(*\:83b7\:53d6\:5f20\:91cf\:4fe1\:606f Get STensor Information*)
 
 
 STensorInfo::ErrorInput = "\:8f93\:5165\:683c\:5f0f\:6709\:8bef.";
@@ -274,7 +274,7 @@ CoordinatesInfo[] := CurrentCoordinates;
 
 
 (* ::Subsection::Closed:: *)
-(*\:4e3b\:53d8\:6362\:51fd\:6570*)
+(*\:4e3b\:53d8\:6362\:51fd\:6570 Main Function*)
 
 
 SCoordinatesTransform::DimensionNotMatch = "\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
@@ -332,7 +332,7 @@ SCoordinatesTransform[target_List, transformation_List] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*\:5c06STensor\:8fdb\:884c\:53d8\:6362*)
+(*\:5c06STensor\:8fdb\:884c\:53d8\:6362 Transform STensor*)
 
 
 (*\:5c06STensor\:7684\:5206\:91cf\:8fdb\:884c\:5750\:6807\:53d8\:6362*)
@@ -363,6 +363,7 @@ STensorTrans[T_STensor, target_List, transformation_List] := Module[
 
 (* ::Subsection::Closed:: *)
 (*\:5c06(0,n)\:578b\:5f20\:91cf\:8fdb\:884c\:5750\:6807\:53d8\:6362\:ff0c\:4e0d\:9700\:8981\:6d89\:53ca\:5750\:6807\:7cfb\:7684\:9006\:53d8\:6362*)
+(* Do Coordinate Transformation to  a (0,n) Tensor ;Don't Need Inverse Transformation*)
 
 
 (*\:5c06(0, n)\:578b\:5f20\:91cf\:7684\:5206\:91cf\:8fdb\:884c\:5750\:6807\:53d8\:6362*)
@@ -444,11 +445,11 @@ MetricInfo[]:=Module[{},
 
 
 (* ::Section::Closed:: *)
-(*\:7ebf\:5143\:548c\:4f53\:5143*)
+(*\:7ebf\:5143 Line Element*)
 
 
 (* ::Subsection::Closed:: *)
-(*\:7ebf\:5143\:8868\:8fbe\:5f0f*)
+(*\:7ebf\:5143\:8868\:8fbe\:5f0f Expression of Line Element*)
 
 
 LineElementInfo::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
@@ -530,12 +531,12 @@ ShowSTensor[T_STensor] :=
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:62bd\:8c61\:6307\:6807\:8fd0\:7b97 Calculation of Abstract Indices Expression*)
 
 
-(* ::Subsection:: *)
-(*\:5bf9\:79f0\:5316*)
+(* ::Subsection::Closed:: *)
+(*\:5bf9\:79f0\:5316 Symmetrize*)
 
 
 (*\:5173\:4e8eperlist\:7684\:6307\:6807\:5bf9\:79f0\:5316\:67d0\:4e2a\:8868\:8fbe\:5f0f*)
@@ -590,8 +591,8 @@ STSymmetrizeTerm[term_, perList_List] := Module[
 ]
 
 
-(* ::Subsection:: *)
-(*\:53cd\:79f0\:5316*)
+(* ::Subsection::Closed:: *)
+(*\:53cd\:79f0\:5316 Antisymmetrize*)
 
 
 STAntiSymmetrize::WrongInput = "\:8f93\:5165\:683c\:5f0f\:9519\:8bef.";
@@ -666,7 +667,7 @@ STAntiSymmetrizeTerm[term__, perList_List] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*\:5347\:964d\:6307\:6807\:51fd\:6570*)
+(*\:5347\:964d\:6307\:6807\:51fd\:6570 Function of Up and Down Index*)
 
 
 (*\:5c06\:6240\:6709\:4e0a\:6307\:6807\:7528\:5ea6\:89c4\:964d\:4e0b\:6765\:ff0c\:8fd4\:56de(0,n)\:578b\:540c\:540d\:5f20\:91cf\:8868\:8fbe\:5f0f*)
@@ -686,7 +687,7 @@ IndicesDown[T_STensor] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*\:5ea6\:89c4\:8fd0\:7b97\:5f8b*)
+(*\:5ea6\:89c4\:8fd0\:7b97\:5f8b Rule of Metric Calculation*)
 
 
 (*\:5ea6\:89c4\:8fd0\:7b97\:5f8b*)
@@ -705,7 +706,7 @@ MetricUpIndex :={
 
 
 (* ::Subsection::Closed:: *)
-(*\:5f20\:91cf\:8fd0\:7b97\:5f8b*)
+(*\:5f20\:91cf\:8fd0\:7b97\:5f8b Rule of Tensor Calculation*)
 
 
 (*\:5f20\:91cf\:8fd0\:7b97\:5f8b*)
@@ -720,7 +721,7 @@ STensorCalcRule:={
 
 
 (* ::Subsection::Closed:: *)
-(*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97\:5f8b*)
+(*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97\:5f8b Rule of Differential Operator Calculation*)
 
 
 (*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97\:5f8b*)
@@ -750,7 +751,7 @@ DerivativeCalcRule:={
 
 
 (* ::Subsection::Closed:: *)
-(*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:5316\:7b80*)
+(*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:5316\:7b80 Simplify the Abstract Expression*)
 
 
 STCalculate[expr__]:= Module[
@@ -766,7 +767,7 @@ STCalculate[expr__]:= Module[
 
 
 (* ::Subsection::Closed:: *)
-(*\:83b7\:53d6\:672a\:4f7f\:7528\:7684\:6307\:6807\:7b26\:53f7*)
+(*\:83b7\:53d6\:672a\:4f7f\:7528\:7684\:6307\:6807\:7b26\:53f7 Get Unused Indices*)
 
 
 (*\:83b7\:53d6\:4e00\:4e2a\:6ca1\:6709\:7528\:8fc7\:7684\:6307\:6807\:7b26\:53f7*)
@@ -793,7 +794,7 @@ GetanUnusedIndex[lis__List] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*\:57fa\:672c\:8fd0\:7b97*)
+(*\:57fa\:672c\:8fd0\:7b97 Fundamental Operations*)
 
 
 (* ::Text:: *)
@@ -978,7 +979,7 @@ SOrdinaryDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f*)
+(*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f Transform Abstract Expressions to Specific Expressions*)
 
 
 (*\:76f4\:63a5\:8ba1\:7b97\:8868\:8fbe\:5f0f\:7684\:5206\:91cf*)
@@ -1080,7 +1081,7 @@ SCalcSpecificExpression[expr__] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*Main Function*)
+(*\:4e3b\:51fd\:6570 Main Function*)
 
 
 STCalcTensor::NoMetric = "\:672a\:8bbe\:7f6e\:5ea6\:89c4\:5206\:91cf."
@@ -1129,7 +1130,7 @@ STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*Christoffel Symbol*)
+(*\:514b\:6c0f\:7b26 Christoffel Symbol*)
 
 
 (*\:514b\:6c0f\:7b26*)
@@ -1159,7 +1160,7 @@ SCalcChristoffel[g_?ArrayQ, coodinateSystem_List] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*Riemann Tensor*)
+(*\:9ece\:66fc\:5f20\:91cf Riemann Tensor*)
 
 
 (*\:9ece\:66fc\:5f20\:91cf*)
@@ -1195,7 +1196,7 @@ SCalcRiemannTensor[g_?ArrayQ, coodinateSystem_List] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*Ricci Tensor*)
+(*\:91cc\:5947\:5f20\:91cf Ricci Tensor*)
 
 
 (*\:91cc\:5947\:5f20\:91cf*)
@@ -1229,7 +1230,7 @@ SCalcRicciTensor[g_?ArrayQ, coodinateSystem_List]:=Module[
 
 
 (* ::Subsection::Closed:: *)
-(*Ricci Scalar*)
+(*\:91cc\:5947\:6807\:91cf Ricci Scalar*)
 
 
 (*\:91cc\:5947\:6807\:91cf*)
@@ -1250,7 +1251,7 @@ SCalcRicciScalar[g_?ArrayQ, coodinateSystem_List] := Module[
 
 
 (* ::Subsection::Closed:: *)
-(*Einstein Tensor*)
+(*\:7231\:56e0\:65af\:5766\:5f20\:91cf Einstein Tensor*)
 
 
 (*\:7231\:56e0\:65af\:5766\:5f20\:91cf*)
