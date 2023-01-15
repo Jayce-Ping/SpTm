@@ -26,7 +26,7 @@ CoordinatesInfo::usage = "CoordinatesInfo[]"<>" "<>"\:83b7\:53d6\:5750\:6807\:7c
 
 LineElementInfo::usage = "STLineElement[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:7ebf\:5143\:8868\:8fbe\:5f0f."
 
-VolumeElementInfo::usage = "VolumeElementInfo[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:4f53\:5143\:8868\:8fbe\:5f0f."
+VolumeElementInfo::usage = "VolumeElementInfo[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:9002\:914d\:4f53\:5143\:8868\:8fbe\:5f0f."
 
 
 SetCoordinates::usage = "SetCoordinates[coodinates_List]"<>" "<>"coodinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
@@ -475,7 +475,7 @@ LineElementInfo[] := Module[
 ]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:4f53\:5143 Volume Element*)
 
 
@@ -496,7 +496,7 @@ VolumeElementInfo[] := Module[
 		Abort[]
 	];
 	diffCoordinatesVector = DifferentialD /@ CurrentCoordinates;
-	Simplify@Sqrt[Abs[Det[MetricComponents]]] * Wedge @@ diffCoordinatesVector
+	\[PlusMinus]Simplify@Sqrt[Abs[Det[MetricComponents]]] * Wedge @@ diffCoordinatesVector
 ]
 
 
