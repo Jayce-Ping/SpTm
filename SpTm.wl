@@ -26,6 +26,8 @@ CoordinatesInfo::usage = "CoordinatesInfo[]"<>" "<>"\:83b7\:53d6\:5750\:6807\:7c
 
 LineElementInfo::usage = "STLineElement[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:7ebf\:5143\:8868\:8fbe\:5f0f."
 
+VolumeElementInfo::usage = "VolumeElementInfo[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:4f53\:5143\:8868\:8fbe\:5f0f."
+
 
 SetCoordinates::usage = "SetCoordinates[coodinates_List]"<>" "<>"coodinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
 
@@ -444,11 +446,11 @@ MetricInfo[]:=Module[{},
 ];
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:7ebf\:5143 Line Element*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*\:7ebf\:5143\:8868\:8fbe\:5f0f Expression of Line Element*)
 
 
@@ -473,7 +475,7 @@ LineElementInfo[] := Module[
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:4f53\:5143 Volume Element*)
 
 
@@ -546,12 +548,15 @@ Subscript[x_, y_, subIndex__] := Subscript[x, Row[{y, subIndex},""]];
 
 ShowForm[expr___] := StandardForm[expr /. {T_STensor :> ShowSTensor[T]}];
 
-ShowSTensor[T_STensor] :=
-    Module[{out = T[[1]], r = {{} -> "", List -> Sequence}},
-        If[Length[T[[2]]] > 0, out = Subscript[out, T[[2]] /.r]];
-        If[Length[T[[3]]] > 0, out = Superscript[out, T[[3]] /.r]];
-        out
-    ];
+ShowSTensor[T_STensor] := Module[
+{
+	out = T[[1]],
+	r = {{} -> "", List -> Sequence}
+},
+	If[Length[T[[2]]] > 0, out = Subscript[out, T[[2]] /.r]];
+	If[Length[T[[3]]] > 0, out = Superscript[out, T[[3]] /.r]];
+	out
+];
 
 ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[components]}];
 
@@ -831,7 +836,7 @@ GetanUnusedIndex[lis__List] := Module[
 
 
 (* ::Subsubsection::Closed:: *)
-(*\:52a0\:6cd5*)
+(*\:52a0\:6cd5 Add*)
 
 
 (*\:8bbe\:7f6e\:52a0\:6cd5\:7684\:4ea4\:6362\:5f8b\:548c\:7ed3\:5408\:5f8b*)
@@ -867,7 +872,7 @@ ATensorAdd[T_ATensor, P_ATensor, Q__ATensor] := ATensorAdd[T, ATensorAdd[P, Q]];
 
 
 (* ::Subsubsection::Closed:: *)
-(*\:6570\:4e58*)
+(*\:6570\:4e58 Scalar Multiplication*)
 
 
 (* ::Code::Initialization::"Tags"-><|"UppercasePattern" -> <|Enabled -> False|>|>:: *)
@@ -881,7 +886,7 @@ ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor, S__ATensor] := ATensorTimes[k, ATen
 
 
 (* ::Subsubsection::Closed:: *)
-(*\:5f20\:91cf\:79ef\:4e0e\:7f29\:5e76*)
+(*\:5f20\:91cf\:79ef\:4e0e\:7f29\:5e76 Tensor Product and Contract*)
 
 
 (*\:5f20\:91cf\:79ef\:4e0e\:7f29\:5e76*)
@@ -929,7 +934,41 @@ ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P
 
 
 (* ::Subsubsection::Closed:: *)
-(*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97*)
+(*\:6954\:79ef Tensor Wedge Product*)
+
+
+ATensorWedge::wrongTensor = "\:53c2\:4e0e\:8fd0\:7b97\:7684\:5f20\:91cf\:4e0d\:662f\:5fae\:5206\:5f62\:5f0f\:6216(0,n)\:578b\:5f20\:91cf";
+
+ATensorWedge[T_ATensor] := Module[
+{
+	subIndex = T[[1]],
+	supIndex = T[[2]]
+},
+	If[
+		T[[2]] =!= {},
+		Message[ATensorWedge::wrongTensor];
+		Abort[]
+	];
+	ATensor[subIndex, supIndex, Normal @ TensorWedge[T[[3]]]]
+];
+
+ATensorWedge[T_ATensor, S_ATensor] := Module[
+{
+	outIndices = Join[T[[1]], S[[1]]]
+},
+	If[
+		T[[2]] =!= {} || S[[2]] =!= {},
+		Message[ATensorWedge::wrongTensor];
+		Abort[]
+	];
+	ATensor[outIndices, {}, Normal @ TensorWedge[T[[3]], S[[3]]]]
+];
+
+ATensorWedge[T_ATensor, S_ATensor, Q__ATensor] := ATensorWedge[T, ATensorWedge[S, Q]];
+
+
+(* ::Subsubsection::Closed:: *)
+(*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97 Derivative Operator Calculation*)
 
 
 (*\:534f\:53d8\:5bfc\:6570\[Del]*)
@@ -1055,7 +1094,8 @@ SCalcSpecificExpression[expr__] := Module[
 		Plus[T_ATensor, S_ATensor] :> ATensorAdd[T, S],
 		Times[k_Symbol|k_?NumericQ, T_ATensor] :> ATensorTimes[k, T],
 		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S],
-		Grad[T_ATensor, dIndex_Symbol] :> SCovariantDerivative[T, dIndex, coodinates]
+		Grad[T_ATensor, dIndex_Symbol] :> SCovariantDerivative[T, dIndex, coodinates],
+		Wedge[T_ATensor, S_ATensor] :> ATensorWedge[T, S]
 	};
 	
 	(*\:68c0\:67e5\:5f20\:91cfT\:662f\:5426\:5df2\:7ecf\:8bbe\:7f6e\:5206\:91cf\:7684\:51fd\:6570*)
@@ -1087,8 +1127,10 @@ SCalcSpecificExpression[expr__] := Module[
 	
 	(*\:5c06\:6240\:6709STensor\:66ff\:6362\:4e3aATensor*)
 	expression = expr/.{T_STensor :> ATensor[T[[2]], T[[3]], keys[T]]};
+	
 	(*\:4f7f\:7528\:66ff\:6362\:8ba1\:7b97\:8868\:8fbe\:5f0f*)
 	expression = expression//.calcReplaceRule;
+	
 	If[
 		NumberQ[expression],
 		ShowTensor[STensor[Global`\[ScriptCapitalT], {}, {}], 0],
