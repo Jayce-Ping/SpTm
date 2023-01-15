@@ -444,11 +444,11 @@ MetricInfo[]:=Module[{},
 ];
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:7ebf\:5143 Line Element*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*\:7ebf\:5143\:8868\:8fbe\:5f0f Expression of Line Element*)
 
 
@@ -470,6 +470,31 @@ LineElementInfo[] := Module[
 	];
 	diffCoordinatesVector = DifferentialD /@ CurrentCoordinates;
 	diffCoordinatesVector . MetricComponents . diffCoordinatesVector
+]
+
+
+(* ::Section:: *)
+(*\:4f53\:5143 Volume Element*)
+
+
+VolumeElementInfo::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
+VolumeElementInfo::NoMetric = "\:672a\:8bbe\:7f6e\:5f20\:91cf.";
+VolumeElementInfo[] := Module[
+{
+	diffCoordinatesVector
+},
+	If[
+		Length @ CurrentCoordinates == 0,
+		Message[LineElementInfo::NoCoordinates];
+		Abort[]
+	];
+	If[
+		Length @ MetricComponents == 0,
+		Message[LineElementInfo::NoMetric];
+		Abort[]
+	];
+	diffCoordinatesVector = DifferentialD /@ CurrentCoordinates;
+	Simplify@Sqrt[Abs[Det[MetricComponents]]] * Wedge @@ diffCoordinatesVector
 ]
 
 
