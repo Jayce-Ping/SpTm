@@ -1091,11 +1091,11 @@ SCalcSpecificExpression[expr__] := Module[
 	coodinates = CurrentCoordinates;
 	
 	calcReplaceRule = {
-		Plus[T_ATensor, S_ATensor] :> ATensorAdd[T, S],
+		Plus[T_ATensor, S__ATensor] :> ATensorAdd[T, S],
 		Times[k_Symbol|k_?NumericQ, T_ATensor] :> ATensorTimes[k, T],
-		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S],
+		Times[T_ATensor, S__ATensor] :> ATensorTimes[T, S],
 		Grad[T_ATensor, dIndex_Symbol] :> SCovariantDerivative[T, dIndex, coodinates],
-		Wedge[T_ATensor, S_ATensor] :> ATensorWedge[T, S]
+		Wedge[T_ATensor, S__ATensor] :> ATensorWedge[T, S]
 	};
 	
 	(*\:68c0\:67e5\:5f20\:91cfT\:662f\:5426\:5df2\:7ecf\:8bbe\:7f6e\:5206\:91cf\:7684\:51fd\:6570*)
