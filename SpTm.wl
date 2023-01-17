@@ -1,12 +1,12 @@
 (* ::Package:: *)
 
-(*It is made by Jayce Ping (Chinese name: \:5e73\:535a\:6587), a student in XJTU, who is interested in both Mathematica and General Relativity. *)
+(*It is made by Jayce Ping (Chinese name: \:5e73\:535a\:6587), a student in XJTU, who is interested in both Mathematica, Differential Geometry and General Relativity. *)
 
 
 BeginPackage["SpTm`"]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*::usage information*)
 
 
@@ -45,7 +45,7 @@ STSymmetrize::usage = "STSymmetrize[expr__, permutation_List]"<>" "<>"\:5c06expr
 STAntiSymmetrize::usage = "STAntiSymmetrize[expr__, permutation_List]"<>" "<>"\:5c06expr\:8868\:793a\:7684\:5f20\:91cf\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807.\:8fd9\:91cc\:5efa\:8bae\:5c06\:6307\:6807\:6309\:5b57\:5178\:5e8f\:6392\:5217\:ff0c\:5426\:5219\:53ef\:80fd\:51fa\:73b0\:95ee\:9898\:ff1b\:53ef\:4ee5\:4f7f\:7528InputExplain\:770b\:5230\:8f93\:5165\:89e3\:91ca\:540e\:7684\:5f62\:5f0f."<>"\n"<>"STAntiSymmetrize[T_STensor, permutation_List]"<>" "<>"\:5c06STensor T\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."
 
 
-STCalculate::usage = "SpTmCalculate[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80."
+STCalculate::usage = "STCalculate[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80."
 
 STSpecify::usage = "STSpecify[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0fexpr\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97\:ff0c\:5f97\:5230\:7ed3\:679c\:5f20\:91cf\:7684\:5177\:4f53\:6307\:6807\:5206\:91cf\:5f62\:5f0f."
 
@@ -475,7 +475,7 @@ LineElementInfo[] := Module[
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:4f53\:5143 Volume Element*)
 
 
