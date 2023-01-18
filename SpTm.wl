@@ -1,12 +1,12 @@
 (* ::Package:: *)
 
-(*It is made by Jayce Ping (Chinese name: \:5e73\:535a\:6587), a student in XJTU, who is interested in both Mathematica, Differential Geometry and General Relativity. *)
+(*The package, SpaceTime (SpTm), is made by Jayce Ping (Chinese name: \:5e73\:535a\:6587), a student in XJTU, who is interested in both Mathematica, Differential Geometry and General Relativity. *)
 
 
 BeginPackage["SpTm`"]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*::usage information*)
 
 
