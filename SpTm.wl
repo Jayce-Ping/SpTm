@@ -75,12 +75,13 @@ Begin["Private`"]
 
 SpTmHelp = {
 	"\:5728\:672c\:7a0b\:5e8f\:5305\:4e2d\:ff0c\:7b26\:53f7g\:5c06\:88ab\:8ba4\:4e3a\:662f\:9ed8\:8ba4\:7684\:5ea6\:89c4\:5f20\:91cf\:8868\:793a\:7b26\:53f7\:ff0c\:53ef\:4ee5\:901a\:8fc7SetMetric\:6765\:4fee\:6539. \[Del]\:4e3a\:4e0e\:5176\:76f8\:9002\:914d\:7684\:534f\:53d8\:5bfc\:6570\:7b97\:7b26.\n",
-	"\[FilledSmallCircle] \:4f7f\:7528STensorInfor[T]\:6765\:83b7\:53d6\:5f20\:91cfT\:7684\:5206\:91cf\:4fe1\:606f.\n",
+	"\[FilledSmallCircle] \:4f7f\:7528STensorInfo[T]\:6765\:83b7\:53d6\:5f20\:91cfT\:7684\:5206\:91cf\:4fe1\:606f.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528STCalculate[expr]\:6765\:5316\:7b80\:62bd\:8c61\:6307\:6807\:7684\:5f20\:91cf\:8868\:8fbe\:5f0fexpr.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528ShowForm[expr]\:5c06\:8868\:8fbe\:5f0f\:663e\:793a\:4e3a\:6807\:51c6\:683c\:5f0f.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528STSpecifye[expr]\:5c06\:8868\:8fbe\:5f0f\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:5e76\:8ba1\:7b97.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528STSimSpecify[expr]\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:9002\:5f53\:5316\:7b80\:540e\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:8ba1\:7b97.\n",
-	"\[FilledSmallCircle] \:5728\:4f7f\:7528SpTm\:65f6\:ff0c\:6240\:6709\:5c0f\:5199\:82f1\:6587\:5b57\:6bcd(a,b...)\:548c\:5e0c\:814a\:5b57\:6bcd(\[Alpha],\[Beta]...)\:90fd\:4f1a\:88ab\:4fdd\:62a4\:ff0c\:7528\:4e8e\:8868\:793a\:5f20\:91cf\:6307\:6807\:ff0c\:8bf7\:4e0d\:8981\:5c06\:5b83\:4eec\:4f5c\:4e3a\:53d8\:91cf\:540d\:ff0c\:4f46\:53ef\:4ee5\:4f5c\:4e3a\:5750\:6807\:7cfb\:7b26\:53f7.\n"
+	"\[FilledSmallCircle] \:5728\:4f7f\:7528SpTm\:65f6\:ff0c\:6240\:6709\:5c0f\:5199\:82f1\:6587\:5b57\:6bcd(a,b...)\:548c\:5e0c\:814a\:5b57\:6bcd(\[Alpha],\[Beta]...)\:90fd\:4f1a\:88ab\:4fdd\:62a4\:ff0c\:7528\:4e8e\:8868\:793a\:5f20\:91cf\:6307\:6807\:ff0c\:8bf7\:4e0d\:8981\:5c06\:5b83\:4eec\:4f5c\:4e3a\:53d8\:91cf\:540d\:ff0c\:4f46\:53ef\:4ee5\:4f5c\:4e3a\:5750\:6807\:7cfb\:7b26\:53f7\:6216\:5f20\:91cf\:7b26\:53f7.\n",
+	"\[FilledSmallCircle] \:8f93\:5165\"<<SpTm`*\"\:67e5\:770b\:53ef\:7528\:51fd\:6570\:4ee5\:53ca\:4f7f\:7528\:65b9\:6cd5."
 };
 SpTmHelp::usage = StringJoin[SpTmHelp];
 Print[StringJoin[SpTmHelp]]
