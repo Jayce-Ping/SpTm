@@ -272,7 +272,7 @@ SetCoordinates[Coordinates_List] := Module[{},
 CoordinatesInfo[] := CurrentCoordinates;
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*\:5750\:6807\:53d8\:6362 Coordinates Transformation*)
 
 
@@ -291,7 +291,9 @@ SCoordinatesTransform[target_List, transformation_List] := Module[
 	keys,
 	newTensorComponents,
 	newMetricComponents,
-	newMetricComponentsInv
+	newMetricComponentsInv,
+	transAs = transformation/.{List -> Association},
+	trans
 },
 	If[
 		Length[target] != Length[CurrentCoordinates],
@@ -313,21 +315,38 @@ SCoordinatesTransform[target_List, transformation_List] := Module[
 		Message[SCoordinateTransform::NoMetricComonents];
 		Abort[]
 	];
+	(*\:5c06\:53d8\:6362\:8865\:5168*)
+	trans = Table[
+		If[
+			KeyExistsQ[transAs, CurrentCoordinates[[i]]],
+			CurrentCoordinates[[i]] -> transAs[CurrentCoordinates[[i]]],
+			CurrentCoordinates[[i]] -> CurrentCoordinates[[i]]
+		],
+		{i,1,Length[CurrentCoordinates]}
+	];
+	
 	(*\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:6240\:6709\:8bbe\:7f6e\:4e86\:5206\:91cf\:7684\:5f20\:91cf,\:9664\:53bb\:5ea6\:89c4\:5f20\:91cf\:548c\[Delta]*)
 	keys = Delete[Keys[TensorComponents], {{1},{2},{3}}];
-	record = Array[keys[[#]] -> STensorTrans[keys[[#]], target, transformation]&, Length[keys], 1, Association];
+	record = Array[keys[[#]] -> STensorTrans[keys[[#]], target, trans]&, Length[keys], 1, Association];
+	
 	(*\:5148\:4fee\:6539\:5ea6\:89c4\:7684\:5206\:91cf*)
-	newMetricComponents = Simplify @ componentsTrans[MetricComponents, target, transformation];
+	newMetricComponents = Simplify @ componentsTrans[MetricComponents, target, trans];
+	
 	(*\:5ea6\:89c4\:9006\:6620\:5c04\:7684\:5206\:91cf*)
 	newMetricComponentsInv = Inverse[newMetricComponents];
+	
 	(*\:91cd\:65b0\:8bbe\:7f6e\:5ea6\:89c4*)
 	SetMetric[newMetricComponents, target];
+	
 	(*\:5c06record\:540e\:534a\:90e8\:5206\:90fd\:8f6c\:5316\:4e3aATensor*)
 	record = record/.{STensor[MetricSymbol, {}, supIndex__] :> ATensor[{}, supIndex, newMetricComponentsInv]};
+	
 	(*\:5c06\:7b2c\:4e8c\:90e8\:5206\:4e58\:6cd5\:6539\:4e3a\:5f20\:91cf\:79ef\:8ba1\:7b97*)
 	record = record/.{Times[t_ATensor, s_ATensor] :> ATensorTimes[t,s]};
+	
 	(*\:5c06\:4e24\:90e8\:5206\:8fdb\:884c\:5f20\:91cf\:4e58\:79ef*)
 	newTensorComponents = Array[keys[[#]] -> Simplify@(ATensorTimes[#1, #2]&[record[[#,1]], record[[#,2]]][[3]])& , Length[record], 1, Association];
+	
 	Unprotect[TensorComponents];
 	Table[TensorComponents[keys[[i]]] = newTensorComponents[keys[[i]]], {i, Length[keys]}];
 	Protect[TensorComponents];
@@ -388,7 +407,7 @@ componentsTrans[components_?ArrayQ, target_List, transformation_List] := Module[
 		Array[jacobi[[sup[[#]],sub[[#]]]]&, {Length[sup]}, 1, Times]
 	];
 	(*\:4e0b\:6807\:4e3asub\:7684\:9879*)
-	term[sub_List] := Array[coeff[{##},sub]components[[##]]//.transformation&, dimension, 1, Plus];
+	term[sub_List] := Array[coeff[{##},sub]components[[##]]/.transformation&, dimension, 1, Plus];
 	(*undone*)
 	Array[term[{##}]&, dimension]
 ]
