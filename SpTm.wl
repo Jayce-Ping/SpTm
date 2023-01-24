@@ -42,7 +42,7 @@ SetTensor::usage = "SetTensor[\!\(\*SuperscriptBox[SubscriptBox[\(T\), \(sub\)],
 
 STSymmetrize::usage = "STSymmetrize[expr, permutation_List]"<>" "<>"\:5c06expr\:8868\:793a\:7684\:5f20\:91cf\:8fdb\:884c\:5bf9\:79f0\:5316\:ff0c\:5bf9\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."<>"\n"<>"STSymmetrize[T_STensor, permutation_List]"<>" "<>"\:5c06STensor T\:8fdb\:884c\:5bf9\:79f0\:5316\:ff0c\:5bf9\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."
 
-STAntiSymmetrize::usage = "STAntiSymmetrize[expr, permutation_List]"<>" "<>"\:5c06expr\:8868\:793a\:7684\:5f20\:91cf\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807.\:8fd9\:91cc\:5efa\:8bae\:5c06\:6307\:6807\:6309\:5b57\:5178\:5e8f\:6392\:5217\:ff0c\:5426\:5219\:53ef\:80fd\:51fa\:73b0\:95ee\:9898\:ff1b\:53ef\:4ee5\:4f7f\:7528InputExplain\:770b\:5230\:8f93\:5165\:89e3\:91ca\:540e\:7684\:5f62\:5f0f."<>"\n"<>"STAntiSymmetrize[T_STensor, permutation_List]"<>" "<>"\:5c06STensor T\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."
+STAntiSymmetrize::usage = "STAntiSymmetrize[expr, permutation_List]"<>" "<>"\:5c06expr\:8868\:793a\:7684\:5f20\:91cf\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."<>"\n"<>"STAntiSymmetrize[T_STensor, permutation_List]"<>" "<>"\:5c06STensor T\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."
 
 
 STCalculate::usage = "STCalculate[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80."
@@ -74,7 +74,7 @@ Begin["Private`"]
 
 
 SpTmHelp = {
-	"\:6210\:529f\:5bfc\:5165SpTm\:ff01\:4ee5\:4e0b\:662f\:6ce8\:610f\:4e8b\:9879\:ff1a\n",
+	"\:6b22\:8fce\:4f7f\:7528SpTm\:ff01\n",
 	"\[FilledSmallCircle] \:5f20\:91cf\:7684\:4e0b\:6807\:901a\:8fc7Ctrl+-\:8f93\:5165\:ff0c\:4e0a\:6807\:901a\:8fc7Ctrl+^\:8f93\:5165\:ff0c\:901a\:8fc7InputExplain\:51fd\:6570\:53ef\:4ee5\:67e5\:770b\:8868\:8fbe\:5f0f\:5728\:7a0b\:5e8f\:5305\:4e2d\:8f6c\:5316\:540e\:7684\:5f62\:5f0f.\n",
 	"\[FilledSmallCircle] \:7a0b\:5e8f\:5305\:4e2d\:4f7f\:7528STensor[T, subIndices, supIndices]\:6765\:8868\:793a\:540d\:79f0\:4e3aT\:ff0c\:4e0b\:6807\:5217\:8868\:4e3asubIndices\:ff0c\:4e0a\:6807\:5217\:8868\:4e3asupIndices\:7684\:5f20\:91cf.\n",
 	"\[FilledSmallCircle] \:7b26\:53f7g\:5c06\:88ab\:8ba4\:4e3a\:662f\:9ed8\:8ba4\:7684\:5ea6\:89c4\:5f20\:91cf\:8868\:793a\:7b26\:53f7\:ff0c\:53ef\:4ee5\:901a\:8fc7SetMetric\:6765\:4fee\:6539. \[Del]\:4e3a\:4e0e\:5176\:76f8\:9002\:914d\:7684\:534f\:53d8\:5bfc\:6570\:7b97\:7b26.\n",
@@ -84,7 +84,7 @@ SpTmHelp = {
 	"\[FilledSmallCircle] \:4f7f\:7528STSpecify[expr]\:5c06\:8868\:8fbe\:5f0f\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:5e76\:8ba1\:7b97.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528STSimSpecify[expr]\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:9002\:5f53\:5316\:7b80\:540e\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:8ba1\:7b97.\n",
 	"\[FilledSmallCircle] \:5728\:4f7f\:7528SpTm\:65f6\:ff0c\:6240\:6709\:5c0f\:5199\:82f1\:6587\:5b57\:6bcd(a,b...)\:548c\:5e0c\:814a\:5b57\:6bcd(\[Alpha],\[Beta]...)\:90fd\:4f1a\:88ab\:4fdd\:62a4\:ff0c\:7528\:4e8e\:8868\:793a\:5f20\:91cf\:6307\:6807\:ff0c\:8bf7\:4e0d\:8981\:5c06\:5b83\:4eec\:4f5c\:4e3a\:53d8\:91cf\:540d\:ff0c\:4f46\:53ef\:4ee5\:4f5c\:4e3a\:5750\:6807\:7cfb\:7b26\:53f7\:6216\:5f20\:91cf\:7b26\:53f7.\n",
-	"\[FilledSmallCircle] \:8f93\:5165\"<<SpTm`*\"\:67e5\:770b\:53ef\:7528\:51fd\:6570\:4ee5\:53ca\:4f7f\:7528\:65b9\:6cd5."
+	"\[FilledSmallCircle] \:8f93\:5165\"?SpTm`*\"\:67e5\:770b\:53ef\:7528\:51fd\:6570\:4ee5\:53ca\:4f7f\:7528\:65b9\:6cd5."
 };
 SpTmHelp::usage = StringJoin[SpTmHelp];
 Print[StringJoin[SpTmHelp]]
