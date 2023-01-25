@@ -542,24 +542,12 @@ InputExplain[expr__] := Module[
 	split[x_] := ToExpression[StringSplit[ToString[x], ""]];
 	
 	InputExplainRule = {
-		Power[Subscript[x_Symbol, y_], z_] :> STensor[x,split[y],split[z]],
-		Subscript[x_Symbol, y_] :> STensor[x,split[y],{}],
-		Power[x_Symbol, y_] :> STensor[x,{},split[y],""]
+		Power[Subscript[x_Symbol, y_], z_] :> STensor[x, split[y], split[z]],
+		Subscript[x_Symbol, y_] :> STensor[x, split[y], {}],
+		Power[x_Symbol, y_] :> STensor[x, {}, split[y]]
 	};
 	
 	res = expr /. InputExplainRule;
-	sub = Flatten @ Join[Cases[res, T_STensor :> T[[2]], All], Cases[res, del_Grad :> del[[2]], All]];
-	sup = Flatten @ Join[Cases[res, T_STensor :> T[[3]], All]];
-	
-	If[
-		!DuplicateFreeQ[sub],
-		Message[InputExplain::DuplicateSubIndex]
-	];
-	
-	If[
-		!DuplicateFreeQ[sup],
-		Message[InputExplain::DuplicateSupIndex]
-	];
 	
 	res
 ];
