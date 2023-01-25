@@ -523,7 +523,7 @@ VolumeElementInfo[] := Module[
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*\:8f93\:5165\:89e3\:91ca Input Explain*)
 
 
@@ -1195,17 +1195,17 @@ STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
 	If[
 		Length @ coodinates == 0,
 		Message[STCalcTensor::NoCoordinates];
-		Abort[]
+		Abort[];
 	];
 	If[
-		!KeyExistsQ[record],
+		!KeyExistsQ[record, name],
 		Message[STCalcTensor::CanNotCalc];
-		Abort[]
+		Abort[];
 	];
 	If[
 		First @ Dimensions @ components != Length @ coodinates,
 		Message[STCalcTensor::DimensionError];
-		Abort[]
+		Abort[];
 	];
 	func = ToExpression @ StringJoin[{"SCalc",name}];
 	
