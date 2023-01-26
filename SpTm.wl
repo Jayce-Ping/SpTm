@@ -166,7 +166,8 @@ STensorReIndex[T_STensor] := Module[
 
 
 STensorInfo::ErrorInput = "\:8f93\:5165\:683c\:5f0f\:6709\:8bef.";
-STensorInfo::NoSuchTensor = "\:8be5\:5f20\:91cf\:672a\:8bbe\:7f6e\:5206\:91cf.";
+STensorInfo::NoSuchTensor = "\!\(\*SuperscriptBox[SubscriptBox[\(\:5f20\:91cf`1`\), \(`2`\)], \(`3`\)]\)\:672a\:8bbe\:7f6e\:5206\:91cf.";
+STensorInfo::NoTensorName = "\:540d\:4e3a`1`\:7684\:5f20\:91cf\:672a\:8bbe\:7f6e\:5206\:91cf.";
 (*\:83b7\:53d6\:5f20\:91cf\:4fe1\:606f*)
 STensorInfo[expr__] := Module[
 {
@@ -190,7 +191,7 @@ STensorInfo[T_STensor] := Module[
 },
 	If[
 		!KeyExistsQ[TensorComponents, rT],
-		Message[STensorInfo::NoSuchTensor];
+		Message[STensorInfo::NoSuchTensor, T[[1]], StringJoin[ ToString/@(T[[2]]) ], StringJoin[ ToString/@(T[[3]]) ] ];
 		Abort[]
 	];
 	specificT = STensor[T[[1]], T[[2]]/.specificReplaceRule, T[[3]]/.specificReplaceRule];
@@ -204,7 +205,7 @@ STensorInfo[T_Symbol] := Module[
 	keys = KeySelect[TensorComponents, MatchQ[#, STensor[T, __, __]]& ];
 	If[
 		Length @ keys == 0,
-		Message[STensorInfo::NoSuchTensor];
+		Message[STensorInfo::NoTensorName, T];
 		Abort[]
 	];
 	(*\:5c06keys\:8f6c\:5316\:4e3a\:5217\:8868\:ff0c\:7136\:540e\:5c06\:5176\:4e2d\:7684STensor\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807*)
@@ -219,8 +220,8 @@ STensorInfo[T_Symbol] := Module[
 
 SetTensor::ErrorExpression = "\:5f20\:91cf\:683c\:5f0f\:8f93\:5165\:9519\:8bef.";
 SetTensor::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
-SetTensor::WrongDimension = "\:5f20\:91cf\:5206\:91cf\:7684\:7ef4\:6570\:4e0e\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
-SetTensor::WrongShape = "\:5f20\:91cf\:5206\:91cf\:7684\:5c42\:6570\:4e0e\:5f20\:91cf\:578b\:53f7\:4e0d\:5339\:914d.";
+SetTensor::WrongDimension = "\:5f20\:91cf\:5206\:91cf\:7684\:7ef4\:6570 (`1`) \:4e0e\:5750\:6807\:7cfb\:7ef4\:6570 (`2`) \:4e0d\:5339\:914d.";
+SetTensor::WrongShape = "\:5f20\:91cf\:5206\:91cf\:7684\:5c42\:6570 (`1`) \:4e0e\:5f20\:91cf\:578b\:53f7 (`2`) \:4e0d\:5339\:914d.";
 SetTensor[expr__, components_List] := Module[
 {
 	T = InputExplain[expr]
@@ -244,12 +245,12 @@ SetTensor[T_STensor, components_List] := Module[
 	];
 	If[
 		First @ Dimensions @ components != Length @ CurrentCoordinates,
-		Message[SetTensor::WrongDimension];
+		Message[SetTensor::WrongDimension, First @ Dimensions @ components, Length @ CurrentCoordinates];
 		Abort[]
 	];
 	If[
 		Length @ Dimensions @ components != Length @ Join[T[[2]], T[[3]]],
-		Message[SetTensor::WrongShape];
+		Message[SetTensor::WrongShape, Length @ Dimensions @ components, Length @ Join[T[[2]], T[[3]]]];
 		Abort[]
 	];
 	Unprotect[TensorComponents];
@@ -431,7 +432,7 @@ componentsTrans[components_?ArrayQ, target_List, transformation_List] := Module[
 
 
 SetMetric::NoCoordinates = "\:6ca1\:6709\:8bbe\:7f6e\:5750\:6807\:7cfb.";
-SetMetric::ErrorDimensions = "\:5206\:91cf\:77e9\:9635\:548c\:5750\:6807\:7cfb\:7ef4\:6570\:4e0d\:5339\:914d.";
+SetMetric::ErrorDimensions = "\:5206\:91cf\:77e9\:9635\:7ef4\:6570 (`1`) \:548c\:5750\:6807\:7cfb\:7ef4\:6570 (`2`) \:4e0d\:5339\:914d.";
 
 
 SetMetricSymbol[metricSymbol_Symbol] := Module[{},
@@ -456,8 +457,8 @@ SetMetric[Components_?ArrayQ, Coordinates_List, metricSymbol_Symbol]:=Module[
 		Abort[]
 	];
 	If[
-		First@Dimensions[Components]!=Length[Coordinates],
-		Message[SetMetric::ErrorDimensions];
+		First @ Dimensions[Components] != Length[Coordinates],
+		Message[SetMetric::ErrorDimensions, First @ Dimensions[Components], Length[Coordinates]];
 		Abort[]
 	];
 	If[Coordinates =!= CurrentCoordinates, SetCoordinates[Coordinates]];
@@ -964,7 +965,9 @@ ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P
 (*\:6954\:79ef Tensor Wedge Product*)
 
 
-ATensorWedge::wrongTensor = "\:53c2\:4e0e\:8fd0\:7b97\:7684\:5f20\:91cf\:4e0d\:662f\:5fae\:5206\:5f62\:5f0f\:6216(0,n)\:578b\:5f20\:91cf";
+ATensorWedge::wrongTensor = "\:53c2\:4e0e\:8fd0\:7b97\:7684\:5f20\:91cf\:4e0d\:5168\:662f(0,n)\:578b\:5f20\:91cf";
+
+(*\:82e5\:53c2\:4e0e\:8fd0\:7b97\:7684(0,n)\:578b\:5f20\:91cf\:4e0d\:662f\:53cd\:79f0\:7684\:ff0c\:5219\:4f1a\:5148\:8fdb\:884c\:53cd\:79f0\:5316*)
 
 ATensorWedge[T_ATensor] := Module[
 {
@@ -983,11 +986,15 @@ ATensorWedge[T_ATensor, S_ATensor] := Module[
 {
 	outIndices = Join[T[[1]], S[[1]]]
 },
-	If[
-		T[[2]] =!= {} || S[[2]] =!= {},
-		Message[ATensorWedge::wrongTensor];
-		Abort[]
+	Scan[
+		If[
+			#[[2]] =!= {},
+			Message[ATensorWedge::wrongTensor];
+			Abort[]
+		]&,
+		{T, S}
 	];
+	
 	ATensor[outIndices, {}, Normal @ TensorWedge[T[[3]], S[[3]]]]
 ];
 
@@ -1095,7 +1102,7 @@ STSimSpecify[expr__] := Module[
 ]
 
 
-SCalcSpecificExpression::componentsMiss = "\:5b58\:5728\:672a\:8bbe\:7f6e\:5206\:91cf\:7684\:5f20\:91cf\:6216\:5b58\:5728\:91cd\:540d\:4e14\:540c\:578b\:53f7\:7684\:5f20\:91cf.";
+SCalcSpecificExpression::componentsMiss = "\!\(\*SuperscriptBox[SubscriptBox[\(\:5f20\:91cf`1`\), \(`2`\)], \(`3`\)]\)\:672a\:8bbe\:7f6e\:5206\:91cf.";
 SCalcSpecificExpression::coodinatesMiss = "\:672a\:9009\:53d6\:5750\:6807\:7cfb.";
 
 SCalcSpecificExpression[expr__] := Module[
@@ -1137,6 +1144,7 @@ SCalcSpecificExpression[expr__] := Module[
 			(*\:4e0d\:5b58\:5728\:952e\:503c\:ff0c\:8be5\:5f20\:91cf\:672a\:8bbe\:7f6e\:5206\:91cf;\:6216\:5b58\:5728\:591a\:4e2a\:5339\:914d\:7684\:952e\:503c*)
 			If[
 				Length[tas] != 1,
+				Message[SCalcSpecificExpression::componentsMiss, T[[1]], StringJoin[ToString/@T[[2]]], StringJoin[ToString/@T[[3]]]];
 				Return[False]
 			];
 			(*\:6b64\:5904\:4fdd\:8bc1tas\:53ea\:6709\:4e00\:4e2a\:952e\:503c\:5bf9*)
@@ -1148,7 +1156,6 @@ SCalcSpecificExpression[expr__] := Module[
 	(*\:68c0\:67e5\:662f\:5426\:6240\:6709\:53c2\:4e0e\:8fd0\:7b97\:7684\:5f20\:91cf\:90fd\:5df2\:7ecf\:8bbe\:7f6e\:5206\:91cf*)
 	If[
 		!AllTrue[sTensors, setTest[#]&],
-		Message[SCalcSpecificExpression::componentsMiss];
 		Abort[]
 	];
 	
