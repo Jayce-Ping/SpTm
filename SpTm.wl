@@ -1111,8 +1111,8 @@ SCovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 		];
 		
 		(*\:5c06\:5404\:90e8\:5206\:52a0\:8d77\:6765*)
-		If[subIndex != {}, ordinaryPart = ATensorAdd[ordinaryPart, downContractPart]];
-		If[supIndex != {}, ordinaryPart = ATensorAdd[ordinaryPart, upContractPart]];
+		If[downContractPart != {}, ordinaryPart = ATensorAdd[ordinaryPart, downContractPart]];
+		If[upContractPart != {}, ordinaryPart = ATensorAdd[ordinaryPart, upContractPart]];
 		
 	];
 	
