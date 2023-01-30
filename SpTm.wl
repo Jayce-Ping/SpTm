@@ -1238,7 +1238,7 @@ SCalcSpecificExpression[expr__] := Module[
 	
 	If[
 		NumberQ[expression],
-		ShowTensor[STensor[Global`\[ScriptCapitalT], {}, {}], 0],
+		ShowSTensor[STensor[Global`\[ScriptCapitalT], {}, {}], 0],
 		(*\:7ed3\:679c\:7684expression\:5e94\:8be5\:4e3a\:4e00\:4e2aATensor*)
 		components = Last[expression];(*\:8bb0\:5f55\:5206\:91cf*)
 		(*\:5c06ATensor\:66ff\:6362\:56deSTensor*)
