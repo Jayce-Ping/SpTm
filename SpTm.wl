@@ -225,35 +225,51 @@ SetTensor::ErrorExpression = "\:5f20\:91cf\:683c\:5f0f\:8f93\:5165\:9519\:8bef."
 SetTensor::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
 SetTensor::WrongDimension = "\:5f20\:91cf\:5206\:91cf\:7684\:7ef4\:6570 (`1`) \:4e0e\:5750\:6807\:7cfb\:7ef4\:6570 (`2`) \:4e0d\:5339\:914d.";
 SetTensor::WrongShape = "\:5f20\:91cf\:5206\:91cf\:7684\:5c42\:6570 (`1`) \:4e0e\:5f20\:91cf\:578b\:53f7 (`2`) \:4e0d\:5339\:914d.";
+
+SetTensor[T_Symbol, components_?NumberQ] := Module[
+{
+	temp = STensor[T, {}, {}]
+},
+	Unprotect[TensorComponents];
+	AppendTo[TensorComponents, temp -> components];
+	Protect[TensorComponents];
+]
+
 SetTensor[expr__, components_List] := Module[
 {
 	T = InputExplain[expr]
 },
+	(*\:5224\:65ad\:683c\:5f0f\:662f\:5426\:6b63\:786e*)
 	If[
 		Head[T] =!= STensor,
 		Message[SetTensor::ErrorExpression];
 		Abort[]
 	];
+	
 	SetTensor[T, components]
 ]
 
+(*\:8bbe\:7f6e\:5f20\:91cf\:5206\:91cf*)
 SetTensor[T_STensor, components_List] := Module[
 {
-	temp = STensorReIndex[T]
+	temp = STensorReIndex[T],
+	comp = components
 },
 	If[
 		Length[CurrentCoordinates] == 0,
 		Message[SetTensor::NoCoordinates];
 		Abort[]
 	];
-	If[
-		First @ Dimensions @ components != Length @ CurrentCoordinates,
-		Message[SetTensor::WrongDimension, First @ Dimensions @ components, Length @ CurrentCoordinates];
-		Abort[]
-	];
+	(*\:68c0\:67e5\:5f20\:91cf\:578b\:53f7\:4e0e\:5206\:91cf\:7ef4\:6570\:662f\:5426\:5339\:914d*)	
 	If[
 		Length @ Dimensions @ components != Length @ Join[T[[2]], T[[3]]],
 		Message[SetTensor::WrongShape, Length @ Dimensions @ components, Length @ Join[T[[2]], T[[3]]]];
+		Abort[]
+	];
+	(*\:68c0\:67e5\:5206\:91cf\:7ef4\:6570\:4e0e\:5750\:6807\:7cfb\:7ef4\:6570\:662f\:5426\:5339\:914d*)
+	If[
+		First @ Dimensions @ components != Length @ CurrentCoordinates,
+		Message[SetTensor::WrongDimension, First @ Dimensions @ components, Length @ CurrentCoordinates];
 		Abort[]
 	];
 	Unprotect[TensorComponents];
@@ -551,8 +567,10 @@ InputExplain[expr__] := Module[
 	sup,
 	sub,
 	InputExplainRule,
-	split
+	split,
+	powerplusRule
 },
+	
 	split[x_] := ToExpression[StringSplit[ToString[x], ""]];
 	
 	InputExplainRule = {
@@ -560,8 +578,16 @@ InputExplain[expr__] := Module[
 		Subscript[x_Symbol, y_] :> STensor[x, split[y], {}],
 		Power[x_Symbol, y_] :> STensor[x, {}, split[y]]
 	};
+	powerplusRule =
+	{
+		Power[Subscript[x_Symbol, y_], Plus[a_Symbol, b___Symbol]] :> Times[ STensor[x, split[y], split[a]], Power[Subscript[x, y], Plus[b]]],
+		Power[x_Symbol, Plus[a_Symbol, b___Symbol]] :> Times[ STensor[x, {}, split[a]], Power[x, Plus[b]]]
+	};
 	
-	res = expr /. InputExplainRule;
+	(*\:7279\:6b8a\:5904\:7406Mathematica\:7b14\:8bb0\:672c\:5c06\:81ea\:52a8\:5c06\:6307\:6570\:76f8\:52a0\:7684\:60c5\:51b5*)
+	res = expr //. powerplusRule;
+	
+	res = res /. InputExplainRule;
 	
 	res
 ];
@@ -894,7 +920,7 @@ ATensorAdd[T_ATensor, S_ATensor] := Module[
 	(*\:6307\:6807\:4e4b\:95f4\:6700\:591a\:5dee\:4e00\:4e2a\:7f6e\:6362*)
 	(*\:627e\:5230\:6307\:6807\:7f6e\:6362*)
 	p = Permute[Range[Length[indexT]], FindPermutation[indexS, indexT]];
-	ATensor[T[[1]], T[[2]], T[[3]]+Transpose[S[[3]], p]]
+	ATensor[T[[1]], T[[2]], If[Head[S[[3]]] === List, T[[3]]+Transpose[S[[3]], p], T[[3]] + S[[3]]]]
 ];
 
 ATensorAdd[T_ATensor] := T;
@@ -923,7 +949,7 @@ ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor, S__ATensor] := ATensorTimes[k, ATen
 (*\:5f20\:91cf\:79ef\:4e0e\:7f29\:5e76*)
 ATensorTimes[T_ATensor, S_ATensor] := Module[
 {
-		commonIndex = Join[Intersection[T[[1]], S[[2]]], Intersection[T[[2]], S[[1]]]], 
+		commonIndex = Join[Intersection[T[[1]], T[[2]]], Intersection[T[[1]], S[[2]]], Intersection[S[[1]], T[[2]]], Intersection[S[[1]], S[[2]]]], 
 		sub = Join[T[[1]], S[[1]]],
 		sup = Join[T[[2]], S[[2]]],
 		outputIndex,
@@ -932,7 +958,8 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 		product,
 		outputComponents,
 		unArrangedIndex,
-		TargetIndex
+		TargetIndex,
+		p
 },
 	(*\:7ed3\:679c\:5f20\:91cf\:7684\:6307\:6807*)
 	outputIndex = {Select[sub, !MemberQ[sup, #]&], Select[sup, !MemberQ[sub, #]&]};
@@ -954,13 +981,34 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 	TargetIndex = Flatten[outputIndex];
 	(*\:627e\:5230\:4ece\:5f53\:524d\:6307\:6807\:96c6\:5411\:7ed3\:679c\:6307\:6807\:96c6\:8f6c\:5316\:7684\:7f6e\:6362\:ff0c\:5e76\:5c06\:5176\:4f5c\:7528\:4e8e{1,2,3...}\:521d\:59cb\:5217\:8868\:ff0c\:5f97\:5230\:8f6c\:7f6e\:5173\:7cfb\:5bf9\:5e94\:5217\:8868*)
 	p = Permute[Range[Length[TargetIndex]], FindPermutation[unArrangedIndex, TargetIndex]];
-	ATensor[outputIndex[[1]], outputIndex[[2]], If[Head[outputComponents] =!= List, outputComponents, Transpose[outputComponents, p]]]
+	
+	ATensor[outputIndex[[1]], outputIndex[[2]], If[Head[outputComponents] === List, Transpose[outputComponents, p], outputComponents]]
 ];
 
-ATensorTimes[T_ATensor] := T;
-
+(*\:5355\:4e2a\:5f20\:91cf\:7684\:81ea\:8eab\:6307\:6807\:7f29\:5e76*)
+ATensorTimes[T_ATensor] := Module[
+{
+	commonIndex = Intersection[T[[1]], T[[2]]],
+	contractIndex,
+	sub = T[[1]],
+	sup = T[[2]],
+	outputIndex,
+	outputComponents,
+	IndicesPos
+},
+	(*\:7ed3\:679c\:7684\:6307\:6807*)
+	outputIndex = {Select[sub, !MemberQ[sup, #]&], Select[sup, !MemberQ[sub, #]&]};
+	
+	IndicesPos = PositionIndex[Join[T[[1]], T[[2]]]];
+	
+	(*\:9700\:8981\:7f29\:5e76\:7684\:6307\:6807\:7684\:4f4d\:7f6e*)
+	contractIndex = IndicesPos[#]& /@ commonIndex;
+	
+	outputComponents = Simplify @ TensorContract[T[[3]], contractIndex];
+	
+	ATensor[outputIndex[[1]], outputIndex[[2]], outputComponents]
+];
 ATensorTimes[T_ATensor, P_ATensor, Q__ATensor] := ATensorTimes[T, ATensorTimes[P, Q]];
-
 
 
 
@@ -1061,10 +1109,13 @@ SCovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 			downContractPart = ATensorTimes[-1, downContractPart],
 			downContractPart = {}
 		];
+		
 		(*\:5c06\:5404\:90e8\:5206\:52a0\:8d77\:6765*)
 		If[subIndex != {}, ordinaryPart = ATensorAdd[ordinaryPart, downContractPart]];
 		If[supIndex != {}, ordinaryPart = ATensorAdd[ordinaryPart, upContractPart]];
+		
 	];
+	
 	ordinaryPart
 ];
 
@@ -1073,9 +1124,25 @@ SCovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 SOrdinaryDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 {
 	components = T[[3]],
-	dimension = Length[coodinates]
+	dimension = Length[coodinates],
+	indexPos,
+	outputComponents
 },
-	ATensor[Prepend[T[[1]], dIndex], T[[2]], Array[D[components, coodinates[[#]]]&, dimension]]
+	
+	outputComponents = Array[D[components, coodinates[[#]]]&, dimension];
+	
+	If[
+		(*\:5224\:65ad\:662f\:5426\:9700\:8981\:7f29\:5e76*)
+		MemberQ[T[[2]], dIndex],
+		
+		outputComponents = TensorContract[outputComponents, Position[Join[{dIndex}, T[[1]], T[[2]]], dIndex]];
+		ATensor[T[[1]], DeleteCases[T[[2]], dIndex], outputComponents],
+		
+		ATensor[Prepend[T[[1]], dIndex], T[[2]], outputComponents]
+	]
+	
+	(*\:4e5f\:53ef\:4ee5\:5229\:7528ATensorTimes\:8ba1\:7b97\:662f\:5426\:9700\:8981\:4e0a\:4e0b\:6307\:6807\:7f29\:5e76*)
+	(*ATensorTimes@ATensor[Prepend[T[[1]], dIndex], T[[2]], Array[D[components, coodinates[[#]]]&, dimension]]*)
 ]
 
 
@@ -1132,7 +1199,8 @@ SCalcSpecificExpression[expr__] := Module[
 		Times[k_Symbol|k_?NumericQ, T_ATensor] :> ATensorTimes[k, T],
 		Times[T_ATensor, S__ATensor] :> ATensorTimes[T, S],
 		Grad[T_ATensor, dIndex_Symbol] :> SCovariantDerivative[T, dIndex, coodinates],
-		Wedge[T_ATensor, S__ATensor] :> ATensorWedge[T, S]
+		Wedge[T_ATensor, S__ATensor] :> ATensorWedge[T, S],
+		T_ATensor :> ATensorTimes[T] /; IntersectingQ[T[[1]], T[[2]]]
 	};
 	
 	(*\:68c0\:67e5\:5f20\:91cfT\:662f\:5426\:5df2\:7ecf\:8bbe\:7f6e\:5206\:91cf\:7684\:51fd\:6570*)
