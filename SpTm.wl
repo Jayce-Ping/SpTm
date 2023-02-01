@@ -268,8 +268,8 @@ SetTensor[T_STensor, components_List] := Module[
 	];
 	(*\:68c0\:67e5\:5206\:91cf\:7ef4\:6570\:4e0e\:5750\:6807\:7cfb\:7ef4\:6570\:662f\:5426\:5339\:914d*)
 	If[
-		First @ Dimensions @ components != Length @ CurrentCoordinates,
-		Message[SetTensor::WrongDimension, First @ Dimensions @ components, Length @ CurrentCoordinates];
+		!AllTrue[Dimensions @ components, # == Length @ CurrentCoordinates&],
+		Message[SetTensor::WrongDimension, Dimensions @ components, Length @ CurrentCoordinates];
 		Abort[]
 	];
 	Unprotect[TensorComponents];
@@ -452,6 +452,7 @@ componentsTrans[components_?ArrayQ, target_List, transformation_List] := Module[
 
 SetMetric::NoCoordinates = "\:6ca1\:6709\:8bbe\:7f6e\:5750\:6807\:7cfb.";
 SetMetric::ErrorDimensions = "\:5206\:91cf\:77e9\:9635\:7ef4\:6570 (`1`) \:548c\:5750\:6807\:7cfb\:7ef4\:6570 (`2`) \:4e0d\:5339\:914d.";
+SetMetric::WrongShape = "\:5206\:91cf\:5217\:8868\:4e0d\:662f\:65b9\:9635.";
 
 
 SetMetricSymbol[metricSymbol_Symbol] := Module[{},
@@ -471,11 +472,19 @@ SetMetric[Components_?ArrayQ, Coordinates_List, metricSymbol_Symbol]:=Module[
 	bb = Global`b
 },
 	If[
+		(*\:5224\:65ad\:662f\:5426\:8bbe\:7f6e\:4e86\:5750\:6807\:7cfb*)
 		Coordinates == {} && Length[CurrentCoordinates] == 0,
 		Message[SetMetric::NoCoordinates];
 		Abort[]
 	];
 	If[
+		(*\:5224\:65ad\:5206\:91cf\:77e9\:9635\:662f\:5426\:4e3a\:65b9\:9635*)
+		!SquareMatrixQ[Components],
+		Message[SetMetric::WrongShape];
+		Abort[];
+	];
+	If[
+		(*\:5224\:65ad\:5206\:91cf\:77e9\:9635\:7ef4\:6570\:662f\:5426\:4e0e\:5750\:6807\:7cfb\:7ef4\:6570\:5339\:914d*)
 		First @ Dimensions[Components] != Length[Coordinates],
 		Message[SetMetric::ErrorDimensions, First @ Dimensions[Components], Length[Coordinates]];
 		Abort[]
@@ -494,7 +503,7 @@ SetMetric[Components_?ArrayQ, Coordinates_List, metricSymbol_Symbol]:=Module[
 ];
 
 
-MetricInfo[]:=Module[{},
+MetricInfo[] := Module[{},
 	Row[{ Subscript[MetricSymbol, Row[{"\[Mu]","\[Nu]"}]], "=" , MatrixForm[MetricComponents] }]
 ];
 
