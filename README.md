@@ -19,7 +19,7 @@
     （1）任意打开一个Mathematica笔记本，执行
 
     ```mathematica
-	URLDownload["https://raw.githubusercontent.com/YunfatChow/SpTm/main/SpTm.wl", FileNameJoin[{$UserBaseDirectory, "Applications", "SpTm.wl"}]]
+	URLDownload["https://raw.githubusercontent.com/Jayce-Ping/SpTm/main/SpTm.wl", FileNameJoin[{$UserBaseDirectory, "Applications", "SpTm.wl"}]]
     ```
 
     在这之后，在任何笔记本中导入SpTm只需要执行`` <<SpTm` ``或 ``Needs["SpTm`"]``即可。
@@ -47,7 +47,7 @@
     (1) Open any Mathematica notebook, run
 
     ```mathematica
-    URLDownload["https://raw.githubusercontent.com/YunfatChow/SpTm/main/SpTm.wl", FileNameJoin[{$UserBaseDirectory, "Applications", "SpTm.wl"}]]
+    URLDownload["https://raw.githubusercontent.com/Jayce-Ping/SpTm/main/SpTm.wl", FileNameJoin[{$UserBaseDirectory, "Applications", "SpTm.wl"}]]
     ```
 
     After this, to import SpTm in any notebook just execute `` <<SpTm` `` or  ``Needs["SpTm`"]``.
