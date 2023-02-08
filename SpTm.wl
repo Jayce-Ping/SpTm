@@ -948,7 +948,7 @@ ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor] := ATensor[T[[1]], T[[2]], k T[[3]]
 
 ATensorTimes[T_ATensor, k_Symbol|k_?NumberQ] := ATensor[T[[1]], T[[2]], k T[[3]]];
 
-ATensorTimes[k_Symbol|k_?NumberQ, T_ATensor, S__ATensor] := ATensorTimes[k, ATensorTimes[T, S]];
+ATensorTimes[k_Symbol|_?NumberQ, T_ATensor, S__ATensor] := ATensorTimes[k, ATensorTimes[T, S]];
 
 
 (* ::Subsubsection::Closed:: *)
@@ -968,8 +968,11 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 		outputComponents,
 		unArrangedIndex,
 		TargetIndex,
-		p
+		p,
+		liscomp
 },
+	(*\:5bf9\:4e8e(0,0)\:578b\:5f20\:91cf\:ff0c\:5176\:5206\:91cf\:662f\:4e00\:4e2a\:6570\:ff0c\:5982\:679c\:4f7f\:7528TensorProduct\:51fd\:6570\:4f1a\:5f97\:5230\:4e00\:4e2a\:6570\:800c\:975e\:6570\:7ec4\:ff0c\:56e0\:6b64\:9700\:8981\:5c06\:6570\:8f6c\:5316\:4e3a\:5355\:5143\:7d20\:6570\:7ec4*)
+	liscomp[x_] := If[ArrayQ[x], x, {x}];
 	(*\:7ed3\:679c\:5f20\:91cf\:7684\:6307\:6807*)
 	outputIndex = {Select[sub, !MemberQ[sup, #]&], Select[sup, !MemberQ[sub, #]&]};
 	(*\:8ba1\:7b97\:65f6\:5bf9\:6307\:6807\:8fdb\:884c\:7f16\:53f7,\:5f62\:5f0f\:4e3a*)
@@ -978,11 +981,12 @@ ATensorTimes[T_ATensor, S_ATensor] := Module[
 	(*\:5148\:5c06\:6307\:6807\:6309\:987a\:5e8f\:6392\:597d*)(*\:8bb0\:5f55\:6bcf\:4e2a\:6307\:6807\:7684\:7f16\:53f7*)
 	IndicesPos = PositionIndex[Join[T[[1]], T[[2]], S[[1]], S[[2]]]];
 	(*\:5148\:6c42\:51fa\:5f20\:91cf\:79ef*)
-	product = TensorProduct[T[[3]], S[[3]]];
+	product = TensorProduct[liscomp @ T[[3]], liscomp @ S[[3]]];
 	(*\:5c06\:9700\:8981\:7f29\:5e76\:7684\:6307\:6807\:8f6c\:5316\:4e3a\:4f4d\:7f6e\:5217\:8868*)
 	contractIndex = IndicesPos[#]& /@ commonIndex;
 	(*\:5bf9\:6307\:6807\:8fdb\:884c\:7f29\:5e76*)
 	outputComponents = Simplify @ TensorContract[product, contractIndex];
+	
 	(*\:8fd8\:9700\:8981\:5c06\:4e0b\:6307\:6807\:653e\:5230\:524d\:9762\:ff0c\:4e0a\:6307\:6807\:653e\:5230\:540e\:9762\:ff0c\:5bf9\:5206\:91cf\:8fdb\:884c\:4f4d\:7f6e\:8c03\:6574*)
 	(*unArrangedIndex\:662foutputComponents\:5bf9\:5e94\:7684\:6307\:6807\:987a\:5e8f*)
 	unArrangedIndex = Keys[DeleteCases[IndicesPos, x_List /; Length[x] > 1]];
@@ -1205,7 +1209,8 @@ SCalcSpecificExpression[expr__] := Module[
 	
 	calcReplaceRule = {
 		Plus[T_ATensor, S__ATensor] :> ATensorAdd[T, S],
-		Times[k_Symbol|k_?NumericQ, T_ATensor] :> ATensorTimes[k, T],
+		Times[k_?NumberQ, T_ATensor] :> ATensorTimes[k, T],
+		Times[k_Symbol, T_ATensor] :> ATensorTimes[k, T],
 		Times[T_ATensor, S__ATensor] :> ATensorTimes[T, S],
 		Grad[T_ATensor, dIndex_Symbol] :> SCovariantDerivative[T, dIndex, coodinates],
 		Wedge[T_ATensor, S__ATensor] :> ATensorWedge[T, S],
