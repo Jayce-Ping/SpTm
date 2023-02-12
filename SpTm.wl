@@ -1,9 +1,10 @@
 (* ::Package:: *)
 
-(*The package, Space-Time (SpTm), is developed by Jayce Ping (Chinese name: \:5e73\:535a\:6587), a student in XJTU, who is interested in both Mathematica, Differential Geometry and General Relativity. *)
+(*This package, Space-Time (SpTm), is developed by Jayce Ping (Chinese name: \:5e73\:535a\:6587), a student in XJTU, who is interested in Wolfram Mathematica, Differential Geometry and General Relativity. *)
 
 
-(*\:672c\:4eba\:51fa\:4e8e\:5174\:8da3\:800c\:5236\:4f5c\:4e86\:8be5\:7a0b\:5e8f\:5305\:ff0c\:65b9\:4fbf\:8fdb\:884c\:4e00\:4e9b\:7b80\:5355\:7684\:5fae\:5206\:51e0\:4f55\:8fd0\:7b97\:3002\:540c\:65f6\:ff0c\:4e5f\:4e3a\:4e86\:7eaa\:5ff5\:6211\:7684\:5fae\:5206\:51e0\:4f55\:4e0e\:5e7f\:4e49\:76f8\:5bf9\:8bba\:7684\:5165\:95e8\:5bfc\:5e08\[LongDash]\[LongDash]\:6881\:707f\:5f6c\:6559\:6388\:3002\:672c\:5e0c\:671b\:6709\:751f\:4e4b\:5e74\:80fd\:591f\:62dc\:8bbf\:6881\:8001\:5e08\:ff0c\:4f46\:5948\:4f55\:6881\:8001\:5e08\:4e8e2022\:5e742\:670818\:65e5\:9a7e\:9e64\:897f\:53bb\:ff0c\:6b64\:751f\:65e0\:7f18\:76f8\:89c1\:4e86\:3002*)
+(*\:672c\:4eba\:51fa\:4e8e\:5174\:8da3\:800c\:5f00\:53d1\:4e86\:8be5\:7a0b\:5e8f\:5305\:ff0c\:65b9\:4fbf\:8fdb\:884c\:4e00\:4e9b\:7b80\:5355\:7684\:5fae\:5206\:51e0\:4f55\:8fd0\:7b97\:ff0c\:5728\:5b66\:4e60\:5e7f\:4e49\:76f8\:5bf9\:8bba\:7684\:8fc7\:7a0b\:4e2d\:4e5f\:80fd\:591f\:51cf\:5c11\:4e00\:4e9b\:4eba\:5de5\:7684\:8ba1\:7b97\:91cf\:ff0c\:5e76\:9a8c\:8bc1\:4e00\:4e9b\:7b80\:5355\:7684\:547d\:9898\:548c\:5b9a\:7406\:3002*)
+(*\:540c\:65f6\:ff0c\:4e5f\:4e3a\:4e86\:7eaa\:5ff5\:6211\:7684\:5fae\:5206\:51e0\:4f55\:4e0e\:5e7f\:4e49\:76f8\:5bf9\:8bba\:7684\:5165\:95e8\:5bfc\:5e08\[LongDash]\[LongDash]\:6881\:707f\:5f6c\:6559\:6388\:3002\:672c\:5e0c\:671b\:6709\:751f\:4e4b\:5e74\:80fd\:591f\:62dc\:8bbf\:6881\:8001\:5e08\:ff0c\:4f46\:5948\:4f55\:6881\:8001\:5e08\:4e8e2022\:5e742\:670816\:65e5\:9a7e\:9e64\:897f\:53bb\:ff0c\:6b64\:751f\:65e0\:7f18\:76f8\:89c1\:4e86\:3002*)
 
 
 (*The MIT License (MIT)
