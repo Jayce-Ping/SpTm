@@ -12,7 +12,7 @@
 
 - **Space-Time**是一个关于**微分几何**计算的**Mathematica程序包**，且与广义相对论关联性较强。
 
-- 具体使用方法和例子见**Document_CN.nb**。
+- 具体使用方法和例子见[**Document_CN.nb**](https://github.com/Jayce-Ping/SpTm/blob/main/Document_CN.nb)。
 
 - 这里介绍两种安装和使用的方法：
 
@@ -40,7 +40,7 @@
 
 - **Space-Time** is a **Mathematica package** for **Differential Geometry** calculations, which is also relevant to **General Relativity** specially.
 
-- For details and examples of use, see **Document_EN.nb**.
+- For details and examples of use, see [**Document_EN.nb**](https://github.com/Jayce-Ping/SpTm/blob/main/Document_EN.nb).
 
 - Here are two ways to install and use:
 
