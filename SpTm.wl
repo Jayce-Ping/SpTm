@@ -930,7 +930,7 @@ ATensorAdd[T_ATensor, S_ATensor] := Module[
 },
 	(*\:4e24\:4e2a\:5f20\:91cf\:76f8\:52a0\:8981\:6c42\:662f\:540c\:578b\:5f20\:91cf\:4e14\:6307\:6807\:76f8\:540c*)
 	If[
-		sortTsub =!= sortSsub || sortTsup =!= sortSsup || Dimensions[T[[3]]] != Dimensions[S[[3]]],
+		sortTsub =!= sortSsub || sortTsup =!= sortSsup || TensorDimensions[T[[3]]] != TensorDimensions[S[[3]]],
 		Message[ATensorAdd::Error];
 		Abort[]
 	];
