@@ -43,11 +43,11 @@ LineElementInfo::usage = "STLineElement[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6
 VolumeElementInfo::usage = "VolumeElementInfo[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:9002\:914d\:4f53\:5143\:8868\:8fbe\:5f0f."
 
 
-SetCoordinates::usage = "SetCoordinates[coodinates_List]"<>" "<>"coodinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
+SetCoordinates::usage = "SetCoordinates[coordinates_List]"<>" "<>"coordinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
 
 SCoordinatesTransform::usage = "SCoordinatesTransform[targetCoordinates, transformation]"<>" "<>"targetCoordinates\:662f\:76ee\:6807\:5750\:6807\:7cfb\:5217\:8868\:ff0ctransformation\:4e3a\:53d8\:6362\:89c4\:5219."
 
-SetMetric::usage = "SetMetric[components]"<>" "<>"\:5728\:8bbe\:7f6e\:5750\:6807\:7cfb\:540e\:ff0c\:8bbe\:7f6e\:5ea6\:89c4g\:5728\:8be5\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635components"<>"\n"<>"SetMetric[components_Array, coodinates_List]"<>" "<>"\:8bbe\:7f6e\:5ea6\:89c4g\:5728\:5750\:6807\:7cfbcoodinates\:4e0b\:7684\:5206\:91cf\:77e9\:9635components.\n"<>"SetMetric[components_Array, coodinates_List, metricSymbol_Symbol] \:8bbe\:7f6e\:5ea6\:89c4g\:5728\:5750\:6807\:7cfbcoodinates\:4e0b\:7684\:5206\:91cf\:77e9\:9635components\:ff0c\:548c\:5ea6\:89c4\:7684\:8868\:793a\:7b26\:53f7metricSymbol. "
+SetMetric::usage = "SetMetric[components]"<>" "<>"\:5728\:8bbe\:7f6e\:5750\:6807\:7cfb\:540e\:ff0c\:8bbe\:7f6e\:5ea6\:89c4g\:5728\:8be5\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635components"<>"\n"<>"SetMetric[components_Array, coordinates_List]"<>" "<>"\:8bbe\:7f6e\:5ea6\:89c4g\:5728\:5750\:6807\:7cfbcoordinates\:4e0b\:7684\:5206\:91cf\:77e9\:9635components.\n"<>"SetMetric[components_Array, coordinates_List, metricSymbol_Symbol] \:8bbe\:7f6e\:5ea6\:89c4g\:5728\:5750\:6807\:7cfbcoordinates\:4e0b\:7684\:5206\:91cf\:77e9\:9635components\:ff0c\:548c\:5ea6\:89c4\:7684\:8868\:793a\:7b26\:53f7metricSymbol. "
 
 SetMetricSymbol::usage = "SetMetricSymbol[g]"<>" "<>"\:8bbe\:7f6e\:5ea6\:89c4\:7b26\:53f7\:4e3ag."
 
@@ -66,7 +66,7 @@ STSpecify::usage = "STSpecify[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868
 STSimSpecify::usage = "STSimSpecify[expr]"<>" "<>"\:5c06\:8868\:8fbe\:5f0f\:5148\:8fdb\:884c\:53ef\:80fd\:7684\:7b80\:5316\:518d\:8ba1\:7b97\:5176\:5177\:4f53\:6307\:6807\:7684\:5206\:91cf\:5f62\:5f0f."
 
 
-STCalcTensor::usage = "STCalcTensor[\"Tensor\"]"<>" "<>"\:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar\:ff0cEinsteinTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:ff0c\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:8ba1\:7b97\:5f20\:91cfTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric, coodinates]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:548c\:5750\:6807\:7cfb\:ff0c\:8ba1\:7b97\:5f20\:91cfTensor."
+STCalcTensor::usage = "STCalcTensor[\"Tensor\"]"<>" "<>"\:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar\:ff0cEinsteinTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:ff0c\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:8ba1\:7b97\:5f20\:91cfTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric, coordinates]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:548c\:5750\:6807\:7cfb\:ff0c\:8ba1\:7b97\:5f20\:91cfTensor."
 
 
 SCalcChristoffel::usage = "SCalcChristoffel[metric, coordinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
@@ -1079,7 +1079,7 @@ ATensorWedge[T_ATensor, S_ATensor, Q__ATensor] := ATensorWedge[T, ATensorWedge[S
 
 (*\:534f\:53d8\:5bfc\:6570\[Del]*)
 SCovariantDerivative::metricMiss ="\:672a\:8bbe\:7f6e\:5ea6\:89c4\:5206\:91cf.";
-SCovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
+SCovariantDerivative[T_ATensor, dIndex_Symbol, coordinates_List] := Module[
 {
 	\[CapitalGamma],
 	subIndex = T[[1]],(*\:4e0b\:6807*)
@@ -1099,10 +1099,10 @@ SCovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 		Abort[]
 	];
 	(*\:8ba1\:7b97\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5ea6\:89c4\:5bf9\:5e94\:7684\:514b\:6c0f\:7b26\:5206\:91cf*)
-	\[CapitalGamma] = SCalcChristoffel[MetricComponents, coodinates];
+	\[CapitalGamma] = SCalcChristoffel[MetricComponents, coordinates];
 
 	(*\:5148\:6c42\:51fa\:666e\:901a\:5bfc\:6570\:7b97\:7b26\:90e8\:5206*)
-	ordinaryPart = SOrdinaryDerivative[T, dIndex, coodinates];
+	ordinaryPart = SOrdinaryDerivative[T, dIndex, coordinates];
 	
 	(*\:5982\:679c\:514b\:6c0f\:7b26\:5168\:4e3a0\:5219\:65e0\:9700\:518d\:8ba1\:7b97\:4e0b\:53bb\:ff0c\:5426\:5219\:9700\:8981\:7ee7\:7eed\:8ba1\:7b97\:53e6\:5916\:4e24\:90e8\:5206*)
 	If[
@@ -1147,15 +1147,15 @@ SCovariantDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 
 
 (*\:666e\:901a\:5bfc\:6570\:7b97\:7b26*)
-SOrdinaryDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
+SOrdinaryDerivative[T_ATensor, dIndex_Symbol, coordinates_List] := Module[
 {
 	components = T[[3]],
-	dimension = Length[coodinates],
+	dimension = Length[coordinates],
 	indexPos,
 	outputComponents
 },
 	
-	outputComponents = Array[D[components, coodinates[[#]]]&, dimension];
+	outputComponents = Array[D[components, coordinates[[#]]]&, dimension];
 	
 	If[
 		(*\:5224\:65ad\:662f\:5426\:9700\:8981\:7f29\:5e76*)
@@ -1168,7 +1168,7 @@ SOrdinaryDerivative[T_ATensor, dIndex_Symbol, coodinates_List] := Module[
 	]
 	
 	(*\:4e5f\:53ef\:4ee5\:5229\:7528ATensorTimes\:8ba1\:7b97\:662f\:5426\:9700\:8981\:4e0a\:4e0b\:6307\:6807\:7f29\:5e76*)
-	(*ATensorTimes@ATensor[Prepend[T[[1]], dIndex], T[[2]], Array[D[components, coodinates[[#]]]&, dimension]]*)
+	(*ATensorTimes@ATensor[Prepend[T[[1]], dIndex], T[[2]], Array[D[components, coordinates[[#]]]&, dimension]]*)
 ]
 
 
@@ -1199,12 +1199,12 @@ STSimSpecify[expr__] := Module[
 
 
 SCalcSpecificExpression::componentsMiss = "\!\(\*SuperscriptBox[SubscriptBox[\(\:5f20\:91cf`1`\), \(`2`\)], \(`3`\)]\)\:672a\:8bbe\:7f6e\:5206\:91cf.";
-SCalcSpecificExpression::coodinatesMiss = "\:672a\:9009\:53d6\:5750\:6807\:7cfb.";
+SCalcSpecificExpression::coordinatesMiss = "\:672a\:9009\:53d6\:5750\:6807\:7cfb.";
 
 SCalcSpecificExpression[expr__] := Module[
 {
 	expression,
-	coodinates,
+	coordinates,
 	calcReplaceRule,
 	sTensors = Cases[expr, _STensor, {0, Infinity}],
 	setTest,
@@ -1216,16 +1216,16 @@ SCalcSpecificExpression[expr__] := Module[
 	(*\:68c0\:67e5\:662f\:5426\:9009\:53d6\:4e86\:5750\:6807\:7cfb*)
 	If[
 		Length[CurrentCoordinates] == 0,
-		Message[SCalcSpecificExpression::coodinatesMiss];
+		Message[SCalcSpecificExpression::coordinatesMiss];
 		Abort[]
 	];
-	coodinates = CurrentCoordinates;
+	coordinates = CurrentCoordinates;
 	
 	calcReplaceRule = {
 		Plus[T_ATensor, S_ATensor] :> ATensorAdd[T, S],
 		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S],
 		Times[k_, T_ATensor] :> ATensorScalarTimes[k,T]/;!MemberQ[k, _ATensor, All],
-		grad_Grad :> SCovariantDerivative[grad[[1]], grad[[2]], coodinates],
+		grad_Grad :> SCovariantDerivative[grad[[1]], grad[[2]], coordinates],
 		Wedge[T_ATensor, S__ATensor] :> ATensorWedge[T, S],
 		T_ATensor :> ATensorTimes[T] /; IntersectingQ[T[[1]], T[[2]]]
 	};
@@ -1295,7 +1295,7 @@ STCalcTensor[name_String] := STCalcTensor[name, MetricComponents, CurrentCoordin
 
 STCalcTensor[name_String, components_?ArrayQ] := STCalcTensor[name, components, CurrentCoordinates];
 
-STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
+STCalcTensor[name_String, components_?ArrayQ, coordinates_List] := Module[
 {
 	func,
 	record = <|
@@ -1313,7 +1313,7 @@ STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
 		Abort[]
 	];
 	If[
-		Length @ coodinates == 0,
+		Length @ coordinates == 0,
 		Message[STCalcTensor::NoCoordinates];
 		Abort[];
 	];
@@ -1323,13 +1323,13 @@ STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
 		Abort[];
 	];
 	If[
-		First @ Dimensions @ components != Length @ coodinates,
+		First @ Dimensions @ components != Length @ coordinates,
 		Message[STCalcTensor::DimensionError];
 		Abort[];
 	];
 	func = ToExpression @ StringJoin[{"SCalc",name}];
 	
-	ShowSTensor[record[name], func[components, coodinates]]
+	ShowSTensor[record[name], func[components, coordinates]]
 ]
 
 
@@ -1338,20 +1338,20 @@ STCalcTensor[name_String, components_?ArrayQ, coodinates_List] := Module[
 
 
 (*\:514b\:6c0f\:7b26*)
-SCalcChristoffel[g_?ArrayQ, coodinateSystem_List] := Module[
+SCalcChristoffel[g_?ArrayQ, coordinateSystem_List] := Module[
 	{
 		invg = Inverse[g],(*inverse of metric g*)
-		dimension = Length @ coodinateSystem,(*dimension of space*)
+		dimension = Length @ coordinateSystem,(*dimension of space*)
 		\[Gamma],(*Christoffel Symbol Component Calculating Function*)
 		\[CapitalGamma](*Christoffel Symbol Component Matrix*)
 	},
 	If[
-		First @ Dimensions @ g != Length @ coodinateSystem,
+		First @ Dimensions @ g != Length @ coordinateSystem,
 		Message[STCalcTensor::DimensionError];
 		Abort[]
 	];
 	
-	\[Gamma][\[Mu]_,\[Nu]_,\[Sigma]_]:=1/2 Sum[ invg[[\[Sigma],\[Rho]]] (D[ g[[\[Rho],\[Mu]]], coodinateSystem[[\[Nu]]] ]+D[ g[[\[Nu],\[Rho]]], coodinateSystem[[\[Mu]]] ]-D[ g[[\[Mu],\[Nu]]], coodinateSystem[[\[Rho]]] ]),{\[Rho],dimension}];(*Subscript[\:514b\:6c0f\:7b26\:5206\:91cf\[CapitalGamma], \[Mu]\[Nu]]^\[Sigma]*)
+	\[Gamma][\[Mu]_,\[Nu]_,\[Sigma]_]:=1/2 Sum[ invg[[\[Sigma],\[Rho]]] (D[ g[[\[Rho],\[Mu]]], coordinateSystem[[\[Nu]]] ]+D[ g[[\[Nu],\[Rho]]], coordinateSystem[[\[Mu]]] ]-D[ g[[\[Mu],\[Nu]]], coordinateSystem[[\[Rho]]] ]),{\[Rho],dimension}];(*Subscript[\:514b\:6c0f\:7b26\:5206\:91cf\[CapitalGamma], \[Mu]\[Nu]]^\[Sigma]*)
 	
 	(*\:5229\:7528\:4e0b\:6307\:6807\:7684\:5bf9\:79f0\:6027\:6765\:964d\:4f4e\:8ba1\:7b97\:590d\:6742\:5ea6*)
 	\[CapitalGamma]=Simplify@Array[If[ #1<=#2, \[Gamma][#1,#2,#3], Null]&, {dimension,dimension,dimension}];(*\:514b\:6c0f\:7b26\:5206\:91cf\:77e9\:9635*)
@@ -1368,24 +1368,24 @@ SCalcChristoffel[g_?ArrayQ, coodinateSystem_List] := Module[
 
 
 (*\:9ece\:66fc\:5f20\:91cf*)
-SCalcRiemannTensor[g_?ArrayQ, coodinateSystem_List] := Module[
+SCalcRiemannTensor[g_?ArrayQ, coordinateSystem_List] := Module[
 	{
 		invg = Inverse[g],(*inverse of metric g*)
-		dimension = Length @ coodinateSystem,(*dimension of space*)
+		dimension = Length @ coordinateSystem,(*dimension of space*)
 		\[CapitalGamma],(*Christoffel Symbol Component Matrix*)
 		r,(*Riemann Tensor Conponent Calculating Function*)
 		Riemann(*Riemann Tensor Component Matrix*)
 	},
 	If[
-		First @ Dimensions @ g != Length @ coodinateSystem,
+		First @ Dimensions @ g != Length @ coordinateSystem,
 		Message[STCalcTensor::DimensionError];
 		Abort[]
 	];
 	(*\:7528\:5750\:6807\:6cd5\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf*)
 	
 	(*\:5148\:8ba1\:7b97\:514b\:6c0f\:7b26*)
-	\[CapitalGamma] = SCalcChristoffel[g, coodinateSystem];
-	r[\[Mu]_,\[Nu]_,\[Sigma]_,\[Rho]_] := D[ \[CapitalGamma][[\[Mu],\[Sigma],\[Rho]]], coodinateSystem[[\[Nu]]]] - D[ \[CapitalGamma][[\[Nu],\[Sigma],\[Rho]]], coodinateSystem[[\[Mu]]]] + Sum[\[CapitalGamma][[\[Sigma],\[Mu],\[Lambda]]] \[CapitalGamma][[\[Nu],\[Lambda],\[Rho]]] - \[CapitalGamma][[\[Sigma],\[Nu],\[Lambda]]] \[CapitalGamma][[\[Mu],\[Lambda],\[Rho]]], {\[Lambda],dimension}];(*Subscript[\:9ece\:66fc\:5f20\:91cf\:7684\:5206\:91cfR, \[Mu]\[Nu]\[Sigma]]^\[Rho]*)
+	\[CapitalGamma] = SCalcChristoffel[g, coordinateSystem];
+	r[\[Mu]_,\[Nu]_,\[Sigma]_,\[Rho]_] := D[ \[CapitalGamma][[\[Mu],\[Sigma],\[Rho]]], coordinateSystem[[\[Nu]]]] - D[ \[CapitalGamma][[\[Nu],\[Sigma],\[Rho]]], coordinateSystem[[\[Mu]]]] + Sum[\[CapitalGamma][[\[Sigma],\[Mu],\[Lambda]]] \[CapitalGamma][[\[Nu],\[Lambda],\[Rho]]] - \[CapitalGamma][[\[Sigma],\[Nu],\[Lambda]]] \[CapitalGamma][[\[Mu],\[Lambda],\[Rho]]], {\[Lambda],dimension}];(*Subscript[\:9ece\:66fc\:5f20\:91cf\:7684\:5206\:91cfR, \[Mu]\[Nu]\[Sigma]]^\[Rho]*)
 	
 	(*\:5229\:7528\:7b2c1\:30012\:4e0b\:6307\:6807\:7684\:53cd\:79f0\:6027\:6765\:964d\:4f4e\:8ba1\:7b97\:590d\:6742\:5ea6*)
 	Riemann = Simplify@Array[If[#1<=#2,r[#1,#2,#3,#4],Null]&,{dimension,dimension,dimension,dimension}];
@@ -1404,29 +1404,43 @@ SCalcRiemannTensor[g_?ArrayQ, coodinateSystem_List] := Module[
 
 
 (*\:91cc\:5947\:5f20\:91cf*)
-SCalcRicciTensor[g_?ArrayQ, coodinateSystem_List]:=Module[
-	{
-		invg = Inverse[g],(*inverse of metric g*)
-		dimension = Length @ coodinateSystem,(*dimension of space*)
-		R,(*Riemann Tensor Component Matrix*)
-		ricci,(*Ricci Tensor Component Calculating Function*)
-		Ricci(*Ricci Tensor Component Matrix*)
-	},
+SCalcRicciTensor[g_?ArrayQ, coordinateSystem_List] := Module[
+{
+	det = Det[g],
+	invg = Inverse[g],(*inverse of metric g*)
+	dimension = Length @ coordinateSystem,(*dimension of space*)
+	\[Gamma],(*Contracted Christoffel Symbol*)
+	\[CapitalGamma],(*Christoffel Symbol*)
+	R,(*Riemann Tensor Component Matrix*)
+	ricci,(*Ricci Tensor Component Calculating Function*)
+	Ricci(*Ricci Tensor Component Matrix*)
+},
 	If[
-		First @ Dimensions @ g != Length @ coodinateSystem,
+		First @ Dimensions @ g != Length @ coordinateSystem,
 		Message[STCalcTensor::DimensionError];
 		Abort[]
 	];
 	(*\:8ba1\:7b97Ricci\:5f20\:91cf*)
 	
+(*
+	(*\:5229\:7528\:9ece\:66fc\:5f20\:91cf\:8ba1\:7b97*)
 	(*\:5148\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf*)
-	R = SCalcRiemannTensor[g,coodinateSystem];
-	ricci[\[Mu]_,\[Nu]_] := Sum[ R[[\[Mu],\[Sigma],\[Nu],\[Sigma]]], {\[Sigma],dimension}];
+	R = SCalcRiemannTensor[g,coordinateSystem];
+	ricci[\[Mu]_,\[Nu]_] := Sum[ R[[\[Mu],\[Sigma],\[Nu],\[Sigma]]], {\[Sigma],dimension}];*)
+
 	
+	(*\:76f4\:63a5\:5229\:7528\:514b\:6c0f\:7b26\:8ba1\:7b97*)
+	\[CapitalGamma] = Simplify @ SCalcChristoffel[g, coordinateSystem];
+	(*\:8ba1\:7b97\:7f29\:5e76\:514b\:6c0f\:7b26 Subscript[\[CapitalGamma], \[Mu]\[Sigma]]^\[Mu]\:ff0c\:76f4\:63a5\:5229\:7528\:5b9a\:7406*)
+	\[Gamma] = Simplify[ 1/(2 det) * D[det, {coordinateSystem}] ];
+	
+	ricci[\[Mu]_, \[Sigma]_] := 
+		Sum[ D[\[CapitalGamma][[\[Mu], \[Sigma], \[Nu]]], coordinateSystem[[\[Nu]]]] - Sum[ \[CapitalGamma][[\[Nu], \[Sigma], \[Lambda]]] * \[CapitalGamma][[\[Lambda], \[Mu], \[Nu]]], {\[Lambda], dimension}], {\[Nu], dimension}]
+		- D[\[Gamma][[\[Sigma]]], coordinateSystem[[\[Mu]]]] + Sum[\[CapitalGamma][[\[Mu], \[Sigma], \[Lambda]]] * \[Gamma][[\[Lambda]]], {\[Lambda], dimension}];
+		
 	(*\:5229\:7528\:5bf9\:79f0\:6027\:6765\:964d\:4f4e\:8ba1\:7b97\:590d\:6742\:5ea6*)
-	Ricci = Simplify@Array[If[#1<=#2, ricci[#1,#2], Null]&, {dimension,dimension}];
-	
-	Array[If[#1>#2, Ricci[[#1,#2]] = Ricci[[#2,#1]]]&, {dimension,dimension}];
+	Ricci = Simplify @ Array[If[#1<=#2, ricci[#1,#2], Null]&, {dimension, dimension}];
+	Array[If[#1>#2, Ricci[[#1,#2]] = Ricci[[#2,#1]]]&, {dimension, dimension}];
 	
 	(*Print[Subscript["R","\[Mu]\[Nu]"]->MatrixForm@Ricci]*);
 	Ricci
@@ -1438,19 +1452,19 @@ SCalcRicciTensor[g_?ArrayQ, coodinateSystem_List]:=Module[
 
 
 (*\:91cc\:5947\:6807\:91cf*)
-SCalcRicciScalar[g_?ArrayQ, coodinateSystem_List] := Module[
+SCalcRicciScalar[g_?ArrayQ, coordinateSystem_List] := Module[
 {
-	dimension = Length @ coodinateSystem,
+	dimension = Length @ coordinateSystem,
 	invg = Inverse[g],
 	Ricci
 },
 	If[
-		First @ Dimensions @ g != Length @ coodinateSystem,
+		First @ Dimensions @ g != Length @ coordinateSystem,
 		Message[STCalcTensor::DimensionError];
 		Abort[]
 	];
 	
-	Ricci = Simplify@SCalcRicciTensor[g, coodinateSystem];
+	Ricci = Simplify@SCalcRicciTensor[g, coordinateSystem];
 	Sum[Ricci[[\[Mu],\[Nu]]] invg[[\[Mu],\[Nu]]],{\[Mu], dimension},{\[Nu], dimension}]
 ];
 
@@ -1460,21 +1474,21 @@ SCalcRicciScalar[g_?ArrayQ, coodinateSystem_List] := Module[
 
 
 (*\:7231\:56e0\:65af\:5766\:5f20\:91cf*)
-SCalcEinsteinTensor[g_?ArrayQ, coodinateSystem_List] := Module[
+SCalcEinsteinTensor[g_?ArrayQ, coordinateSystem_List] := Module[
 {
 	invg = Inverse[g],
-	dimension = Length @ coodinateSystem,
+	dimension = Length @ coordinateSystem,
 	RicciTensor,
 	RicciScalar
 },
 	If[
-		First @ Dimensions @ g != Length @ coodinateSystem,
+		First @ Dimensions @ g != Length @ coordinateSystem,
 		Message[STCalcTensor::DimensionError];
 		Abort[]
 	];
 	
 	(*\:8ba1\:7b97\:91cc\:5947\:5f20\:91cf*)
-	RicciTensor = Simplify@SCalcRicciTensor[g, coodinateSystem];
+	RicciTensor = Simplify@SCalcRicciTensor[g, coordinateSystem];
 	
 	(*\:8ba1\:7b97\:91cc\:5947\:6807\:91cf*)
 	RicciScalar = Sum[RicciTensor[[\[Mu],\[Nu]]] invg[[\[Mu],\[Nu]]],{\[Mu], dimension},{\[Nu], dimension}];
