@@ -1222,10 +1222,17 @@ SCalcSpecificExpression[expr__] := Module[
 	coordinates = CurrentCoordinates;
 	
 	calcReplaceRule = {
+		(*\:8003\:8651\:6807\:91cf\:4e0e(0,0)\:578b\:5f20\:91cf\:76f8\:52a0*)
+		Plus[k_, T_ATensor] :> ATensorAdd[ATensor[{}, {}, k], T]/;!MemberQ[k, _ATensor, All],
+		(*\:4e00\:822c\:5f20\:91cf\:52a0\:6cd5*)
 		Plus[T_ATensor, S_ATensor] :> ATensorAdd[T, S],
+		(*\:4e00\:822c\:5f20\:91cf\:4e58\:6cd5*)
 		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S],
+		(*\:5f20\:91cf\:6570\:4e58*)
 		Times[k_, T_ATensor] :> ATensorScalarTimes[k,T]/;!MemberQ[k, _ATensor, All],
+		(*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97*)
 		grad_Grad :> SCovariantDerivative[grad[[1]], grad[[2]], coordinates],
+		(*\:6954\:79ef\:8fd0\:7b97*)
 		Wedge[T_ATensor, S__ATensor] :> ATensorWedge[T, S],
 		T_ATensor :> ATensorTimes[T] /; IntersectingQ[T[[1]], T[[2]]]
 	};
@@ -1280,7 +1287,7 @@ SCalcSpecificExpression[expr__] := Module[
 
 
 (* ::Section::Closed:: *)
-(*\:5e38\:7528\:5f20\:91cf\:8ba1\:7b97 Common Tensor Calculation *)
+(*\:5e38\:7528\:5f20\:91cf\:8ba1\:7b97 Common Tensor Calculation*)
 
 
 (* ::Subsection::Closed:: *)
@@ -1464,7 +1471,7 @@ SCalcRicciScalar[g_?ArrayQ, coordinateSystem_List] := Module[
 		Abort[]
 	];
 	
-	Ricci = Simplify@SCalcRicciTensor[g, coordinateSystem];
+	Ricci = Simplify @ SCalcRicciTensor[g, coordinateSystem];
 	Sum[Ricci[[\[Mu],\[Nu]]] invg[[\[Mu],\[Nu]]],{\[Mu], dimension},{\[Nu], dimension}]
 ];
 
@@ -1488,7 +1495,7 @@ SCalcEinsteinTensor[g_?ArrayQ, coordinateSystem_List] := Module[
 	];
 	
 	(*\:8ba1\:7b97\:91cc\:5947\:5f20\:91cf*)
-	RicciTensor = Simplify@SCalcRicciTensor[g, coordinateSystem];
+	RicciTensor = Simplify @ SCalcRicciTensor[g, coordinateSystem];
 	
 	(*\:8ba1\:7b97\:91cc\:5947\:6807\:91cf*)
 	RicciScalar = Sum[RicciTensor[[\[Mu],\[Nu]]] invg[[\[Mu],\[Nu]]],{\[Mu], dimension},{\[Nu], dimension}];
@@ -1527,10 +1534,14 @@ SCalcWeylTensor[g_?ArrayQ, coordinateSystem_List] := Module[
 	
 	ricciscalar = Simplify @ Sum[Ricci[[\[Mu],\[Nu]]] invg[[\[Mu],\[Nu]]], {\[Mu], dimension}, {\[Nu], dimension}];
 	
+	
+	gR = TensorProduct[g, Ricci];
+	gg = TensorProduct[g, g];
+	
 	Array[
 		Sum[RiemannTensor[[#1, #2, #3, i]] g[[i, #4]],{i, dimension}]
-		- (g[[#1, #3]] Ricci[[#4, #2]] - g[[#1, #4]] Ricci[[#3, #2]] - g[[#2, #3]] Ricci[[#4, #1]] + g[[#2, #4]]Ricci[[#3, #1]]) / (dimension - 2)
-		+ (ricciscalar / ((dimension - 1) * (dimension - 2))) * (g[[#1, #3]] g[[#4,#2]] - g[[#1,#4]] g[[#3,#2]])&,
+		- (gR[[#1, #3, #4, #2]] - gR[[#1, #4,#3, #2]] - gR[[#2, #3, #4, #1]] + gR[[#2, #4, #3, #1]]) / (dimension - 2)
+		+ (ricciscalar / ((dimension - 1) * (dimension - 2))) * (gg[[#1, #3, #4,#2]] - gg[[#1, #4, #3,#2]])&,
 		{dimension, dimension, dimension, dimension}
 	]
 ]
