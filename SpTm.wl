@@ -38,9 +38,9 @@ MetricInfo::usage = "MetricInfo[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
 CoordinatesInfo::usage = "CoordinatesInfo[]"<>" "<>"\:83b7\:53d6\:5750\:6807\:7cfb\:5217\:8868."
 
 
-LineElementInfo::usage = "STLineElement[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:7ebf\:5143\:8868\:8fbe\:5f0f."
+SLineElement::usage = "SLineElement[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:7ebf\:5143\:8868\:8fbe\:5f0f."
 
-VolumeElementInfo::usage = "VolumeElementInfo[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:9002\:914d\:4f53\:5143\:8868\:8fbe\:5f0f."
+SVolumeElement::usage = "SVolumeElement[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:9002\:914d\:4f53\:5143\:8868\:8fbe\:5f0f\:ff08\:9ed8\:8ba4\:4e0b\:6307\:6807\:4e3aa,b,c...).\n"<>"SVolumeElement[indices]"<>"\:83b7\:53d6\:4e0b\:6307\:6807\:987a\:5e8f\:4e3a\:5217\:8868indices\:7684\:9002\:914d\:4f53\:5143\:8868\:8fbe\:5f0f."
 
 
 SetCoordinates::usage = "SetCoordinates[coordinates_List]"<>" "<>"coordinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
@@ -66,7 +66,7 @@ STSpecify::usage = "STSpecify[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868
 STSimSpecify::usage = "STSimSpecify[expr]"<>" "<>"\:5c06\:8868\:8fbe\:5f0f\:5148\:8fdb\:884c\:53ef\:80fd\:7684\:7b80\:5316\:518d\:8ba1\:7b97\:5176\:5177\:4f53\:6307\:6807\:7684\:5206\:91cf\:5f62\:5f0f."
 
 
-STCalcTensor::usage = "STCalcTensor[\"Tensor\"]"<>" "<>"\:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar\:ff0cEinsteinTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:ff0c\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:8ba1\:7b97\:5f20\:91cfTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric, coordinates]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:548c\:5750\:6807\:7cfb\:ff0c\:8ba1\:7b97\:5f20\:91cfTensor."
+STCalcTensor::usage = "STCalcTensor[\"Tensor\"]"<>" "<>"\:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar, EinsteinTensor, WeylTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:ff0c\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:8ba1\:7b97\:5f20\:91cfTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric, coordinates]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:548c\:5750\:6807\:7cfb\:ff0c\:8ba1\:7b97\:5f20\:91cfTensor."
 
 
 SCalcChristoffel::usage = "SCalcChristoffel[metric, coordinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
@@ -82,6 +82,12 @@ SCalcEinsteinTensor::usage = "SCalcEinsteinTensor[metric, coordinates]"<>" "<>"\
 SCalcWeylTensor::usage = "SCalcWeylTensor[metric, coordinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Weyl\:5f20\:91cf\:7684\:5206\:91cf."
 
 
+BoostMatrix::usage = "Boost[velocity]"<>" "<>"\:5728\:95f5\:5f0f\:65f6\:7a7a\:4e0b\:ff0c\:7ed9\:5b9a\:7a7a\:95f4\:901f\:5ea6\:77e2\:91cf\:ff0c\:6c42\:51fa\:5176\:51b3\:5b9a\:7684\:4f2a\:8f6c\:52a8\:77e9\:9635.\n"<>"Boost[velocity, dimension]"<>" "<>"\:7ed9\:5b9a\:95f5\:5f0f\:65f6\:7a7a\:7684\:7ef4\:6570\:548c\:7a7a\:95f4\:901f\:5ea6\:77e2\:91cf\:ff0c\:6c42\:51fa\:5176\:51b3\:5b9a\:7684\:4f2a\:8f6c\:52a8\:77e9\:9635.\n"
+
+
+SpTmHelp::usage = "\:83b7\:53d6\:4e00\:4e9b\:5e2e\:52a9\:4fe1\:606f."
+
+
 Begin["Private`"]
 
 
@@ -89,7 +95,7 @@ Begin["Private`"]
 (*SpTmHelp*)
 
 
-SpTmHelp = {
+SpTmHelpInfo = {
 	"\:6b22\:8fce\:4f7f\:7528SpTm\:ff01\n",
 	"\[FilledSmallCircle] \:5f20\:91cf\:7684\:4e0b\:6807\:901a\:8fc7Ctrl+-\:8f93\:5165\:ff0c\:4e0a\:6807\:901a\:8fc7Ctrl+^\:8f93\:5165\:ff0c\:901a\:8fc7InputExplain\:51fd\:6570\:53ef\:4ee5\:67e5\:770b\:8868\:8fbe\:5f0f\:5728\:7a0b\:5e8f\:5305\:4e2d\:8f6c\:5316\:540e\:7684\:5f62\:5f0f.\n",
 	"\[FilledSmallCircle] \:7a0b\:5e8f\:5305\:4e2d\:4f7f\:7528STensor[T, subIndices, supIndices]\:6765\:8868\:793a\:540d\:79f0\:4e3aT\:ff0c\:4e0b\:6807\:5217\:8868\:4e3asubIndices\:ff0c\:4e0a\:6807\:5217\:8868\:4e3asupIndices\:7684\:5f20\:91cf.\n",
@@ -102,8 +108,8 @@ SpTmHelp = {
 	"\[FilledSmallCircle] \:5728\:4f7f\:7528SpTm\:65f6\:ff0c\:6240\:6709\:5c0f\:5199\:82f1\:6587\:5b57\:6bcd(a,b...)\:548c\:5e0c\:814a\:5b57\:6bcd(\[Alpha],\[Beta]...)\:90fd\:4f1a\:88ab\:4fdd\:62a4\:ff0c\:7528\:4e8e\:8868\:793a\:5f20\:91cf\:6307\:6807\:ff0c\:8bf7\:4e0d\:8981\:5c06\:5b83\:4eec\:4f5c\:4e3a\:53d8\:91cf\:540d\:ff0c\:4f46\:53ef\:4ee5\:4f5c\:4e3a\:5750\:6807\:7cfb\:7b26\:53f7\:6216\:5f20\:91cf\:7b26\:53f7.\n",
 	"\[FilledSmallCircle] \:8f93\:5165\"?SpTm`*\"\:67e5\:770b\:53ef\:7528\:51fd\:6570\:4ee5\:53ca\:4f7f\:7528\:65b9\:6cd5."
 };
-SpTmHelp::usage = StringJoin[SpTmHelp];
-Print[StringJoin[SpTmHelp]]
+
+SpTmHelp := StringJoin[SpTmHelpInfo]
 
 (*STensor\:5199\:6cd5\:7684\:6807\:51c6\:683c\:5f0f*)
 STensor[TensorName_Symbol, subindex_List, superindex_List];(*STensor\:6807\:51c6\:683c\:5f0f*)
@@ -180,7 +186,7 @@ STensorInfo[expr__] := Module[
 	tensor = InputExplain[expr]
 },
 	If[
-		(Head @ tensor =!= STensor) && (Head @ tensor =!= Symbol),
+		(Head @ tensor =!= STensor|Symbol|DifferentialD|CapitalDifferentialD),
 		Message[STensorInfo::ErrorInput];
 		Abort[]
 	];
@@ -204,7 +210,7 @@ STensorInfo[T_STensor] := Module[
 	ShowSTensor[specificT, TensorComponents[rT]]
 ]
 (*\:83b7\:53d6\:540d\:4e3aT\:7684\:5f20\:91cf\:4fe1\:606f*)
-STensorInfo[T_Symbol] := Module[
+STensorInfo[T_Symbol|T_DifferentialD|T_CapitalDifferentialD] := Module[
 {
 	keys
 },
@@ -286,9 +292,13 @@ SetTensor[T_STensor, components_List] := Module[
 
 
 SetCoordinates::ErrorSymbol = "\:8f93\:5165\:5750\:6807\:7cfb\:4e2d\:5b58\:5728\:975e\:7b26\:53f7\:ff08Symbol\:ff09\:5143\:7d20.";
-SetCoordinates[Coordinates_List] := Module[{},
+SetCoordinates[Coordinates_List] := Module[
+{
+	i,
+	dimension = Length[Coordinates]
+},
 	If[
-		!AllTrue[Coordinates, MatchQ[#,_Symbol]&],
+		!AllTrue[Coordinates, MatchQ[#, _Symbol]&],
 		Message[SetCoordinates::ErrorSymbol];
 		Abort[]
 	];
@@ -303,7 +313,15 @@ SetCoordinates[Coordinates_List] := Module[{},
 	Unprotect[TensorComponents];
 	TensorComponents = Association[];
 	Protect[TensorComponents];
+	(*\:8bbe\:7f6e\:5750\:6807\:57fa\:5e95*)
+	For[i = 1, i <= dimension, i++,
+		(*\:5750\:6807\:57fa\:5e95*)
+		SetTensor[ STensor[CapitalDifferentialD[#], {}, {Global`a}], Normal @ SparseArray[{i -> 1}, dimension ,0] ]& [CurrentCoordinates[[i]]];
+		(*\:5bf9\:5076\:5750\:6807\:57fa\:5e95*)
+		SetTensor[ STensor[DifferentialD[#], {Global`a}, {}], Normal @ SparseArray[{i -> 1}, dimension ,0] ]& [CurrentCoordinates[[i]]];
+	]
 ]
+
 (*\:83b7\:53d6\:5f53\:524d\:5750\:6807\:7cfb\:5217\:8868*)
 CoordinatesInfo[] := CurrentCoordinates;
 
@@ -333,22 +351,22 @@ SCoordinatesTransform[target_List, transformation_List] := Module[
 },
 	If[
 		Length[target] != Length[CurrentCoordinates],
-		Message[SCoordinateTransform::DimensionNotMatch];
+		Message[SCoordinatesTransform::DimensionNotMatch];
 		Abort[]
 	];
 	If[
 		!AllTrue[target, MatchQ[#,_Symbol]&],
-		Message[SCoordinateTransform::ErrorSymbol];
+		Message[SCoordinatesTransform::ErrorSymbol];
 		Abort[]
 	];
 	If[
 		!AllTrue[transformation, MatchQ[#, __->__]&],
-		Message[SCoordinateTransform::ErrorTransformation];
+		Message[SCoordinatesTransform::ErrorTransformation];
 		Abort[]
 	];
 	If[
 		Length[MetricComponents] == 0,
-		Message[SCoordinateTransform::NoMetricComonents];
+		Message[SCoordinatesTransform::NoMetricComonents];
 		Abort[]
 	];
 	(*\:5c06\:53d8\:6362\:8865\:5168*)
@@ -362,7 +380,9 @@ SCoordinatesTransform[target_List, transformation_List] := Module[
 	];
 	
 	(*\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:6240\:6709\:8bbe\:7f6e\:4e86\:5206\:91cf\:7684\:5f20\:91cf,\:9664\:53bb\:5ea6\:89c4\:5f20\:91cf\:548c\[Delta]*)
-	keys = Delete[Keys[TensorComponents], {{1},{2},{3}}];
+	(*\:5220\:53bb\:539f\:5750\:6807\:7cfb\:7684\:5750\:6807\:57fa\:5e95\:548c\:5bf9\:5076\:5750\:6807\:57fa\:5e95*)
+	keys = DeleteCases[Keys[TensorComponents], STensor[_DifferentialD | _CapitalDifferentialD | MetricSymbol | Global`\[Delta], ___]];
+	
 	record = Array[keys[[#]] -> STensorTrans[keys[[#]], target, trans]&, Length[keys], 1, Association];
 	
 	(*\:5148\:4fee\:6539\:5ea6\:89c4\:7684\:5206\:91cf*)
@@ -378,11 +398,20 @@ SCoordinatesTransform[target_List, transformation_List] := Module[
 	record = record/.{STensor[MetricSymbol, {}, supIndex__] :> ATensor[{}, supIndex, newMetricComponentsInv]};
 	
 	(*\:5c06\:7b2c\:4e8c\:90e8\:5206\:4e58\:6cd5\:6539\:4e3a\:5f20\:91cf\:79ef\:8ba1\:7b97*)
-	record = record/.{Times[t_ATensor, s_ATensor] :> ATensorTimes[t,s]};
+	record = record/.{Times[t_ATensor, s_ATensor] :> ATensorTimes[t, s]};
 	
 	(*\:5c06\:4e24\:90e8\:5206\:8fdb\:884c\:5f20\:91cf\:4e58\:79ef*)
-	newTensorComponents = Array[keys[[#]] -> Simplify@(ATensorTimes[#1, #2]&[record[[#,1]], record[[#,2]]][[3]])& , Length[record], 1, Association];
-	
+	newTensorComponents = Array[
+		keys[[#]] -> Simplify@
+			(
+				If[
+				Head[#1] === ATensor && Head[#2] === ATensor,
+				ATensorTimes[#1, #2],
+				ATensorScalarTimes[#1, #2]
+				]
+				&[record[[#,1]], record[[#,2]]][[3]]
+			)& , Length[record], 1, Association
+	];
 	Unprotect[TensorComponents];
 	Table[TensorComponents[keys[[i]]] = newTensorComponents[keys[[i]]], {i, Length[keys]}];
 	Protect[TensorComponents];
@@ -524,20 +553,20 @@ MetricInfo[] := Module[{},
 (*\:7ebf\:5143\:8868\:8fbe\:5f0f Expression of Line Element*)
 
 
-LineElementInfo::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
-LineElementInfo::NoMetric = "\:672a\:8bbe\:7f6e\:5f20\:91cf.";
-LineElementInfo[] := Module[
+SLineElement::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
+SLineElement::NoMetric = "\:672a\:8bbe\:7f6e\:5ea6\:89c4.";
+SLineElement[] := Module[
 {
 	diffCoordinatesVector
 },
 	If[
 		Length @ CurrentCoordinates == 0,
-		Message[LineElementInfo::NoCoordinates];
+		Message[SLineElement::NoCoordinates];
 		Abort[]
 	];
 	If[
 		Length @ MetricComponents == 0,
-		Message[LineElementInfo::NoMetric];
+		Message[SLineElement::NoMetric];
 		Abort[]
 	];
 	diffCoordinatesVector = DifferentialD /@ CurrentCoordinates;
@@ -549,24 +578,41 @@ LineElementInfo[] := Module[
 (*\:4f53\:5143 Volume Element*)
 
 
-VolumeElementInfo::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
-VolumeElementInfo::NoMetric = "\:672a\:8bbe\:7f6e\:5f20\:91cf.";
-VolumeElementInfo[] := Module[
+SVolumeElement::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
+SVolumeElement::NoMetric = "\:672a\:8bbe\:7f6e\:5ea6\:89c4.";
+SVolumeElement[] := Module[
+{
+	indices
+},
+	If[
+		Length @ CurrentCoordinates == 0,
+		Message[SVolumeElement::NoCoordinates];
+		Abort[]
+	];
+	If[
+		Length @ MetricComponents == 0,
+		Message[SVolumeElement::NoMetric];
+		Abort[]
+	];
+	indices = ToExpression[Alphabet[][[1 ;; Length[CurrentCoordinates]]]];
+	SVolumeElement[indices]
+]
+SVolumeElement[indices_List] := Module[
 {
 	diffCoordinatesVector
 },
 	If[
 		Length @ CurrentCoordinates == 0,
-		Message[LineElementInfo::NoCoordinates];
+		Message[SVolumeElement::NoCoordinates];
 		Abort[]
 	];
 	If[
 		Length @ MetricComponents == 0,
-		Message[LineElementInfo::NoMetric];
+		Message[SVolumeElement::NoMetric];
 		Abort[]
 	];
-	diffCoordinatesVector = DifferentialD /@ CurrentCoordinates;
-	\[PlusMinus]Simplify@Sqrt[Abs[Det[MetricComponents]]] * Wedge @@ diffCoordinatesVector
+	diffCoordinatesVector = MapThread[Subscript[DifferentialD[#1], #2]&, {CurrentCoordinates, indices}];
+	Simplify@Sqrt[Abs[Det[MetricComponents]]] * Wedge @@ diffCoordinatesVector
 ]
 
 
@@ -592,13 +638,13 @@ InputExplain[expr__] := Module[
 	
 	InputExplainRule = {
 		Power[Subscript[x_Symbol, y_Symbol], z_Symbol] :> STensor[x, split[y], split[z]],
-		Subscript[x_Symbol, y_Symbol] :> STensor[x, split[y], {}],
-		Power[x_Symbol, y_Symbol] :> STensor[x, {}, split[y]]
+		Subscript[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol] :> STensor[x, split[y], {}],
+		Power[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol] :> STensor[x, {}, split[y]]
 	};
 	powerplusRule =
 	{
-		Power[Subscript[x_Symbol, y_Symbol], Plus[a_Symbol, b___Symbol]] :> Times[ STensor[x, split[y], split[a]], Power[Subscript[x, y], Plus[b]]],
-		Power[x_Symbol, Plus[a_Symbol, b___Symbol]] :> Times[ STensor[x, {}, split[a]], Power[x, Plus[b]]]
+		Power[Subscript[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol], Plus[a_Symbol, b___Symbol]] :> Times[ STensor[x, split[y], split[a]], Power[Subscript[x, y], Plus[b]]],
+		Power[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, Plus[a_Symbol, b___Symbol]] :> Times[ STensor[x, {}, split[a]], Power[x, Plus[b]]]
 	};
 	
 	(*\:7279\:6b8a\:5904\:7406Mathematica\:7b14\:8bb0\:672c\:5c06\:81ea\:52a8\:5c06\:6307\:6570\:76f8\:52a0\:7684\:60c5\:51b5*)
@@ -1544,6 +1590,34 @@ SCalcWeylTensor[g_?ArrayQ, coordinateSystem_List] := Module[
 		+ (ricciscalar / ((dimension - 1) * (dimension - 2))) * (gg[[#1, #3, #4,#2]] - gg[[#1, #4, #3,#2]])&,
 		{dimension, dimension, dimension, dimension}
 	]
+]
+
+
+(* ::Section::Closed:: *)
+(*\:5176\:5b83 Other*)
+
+
+BoostMatrix::dimensionNotMatch = "\:7a7a\:95f4\:901f\:5ea6\:5411\:91cf\:7684\:7ef4\:6570`1`\:4e0e\:95f5\:5f0f\:65f6\:7a7a\:7684\:7a7a\:95f4\:7ef4\:6570`2`\:4e0d\:5339\:914d"
+BoostMatrix::fasterThanLight = "\:901f\:5ea6\:5411\:91cf\:7684\:6a21\:957f\:4e3a`1` >= 1\:ff0c\:610f\:5473\:7740\:901f\:5ea6\:8d85\:8d8a\:4e86\:5149\:901f."
+
+BoostMatrix[v_?VectorQ] := BoostMatrix[v, Length[v] + 1]
+
+BoostMatrix[v_?VectorQ, n_Integer] := Module[
+{
+	norm = Norm[v],
+	\[Gamma]
+},
+	If[
+		Length[v] != n - 1,
+		Message[BoostMatrix::dimensionNotMatch, Length[v], n - 1];
+		Abort[];
+	];
+	If[
+		norm >= 1,
+		Message[BoostMatrix::fasterThanLight, norm];
+	];
+	\[Gamma] = 1 / Sqrt[1 - norm^2];
+	Prepend[Transpose[Prepend[Array[If[#1 == #2, 1, 0] + If[norm == 0, 0, (\[Gamma]-1) v[[#1]] v[[#2]] / norm^2]&, {n - 1, n - 1}], -\[Gamma] v]], \[Gamma] Prepend[-v, 1]]
 ]
 
 
