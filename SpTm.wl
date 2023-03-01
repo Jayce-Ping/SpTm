@@ -20,73 +20,131 @@ THE SOFTWARE IS PROVIDED \[OpenCurlyDoubleQuote]AS IS\[CloseCurlyDoubleQuote], W
 BeginPackage["SpTm`"]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*::usage information*)
 
 
-STensor::usage = "STensor[TensorName_Symbol, subindices_List, superindices_List] \:4e3aSTensor\:5bf9\:8c61\:7684\:6807\:51c6\:683c\:5f0f\:ff0c\:662f\:5f20\:91cf\:8fdb\:884c\:62bd\:8c61\:6307\:6807\:8ba1\:7b97\:65f6\:6240\:7528\:7684\:8868\:8fbe\:5f62\:5f0f. "<>"\:4e5f\:53ef\:4ee5\:76f4\:63a5\:91c7\:53d6ctrl+_\:8f93\:5165\:4e0b\:6807\:548cctrl+^\:8f93\:5165\:4e0a\:6807\:7684\:5f62\:5f0f\:8f93\:5165\:5f20\:91cf\:ff08\!\(\*SuperscriptBox[SubscriptBox[\(\:5982R\), \(a\\\ b\\\ c\)], \(d\)]\),\:6ce8\:610f\:6307\:6807\:4e4b\:95f4\:4e0d\:9700\:8981\:7528\:7a7a\:683c\:9694\:5f00\:ff09."
+STensor::usage = "STensor[\!\(\*StyleBox[\"TensorName\",\nFontSlant->\"Italic\"]\), \*StyleBox[\(\!\(\*StyleBox[\"subindices\",\nFontSlant->\"Italic\"]\)_List\)], \*StyleBox[\(\!\(\*StyleBox[\"superindices\",\nFontSlant->\"Italic\"]\)_List\)]] \:4e3aSTensor\:5bf9\:8c61\:7684\:6807\:51c6\:683c\:5f0f\:ff0c\:662f\:5f20\:91cf\:8fdb\:884c\:62bd\:8c61\:6307\:6807\:8ba1\:7b97\:65f6\:6240\:7528\:7684\:8868\:8fbe\:5f62\:5f0f.
+STensor[\*StyleBox[\(\!\(\*StyleBox[\"TensorName\",\nFontSlant->\"Italic\"]\)_Symbol\)], \*StyleBox[\(\!\(\*StyleBox[\"subindices\",\nFontSlant->\"Italic\"]\)_List\)], \*StyleBox[\(\!\(\*StyleBox[\"superindices\",\nFontSlant->\"Italic\"]\)_List\)]] is the standard form of STensor, which is used to represent a tensor with abstract indices."
 
-ShowForm::usage = "ShowForm[expr]"<>" "<>"\:5c06STensor\:8f6c\:5316\:4e3a\:6807\:51c6\:683c\:5f0f\:ff0c\:4e0e\:8868\:8fbe\:5f0f\:5176\:4f59\:90e8\:5206\:5747\:4ee5StandardForm\:683c\:5f0f\:8f93\:51fa."
+ShowForm::usage = "ShowForm[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06STensor\:8f6c\:5316\:4e3a\:6807\:51c6\:683c\:5f0f\:ff0c\:4e0e\:8868\:8fbe\:5f0f\:5176\:4f59\:90e8\:5206\:5747\:4ee5StandardForm\:683c\:5f0f\:8f93\:51fa.
+ShowForm[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Make STensor into a more readable form. The rest of expression will be shown in StandardForm."
 
-InputExplain::usage = "InputExplain[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8f6c\:5316\:4e3a\:5185\:90e8\:8ba1\:7b97\:65f6\:4f7f\:7528\:7684\:5f62\:5f0f."
-
-
-STensorInfo::usage = "STensorInfo[expr]"<>" "<>"\!\(\*SuperscriptBox[SubscriptBox[\(expr\:662f\:4e00\:4e2a\:5f62\:5982T\), \(a\)], \(b\)]\)\:7684\:5f20\:91cf\:ff0c\:7ed9\:51fa\:8be5\:5f20\:91cf\:7684\:5206\:91cf\:4fe1\:606f."<>"\n"<>"STensorInfo[T]"<>" "<>"\:7ed9\:51fa\:540d\:4e3aT\:7684\:6240\:6709\:5f20\:91cf\:7684\:5206\:91cf\:4fe1\:606f\:5217\:8868."<>"\n"<>"STensorInfo[T_STensor]"<>" "<>"\:7ed9\:51faSTensor\:5bf9\:8c61T\:7684\:5206\:91cf\:4fe1\:606f."
-
-MetricInfo::usage = "MetricInfo[]"<>" "<>"\:83b7\:53d6\:5ea6\:89c4\:4fe1\:606f."
-
-CoordinatesInfo::usage = "CoordinatesInfo[]"<>" "<>"\:83b7\:53d6\:5750\:6807\:7cfb\:5217\:8868."
+InputExplain::usage = "InputExplain[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8f6c\:5316\:4e3a\:5185\:90e8\:8ba1\:7b97\:65f6\:4f7f\:7528\:7684\:5f62\:5f0f.
+InputExplain[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Transform the \!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\) into the form with STensors."
 
 
-SLineElement::usage = "SLineElement[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:7ebf\:5143\:8868\:8fbe\:5f0f."
-
-SVolumeElement::usage = "SVolumeElement[]"<>" "<>"\:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:9002\:914d\:4f53\:5143\:8868\:8fbe\:5f0f\:ff08\:9ed8\:8ba4\:4e0b\:6307\:6807\:4e3aa,b,c...).\n"<>"SVolumeElement[indices]"<>"\:83b7\:53d6\:4e0b\:6307\:6807\:987a\:5e8f\:4e3a\:5217\:8868indices\:7684\:9002\:914d\:4f53\:5143\:8868\:8fbe\:5f0f."
-
-
-SetCoordinates::usage = "SetCoordinates[coordinates_List]"<>" "<>"coordinates\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7."
-
-SCoordinatesTransform::usage = "SCoordinatesTransform[targetCoordinates, transformation]"<>" "<>"targetCoordinates\:662f\:76ee\:6807\:5750\:6807\:7cfb\:5217\:8868\:ff0ctransformation\:4e3a\:53d8\:6362\:89c4\:5219."
-
-SetMetric::usage = "SetMetric[components]"<>" "<>"\:5728\:8bbe\:7f6e\:5750\:6807\:7cfb\:540e\:ff0c\:8bbe\:7f6e\:5ea6\:89c4g\:5728\:8be5\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635components"<>"\n"<>"SetMetric[components_Array, coordinates_List]"<>" "<>"\:8bbe\:7f6e\:5ea6\:89c4g\:5728\:5750\:6807\:7cfbcoordinates\:4e0b\:7684\:5206\:91cf\:77e9\:9635components.\n"<>"SetMetric[components_Array, coordinates_List, metricSymbol_Symbol] \:8bbe\:7f6e\:5ea6\:89c4g\:5728\:5750\:6807\:7cfbcoordinates\:4e0b\:7684\:5206\:91cf\:77e9\:9635components\:ff0c\:548c\:5ea6\:89c4\:7684\:8868\:793a\:7b26\:53f7metricSymbol. "
-
-SetMetricSymbol::usage = "SetMetricSymbol[g]"<>" "<>"\:8bbe\:7f6e\:5ea6\:89c4\:7b26\:53f7\:4e3ag."
-
-SetTensor::usage = "SetTensor[\!\(\*SuperscriptBox[SubscriptBox[\(T\), \(sub\)], \(sup\)]\), comopents]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:53ca\:5176\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf"<>"\n"<>"SetTensor[T_STensor, components]"<>" "<>"\:8bbe\:7f6e\:5f20\:91cfT\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf."
+STensorInfo::usage = "STensorInfo[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \!\(\*SuperscriptBox[SubscriptBox[\(expr\:662f\:4e00\:4e2a\:5f62\:5982T\), \(a\)], \(b\)]\)\:7684\:5f20\:91cf\:ff0c\:7ed9\:51fa\:8be5\:5f20\:91cf\:7684\:5206\:91cf\:4fe1\:606f.
+STensorInfo[\!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\)] Show the components of expr. expr is a tensor like \!\(\*SuperscriptBox[SubscriptBox[\(T\), \(abc\)], \(def\)]\).
+STensorInfo[\!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\)] \:7ed9\:51fa\:540d\:4e3aT\:7684\:6240\:6709\:5f20\:91cf\:7684\:5206\:91cf\:4fe1\:606f\:5217\:8868.
+STensorInfo[\!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\)] Show the components of all tensors named \!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\).
+STensorInfo[\!\(\*StyleBox[\"T_STensor\",\nFontSlant->\"Italic\"]\)] \*StyleBox[\(\:7ed9\:51faSTensor\:5bf9\:8c61\!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\)\:7684\:5206\:91cf\:4fe1\:606f\)].
+STensorInfo[\!\(\*StyleBox[\"T_STensor\",\nFontSlant->\"Italic\"]\)] Show the components of STensor \!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\)."
 
 
-STSymmetrize::usage = "STSymmetrize[expr, permutation_List]"<>" "<>"\:5c06expr\:8868\:793a\:7684\:5f20\:91cf\:8fdb\:884c\:5bf9\:79f0\:5316\:ff0c\:5bf9\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."<>"\n"<>"STSymmetrize[T_STensor, permutation_List]"<>" "<>"\:5c06STensor T\:8fdb\:884c\:5bf9\:79f0\:5316\:ff0c\:5bf9\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."
-
-STAntiSymmetrize::usage = "STAntiSymmetrize[expr, permutation_List]"<>" "<>"\:5c06expr\:8868\:793a\:7684\:5f20\:91cf\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."<>"\n"<>"STAntiSymmetrize[T_STensor, permutation_List]"<>" "<>"\:5c06STensor T\:8fdb\:884c\:53cd\:79f0\:5316\:ff0c\:53cd\:79f0\:5316\:7684\:6307\:6807\:4e3apermutation\:5217\:8868\:4e2d\:7684\:6307\:6807."
-
-
-STCalculate::usage = "STCalculate[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80."
-
-STSpecify::usage = "STSpecify[expr]"<>" "<>"\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0fexpr\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97\:ff0c\:5f97\:5230\:7ed3\:679c\:5f20\:91cf\:7684\:5177\:4f53\:6307\:6807\:5206\:91cf\:5f62\:5f0f."
-
-STSimSpecify::usage = "STSimSpecify[expr]"<>" "<>"\:5c06\:8868\:8fbe\:5f0f\:5148\:8fdb\:884c\:53ef\:80fd\:7684\:7b80\:5316\:518d\:8ba1\:7b97\:5176\:5177\:4f53\:6307\:6807\:7684\:5206\:91cf\:5f62\:5f0f."
+MetricInfo::usage = "MetricInfo[] \:83b7\:53d6\:5ea6\:89c4\:53ca\:5176\:9006\:53d8\:6362\:7684\:5206\:91cf.
+MetricInfo[] Get the information of both metric and its inverse."
 
 
-STCalcTensor::usage = "STCalcTensor[\"Tensor\"]"<>" "<>"\:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar, EinsteinTensor, WeylTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:ff0c\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:8ba1\:7b97\:5f20\:91cfTensor."<>"\n"<>"STCalcTensor[\"Tensor\", metric, coordinates]"<>" "<>"\:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:548c\:5750\:6807\:7cfb\:ff0c\:8ba1\:7b97\:5f20\:91cfTensor."
+CoordinatesInfo::usage = "CoordinatesInfo[] \:83b7\:53d6\:5750\:6807\:7cfb\:5217\:8868.
+CoordinatesInfo[] Get the list of coordinate system."
 
 
-SCalcChristoffel::usage = "SCalcChristoffel[metric, coordinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
-
-SCalcRiemannTensor::usage = "SCalcRiemannTensor[metric, coordinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(R\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)-(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f)."
-
-SCalcRicciTensor::usage = "SCalcRicciTensor[metric, coordinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SubscriptBox[\(R\), \(\[Mu]\[Nu]\)]\)."
-
-SCalcRicciScalar::usage = "SCalcRicciScalar[metric, coordinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:6807\:91cf."
-
-SCalcEinsteinTensor::usage = "SCalcEinsteinTensor[metric, coordinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Einstein\:5f20\:91cf\:7684\:5206\:91cf."
-
-SCalcWeylTensor::usage = "SCalcWeylTensor[metric, coordinates]"<>" "<>"\:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Weyl\:5f20\:91cf\:7684\:5206\:91cf."
+SLineElement::usage = "SLineElement[] \:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:7ebf\:5143\:8868\:8fbe\:5f0f.
+SLineElement[] Get the line element with current metric and coordinate system."
 
 
-BoostMatrix::usage = "Boost[velocity]"<>" "<>"\:5728\:95f5\:5f0f\:65f6\:7a7a\:4e0b\:ff0c\:7ed9\:5b9a\:7a7a\:95f4\:901f\:5ea6\:77e2\:91cf\:ff0c\:6c42\:51fa\:5176\:51b3\:5b9a\:7684\:4f2a\:8f6c\:52a8\:77e9\:9635.\n"<>"Boost[velocity, dimension]"<>" "<>"\:7ed9\:5b9a\:95f5\:5f0f\:65f6\:7a7a\:7684\:7ef4\:6570\:548c\:7a7a\:95f4\:901f\:5ea6\:77e2\:91cf\:ff0c\:6c42\:51fa\:5176\:51b3\:5b9a\:7684\:4f2a\:8f6c\:52a8\:77e9\:9635.\n"
+SVolumeElement::usage = "SVolumeElement[] \:83b7\:53d6\:5f53\:524d\:5ea6\:89c4\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:9002\:914d\:4f53\:5143\:8868\:8fbe\:5f0f\:ff08\:9ed8\:8ba4\:4e0b\:6307\:6807\:4e3aa,b,c...).
+SVolumeElement[] Get the expression of volume element with current metric and coordinate system(default indices are a,b,c...).
+SVolumeElement[\!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)] \:83b7\:53d6\:4e0b\:6307\:6807\:987a\:5e8f\:4e3a\:5217\:8868\!\(\*
+StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)\:7684\:9002\:914d\:4f53\:5143\:8868\:8fbe\:5f0f.
+SVolumeElement[\!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)] Get the expression of volume element with given \!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\))."
 
+
+SetCoordinates::usage = "SetCoordinates[\!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \*StyleBox[\(\!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)\:662f\:4e00\:4e2a\:7b26\:53f7\:5217\:8868\)]\:ff0c\:5305\:542b\:5750\:6807\:7cfb\:6240\:7528\:7684\:7b26\:53f7.
+SetCoordinates[\!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\) is a list of coordinate system symbols."
+
+
+SCoordinatesTransform::usage = "SCoordinatesTransform[\!\(\*StyleBox[\"targetCoordinates\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"transformation\",\nFontSlant->\"Italic\"]\)] \!\(\*StyleBox[\"targetCoordinates\",\nFontSlant->\"Italic\"]\)\:662f\:76ee\:6807\:5750\:6807\:7cfb\:5217\:8868\:ff0c\!\(\*StyleBox[\"transformation\",\nFontSlant->\"Italic\"]\)\:662f\:5f53\:524d\:5750\:6807\:7cfb\:5411\:76ee\:6807\:5750\:6807\:7cfb\:7684\:53d8\:6362\:89c4\:5219\:ff08\:5f53\:524d\:5750\:6807\:7cfb\:7684\:7b26\:53f7\:8868\:793a\:4e3a\:76ee\:6807\:5750\:6807\:7cfb\:7684\:51fd\:6570\:ff09.
+SCoordinatesTransform[\!\(\*StyleBox[\"targetCoordinates\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"transformation\",\nFontSlant->\"Italic\"]\)] \!\(\*StyleBox[\"tragetCoordinates\",\nFontSlant->\"Italic\"]\) is the tagret coordinate system. \!\(\*StyleBox[\"transformation\",\nFontSlant->\"Italic\"]\) gives the list of rule from current coordinates to target coordinates(current coordinates are functions of target coordinates)."
+
+
+SetMetric::usage = "SetMetric[\!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\)] \:5728\:8bbe\:7f6e\:5750\:6807\:7cfb\:540e\:ff0c\:8bbe\:7f6e\:5ea6\:89c4\:5728\:8be5\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\".\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\"\\\\n\",\nFontSlant->\"Italic\"]\).
+SetMetric[\!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\)] After coordinate system set, set the \!\(\*StyleBox[\"components\",\nFontWeight->\"Plain\",\nFontSlant->\"Italic\"]\) of metric.\!\(\*StyleBox[\"\\\\n\",\nFontSlant->\"Italic\"]\).
+SetMetric[\!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \:8bbe\:7f6e\:5ea6\:89c4\:5728\:5750\:6807\:7cfb\!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)\:4e0b\:7684\:5206\:91cf\:77e9\:9635\!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\".\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\"\\\\n\",\nFontSlant->\"Italic\"]\).
+SetMetric[\!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] Set both \!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\) of metric and corresponding \!\(\*StyleBox[\"coordinate\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\"system\",\nFontSlant->\"Italic\"]\).\!\(\*StyleBox[\"\\\\n\",\nFontSlant->\"Italic\"]\).
+SetMetric[\!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"metricSymbol\",\nFontSlant->\"Italic\"]\)] \:8bbe\:7f6e\:5ea6\:89c4\:5728\:5750\:6807\:7cfb\!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)\:4e0b\:7684\:5206\:91cf\:77e9\:9635\!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\)\:ff0c\:548c\:5ea6\:89c4\:7684\:8868\:793a\:7b26\:53f7\!\(\*StyleBox[\"metricSymbol\",\nFontSlant->\"Italic\"]\).
+SetMetric[\!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"metricSymbol\",\nFontSlant->\"Italic\"]\)] Set \!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\) of metric, coordinate system \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\) and the metric symbol \!\(\*StyleBox[\"metricSymbol\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\".\",\nFontSlant->\"Italic\"]\)."
+
+
+SetMetricSymbol::usage = "SetMetricSymbol[\!\(\*StyleBox[\"g\",\nFontSlant->\"Italic\"]\)] \:8bbe\:7f6e\:5ea6\:89c4\:7b26\:53f7\:4e3ag.
+SetMetricSymbol[\!\(\*StyleBox[\"g\",\nFontSlant->\"Italic\"]\)] Set metric symbol to be \!\(\*StyleBox[\"g\",\nFontSlant->\"Italic\"]\)"
+
+
+SetTensor::usage = "SetTensor[\!\(\*SuperscriptBox[SubscriptBox[\(\!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\)\), \(\!\(\*StyleBox[\"sub\",\nFontSlant->\"Italic\"]\)\)], \(\!\(\*StyleBox[\"sup\",\nFontSlant->\"Italic\"]\)\)]\), \!\(\*StyleBox[\"comopents\",\nFontSlant->\"Italic\"]\)] \:8bbe\:7f6e\:5f20\:91cf\!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\)\:53ca\:5176\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:ff08\:4e5f\:53ef\:4ee5\:4f7f\:7528STensor[T, {sub}, {sup}]\:7684\:5f62\:5f0f\:ff09.
+SetTensor[\!\(\*SuperscriptBox[SubscriptBox[\(\!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\)\), \(\!\(\*StyleBox[\"sub\",\nFontSlant->\"Italic\"]\)\)], \(\!\(\*StyleBox[\"sup\",\nFontSlant->\"Italic\"]\)\)]\), comopents] set \!\(\*StyleBox[\"components\",\nFontSlant->\"Italic\"]\) of tensor \!\(\*StyleBox[SuperscriptBox[SubscriptBox[\"T\", \"sub\"], \"sup\"],\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)(You can use form STensor[\!\(\*StyleBox[\"T\",\nFontSlant->\"Italic\"]\), {\!\(\*StyleBox[\"sub\",\nFontSlant->\"Italic\"]\)}, {\!\(\*StyleBox[\"sup\",\nFontSlant->\"Italic\"]\)}], too)."
+
+
+STSymmetrize::usage = "STSymmetrize[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)] \*StyleBox[\(\:5c06\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\:8fdb\:884c\:5bf9\:79f0\:5316\)]\:ff0c\*StyleBox[\(\:5bf9\:79f0\:5316\:7684\:6307\:6807\:4e3a\!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)\:5217\:8868\:4e2d\:7684\:6307\:6807\)].
+STSymmetrize[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)] Symmetrize the abstract index notation expression \!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\".\",\nFontSlant->\"Italic\"]\) \!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)is the list of indices to be symmetrized."
+
+
+STAntiSymmetrize::usage = "STAntiSymmetrize[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)] \:5c06\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\:8868\:793a\:7684\:5f20\:91cf\:8fdb\:884c\:53cd\:5bf9\:79f0\:5316\:ff0c\:53cd\:5bf9\:79f0\:5316\:7684\:6307\:6807\:4e3a\!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)\:5217\:8868\:4e2d\:7684\:6307\:6807.
+STAntiSymmetrize[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)] Antisymmetrize the abstract index notation expression \!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\".\",\nFontSlant->\"Italic\"]\) \!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)is the list of indices to be antisymmetrized."
+
+
+STCalculate::usage = "STCalculate[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \*StyleBox[\(\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0f\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80\)].
+STCalculate[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] simplify the tensors expression with abstract index notation."
+
+
+STSpecify::usage = "STSpecify[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97\:ff0c\:5f97\:5230\:7ed3\:679c\:5f20\:91cf\:7684\:5177\:4f53\:6307\:6807\:5206\:91cf\:5f62\:5f0f.
+STSpecify[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Specify the abstract expression. Calculate the components of expression in current coordinate system and metric."
+
+
+STSimSpecify::usage = "STSimSpecify[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06\:8868\:8fbe\:5f0f\:5148\:8fdb\:884c\:53ef\:80fd\:7684\:7b80\:5316\:518d\:8ba1\:7b97\:5176\:5177\:4f53\:6307\:6807\:7684\:5206\:91cf\:5f62\:5f0f.
+STSimSpecify[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Do STCalculate to simplify first. Then, do STSpecify."
+
+
+STCalcTensor::usage = "STCalcTensor[\"Tensor\"] \:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar, EinsteinTensor, WeylTensor.
+STCalcTensor[\"Tensor\"] Calculate Tensor such as: Christoffel, RiemannTensor, RicciTensor, RicciScalar, EinsteinTensor, WeylTensor.
+STCalcTensor[\"Tensor\", \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\)] \:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:ff0c\:5728\:5f53\:524d\:5750\:6807\:7cfb\:4e0b\:8ba1\:7b97\:5f20\:91cfTensor.
+STCalcTensor[\"Tensor\", \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\)] Calculate the tensor with given \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\).
+STCalcTensor[\"Tensor\", \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \:91cd\:65b0\:7ed9\:5b9a\:5ea6\:89c4\:5206\:91cf\:548c\:5750\:6807\:7cfb\:ff0c\:8ba1\:7b97\:5f20\:91cfTensor.
+STCalcTensor[\"Tensor\", \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] Calculate the tensor with given \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\) and coordinate system \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)."
+
+
+SCalcChristoffel::usage = "SCalcChristoffel[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97\:514b\:6c0f\:7b26\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\) -(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f).
+SCalcChristoffel[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] Given \!\(\*StyleBox[\"coordinate\",\nFontSlant->\"Italic\"]\) system and components of \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\".\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)Calculate the components of Christoffel Symbol \!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalGamma]\), \(\[Mu]\[Nu]\)], \(\[Sigma]\)]\)(pay attention to the order of the indices)."
+
+
+SCalcRiemannTensor::usage = "SCalcRiemannTensor[\!\(\*
+StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*
+StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Riemann\:66f2\:7387\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SuperscriptBox[SubscriptBox[\(R\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)-(\:6ce8\:610f\:4e0a\:4e0b\:6307\:6807\:987a\:5e8f).
+SCalcRiemannTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] Given \!\(\*StyleBox[\"coordinate\",\nFontSlant->\"Italic\"]\) system and components of \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\".\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)Calculate the components of Riemann Tensor \!\(\*SuperscriptBox[SubscriptBox[\(R\), \(\[Mu]\[Nu]\[Sigma]\)], \(\[Rho]\)]\)(pay attention to the order of the indices)."
+
+
+SCalcRicciTensor::usage = "SCalcRicciTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:5f20\:91cf\:7684\:5206\:91cf\!\(\*SubscriptBox[\(R\), \(\[Mu]\[Nu]\)]\).
+SCalcRicciTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] Given \!\(\*StyleBox[\"coordinate\",\nFontSlant->\"Italic\"]\) system and components of \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\). Calculate the components of Ricci Tensor \!\(\*SubscriptBox[\(R\), \(\[Mu]\[Nu]\)]\)."
+
+
+SCalcRicciScalar::usage = "SCalcRicciScalar[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Ricci\:6807\:91cf.
+SCalcRicciScalar[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] Given \!\(\*StyleBox[\"coordinate\",\nFontSlant->\"Italic\"]\) system and components of \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\).\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)Calculate the components of Ricci Scalar R."
+
+
+SCalcEinsteinTensor::usage = "SCalcEinsteinTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\!\(\*SubscriptBox[\(\:8ba1\:7b97Einstein\:5f20\:91cf\:7684\:5206\:91cfG\), \(\[Mu]\[Nu]\)]\).
+SCalcEinsteinTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] Given \!\(\*StyleBox[\"coordinate\",\nFontSlant->\"Italic\"]\) system and components of \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\).\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)Calculate the components of Einstein Tensor \!\(\*SubscriptBox[\(G\), \(\[Mu]\[Nu]\)]\)."
+
+
+SCalcWeylTensor::usage = "SCalcWeylTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Weyl\:5f20\:91cf\:7684\:5206\:91cf.
+SCalcWeylTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)]  Given \!\(\*StyleBox[\"coordinate\",\nFontSlant->\"Italic\"]\) system and components of \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\). Calculate the components of Weyl Tensor \!\(\*SubscriptBox[\(C\), \(abcd\)]\)."
+
+BoostMatrix::usage = "BoostMatrix[\!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\)] \:5728\:95f5\:5f0f\:65f6\:7a7a\:4e0b\:ff0c\:7ed9\:5b9a\:7a7a\:95f4\:901f\:5ea6\:77e2\:91cf\:ff0c\:6c42\:51fa\:5176\:51b3\:5b9a\:7684\:4f2a\:8f6c\:52a8\:77e9\:9635.
+BoostMatrix[\!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\)] Given spatial \!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)vector\!\(\*StyleBox[\",\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)calculate the boost matrix in Minkowski spacetime of corresponding dimensions. 
+BoostMatrix[\!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"dimension\",\nFontSlant->\"Italic\"]\)]\:7ed9\:5b9a\:95f5\:5f0f\:65f6\:7a7a\:7684\:7ef4\:6570\:548c\:7a7a\:95f4\:901f\:5ea6\:77e2\:91cf\:ff0c\:6c42\:51fa\:5176\:51b3\:5b9a\:7684\:4f2a\:8f6c\:52a8\:77e9\:9635.
+BoostMatrix[\!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"dimension\",\nFontSlant->\"Italic\"]\)] Given spatial \!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)vector and \!\(\*StyleBox[\"dimension\",\nFontSlant->\"Italic\"]\) of Minkowski spacetime\!\(\*StyleBox[\",\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)calculate the boost matrix."
 
 SpTmHelp::usage = "\:83b7\:53d6\:4e00\:4e9b\:5e2e\:52a9\:4fe1\:606f."
-
+SpTmHelp::usage = "Get some help."
 
 Begin["Private`"]
 
