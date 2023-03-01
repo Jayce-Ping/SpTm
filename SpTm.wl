@@ -20,7 +20,7 @@ THE SOFTWARE IS PROVIDED \[OpenCurlyDoubleQuote]AS IS\[CloseCurlyDoubleQuote], W
 BeginPackage["SpTm`"]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*::usage information*)
 
 
@@ -138,13 +138,18 @@ SCalcEinsteinTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*
 SCalcWeylTensor::usage = "SCalcWeylTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)] \:7ed9\:5b9a\:5750\:6807\:7cfb\:ff0c\:5e76\:7ed9\:51fa\:5ea6\:89c4\:5728\:8be5\:5750\:6807\:7cfb\:4e0b\:7684\:5206\:91cf\:77e9\:9635\:ff0c\:8ba1\:7b97Weyl\:5f20\:91cf\:7684\:5206\:91cf.
 SCalcWeylTensor[\!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"coordinates\",\nFontSlant->\"Italic\"]\)]  Given \!\(\*StyleBox[\"coordinate\",\nFontSlant->\"Italic\"]\) system and components of \!\(\*StyleBox[\"metric\",\nFontSlant->\"Italic\"]\). Calculate the components of Weyl Tensor \!\(\*SubscriptBox[\(C\), \(abcd\)]\)."
 
+
 BoostMatrix::usage = "BoostMatrix[\!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\)] \:5728\:95f5\:5f0f\:65f6\:7a7a\:4e0b\:ff0c\:7ed9\:5b9a\:7a7a\:95f4\:901f\:5ea6\:77e2\:91cf\:ff0c\:6c42\:51fa\:5176\:51b3\:5b9a\:7684\:4f2a\:8f6c\:52a8\:77e9\:9635.
 BoostMatrix[\!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\)] Given spatial \!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)vector\!\(\*StyleBox[\",\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)calculate the boost matrix in Minkowski spacetime of corresponding dimensions. 
 BoostMatrix[\!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"dimension\",\nFontSlant->\"Italic\"]\)]\:7ed9\:5b9a\:95f5\:5f0f\:65f6\:7a7a\:7684\:7ef4\:6570\:548c\:7a7a\:95f4\:901f\:5ea6\:77e2\:91cf\:ff0c\:6c42\:51fa\:5176\:51b3\:5b9a\:7684\:4f2a\:8f6c\:52a8\:77e9\:9635.
 BoostMatrix[\!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"dimension\",\nFontSlant->\"Italic\"]\)] Given spatial \!\(\*StyleBox[\"velocity\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)vector and \!\(\*StyleBox[\"dimension\",\nFontSlant->\"Italic\"]\) of Minkowski spacetime\!\(\*StyleBox[\",\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)calculate the boost matrix."
 
+
 SpTmHelp::usage = "\:83b7\:53d6\:4e00\:4e9b\:5e2e\:52a9\:4fe1\:606f."
+
+
 SpTmHelp::usage = "Get some help."
+
 
 Begin["Private`"]
 
