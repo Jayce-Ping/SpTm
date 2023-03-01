@@ -27,8 +27,10 @@ BeginPackage["SpTm`"]
 STensor::usage = "STensor[\!\(\*StyleBox[\"TensorName\",\nFontSlant->\"Italic\"]\), \*StyleBox[\(\!\(\*StyleBox[\"subindices\",\nFontSlant->\"Italic\"]\)_List\)], \*StyleBox[\(\!\(\*StyleBox[\"superindices\",\nFontSlant->\"Italic\"]\)_List\)]] \:4e3aSTensor\:5bf9\:8c61\:7684\:6807\:51c6\:683c\:5f0f\:ff0c\:662f\:5f20\:91cf\:8fdb\:884c\:62bd\:8c61\:6307\:6807\:8ba1\:7b97\:65f6\:6240\:7528\:7684\:8868\:8fbe\:5f62\:5f0f.
 STensor[\*StyleBox[\(\!\(\*StyleBox[\"TensorName\",\nFontSlant->\"Italic\"]\)_Symbol\)], \*StyleBox[\(\!\(\*StyleBox[\"subindices\",\nFontSlant->\"Italic\"]\)_List\)], \*StyleBox[\(\!\(\*StyleBox[\"superindices\",\nFontSlant->\"Italic\"]\)_List\)]] is the standard form of STensor, which is used to represent a tensor with abstract indices."
 
+
 ShowForm::usage = "ShowForm[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06STensor\:8f6c\:5316\:4e3a\:6807\:51c6\:683c\:5f0f\:ff0c\:4e0e\:8868\:8fbe\:5f0f\:5176\:4f59\:90e8\:5206\:5747\:4ee5StandardForm\:683c\:5f0f\:8f93\:51fa.
 ShowForm[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Make STensor into a more readable form. The rest of expression will be shown in StandardForm."
+
 
 InputExplain::usage = "InputExplain[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8f6c\:5316\:4e3a\:5185\:90e8\:8ba1\:7b97\:65f6\:4f7f\:7528\:7684\:5f62\:5f0f.
 InputExplain[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Transform the \!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\) into the form with STensors."
