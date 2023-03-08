@@ -300,7 +300,7 @@ SetTensor::NoCoordinates = "\:672a\:8bbe\:7f6e\:5750\:6807\:7cfb.";
 SetTensor::WrongDimension = "\:5f20\:91cf\:5206\:91cf\:7684\:7ef4\:6570 (`1`) \:4e0e\:5750\:6807\:7cfb\:7ef4\:6570 (`2`) \:4e0d\:5339\:914d.";
 SetTensor::WrongShape = "\:5f20\:91cf\:5206\:91cf\:7684\:5c42\:6570 (`1`) \:4e0e\:5f20\:91cf\:578b\:53f7 (`2`) \:4e0d\:5339\:914d.";
 
-SetTensor[T_Symbol, components_?NumberQ] := Module[
+SetTensor[T_Symbol, components_?NumericQ] := Module[
 {
 	temp = STensor[T, {}, {}]
 },
@@ -308,7 +308,6 @@ SetTensor[T_Symbol, components_?NumberQ] := Module[
 	AppendTo[TensorComponents, temp -> components];
 	Protect[TensorComponents];
 ]
-
 SetTensor[expr__, components_List] := Module[
 {
 	T = InputExplain[expr]
@@ -530,12 +529,13 @@ componentsTrans[components_?ArrayQ, target_List, transformation_List] := Module[
 	term
 },
 	(*(0,n)\:578b\:5f20\:91cf*)
-	coeff[sup_List,sub_List]:=Module[
+	coeff[sup_List,sub_List] := Module[
 	{
 		temp = Table[{sup[[i]],sub[[i]]},{i,Length[sup]}]
 	},
 		Array[jacobi[[sup[[#]],sub[[#]]]]&, {Length[sup]}, 1, Times]
 	];
+	
 	(*\:4e0b\:6807\:4e3asub\:7684\:9879*)
 	term[sub_List] := Array[coeff[{##},sub]components[[##]]/.transformation&, dimension, 1, Plus];
 	(*undone*)
@@ -561,7 +561,7 @@ SetMetricSymbol[metricSymbol_Symbol] := Module[{},
 
 SetMetric[Components_?ArrayQ]:=Module[ {}, SetMetric[Components, CurrentCoordinates] ];
 
-SetMetric[Components_?ArrayQ, Coordinates_List]:=Module[ {}, SetMetric[Components, Coordinates, Global`g] ];
+SetMetric[Components_?ArrayQ, Coordinates_List]:=Module[ {}, SetMetric[Components, Coordinates, MetricSymbol] ];
 
 SetMetric[Components_?ArrayQ, Coordinates_List, metricSymbol_Symbol]:=Module[
 {
@@ -1382,15 +1382,15 @@ SCalcSpecificExpression[expr__] := Module[
 	expression = Simplify[expression//.calcReplaceRule];
 	
 	If[
-		NumberQ[expression],
+		NumericQ[expression],
 		ShowSTensor[STensor[Global`\[ScriptCapitalT], {}, {}], 0],
 		
 		(*\:7ed3\:679c\:7684expression\:5e94\:8be5\:4e3a\:4e00\:4e2aATensor*)
 		(*\:8bb0\:5f55\:5206\:91cf*)
-		components = Last[expression];
+		components = TensorTranspose[Last[expression], FindPermutation[Join[#1, #2], Join[Sort[#1], Sort[#2]]]& [expression[[1]],expression[[2]]]];
 		(*\:5c06ATensor\:66ff\:6362\:56deSTensor*)
 		output = expression //. {
-				T_ATensor :> STensor[Global`\[ScriptCapitalT], T[[1]]/.specificReplaceRule, T[[2]]/.specificReplaceRule]
+				T_ATensor :> STensor[Global`\[ScriptCapitalT], Sort[T[[1]]]/.specificReplaceRule, Sort[T[[2]]]/.specificReplaceRule]
 				};
 		ShowSTensor[output, components]
 	]
@@ -1682,7 +1682,12 @@ BoostMatrix[v_?VectorQ, n_Integer] := Module[
 		Message[BoostMatrix::fasterThanLight, norm];
 	];
 	\[Gamma] = 1 / Sqrt[1 - norm^2];
-	Prepend[Transpose[Prepend[Array[If[#1 == #2, 1, 0] + If[norm == 0, 0, (\[Gamma]-1) v[[#1]] v[[#2]] / norm^2]&, {n - 1, n - 1}], -\[Gamma] v]], \[Gamma] Prepend[-v, 1]]
+
+	If[
+		norm === 0,
+		IdentityMatrix[Length[v]+1],
+		Prepend[Transpose[Prepend[Array[ If[#1 == #2, 1, 0] + (\[Gamma]-1) v[[#1]] v[[#2]] / norm^2 &, {n - 1, n - 1}], -\[Gamma] v]], \[Gamma] Prepend[-v, 1]]
+	]
 ]
 
 

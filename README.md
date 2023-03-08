@@ -1,6 +1,6 @@
 # Space-Time (SpTm)
 
-# A Differential Geometry and General Relativity Calculations Package for Wolfram Mathematica
+# A Wolfram Mathematica Package for Differential Geometry and General Relativity Calculations.
 
 - [中文](#中文)
 
@@ -27,7 +27,7 @@
 这里介绍两种安装和使用的方法：
 
 - 任意打开一个Mathematica笔记本，执行
-    
+  
     ```mathematica
     URLDownload["https://raw.githubusercontent.com/Jayce-Ping/SpTm/main/SpTm.wl", FileNameJoin[{$UserBaseDirectory, "Applications", "SpTm.wl"}]]
     ```
@@ -35,7 +35,7 @@
     在这之后，在任何笔记本中导入SpTm只需要执行`` <<SpTm` ``或 ``Needs["SpTm`"]``即可。
     
 - 将``SpTm.wl``文件下载至当前目录，在当前目录下新建笔记本，在笔记本中执行
-    
+  
     ```mathematica
     Get[FileNameJoin[{NotebookDirectory[], "SpTm.wl"}]]
     ```
@@ -74,7 +74,7 @@ Here are two ways to install and use:
     After this, to import SpTm in any notebook just execute `` <<SpTm` `` or  ``Needs["SpTm`"]``.
     
 - Download ``SpTm.wl`` to the current directory, create a new Notebook, and run
-    
+  
     ```mathematica
     Get[FileNameJoin[{NotebookDirectory[], "SpTm.wl"}]]
     ```
