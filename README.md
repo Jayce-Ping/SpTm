@@ -20,7 +20,7 @@
 
 - 你可以计算一些常用张量的分量，如：黎曼张量、里奇张量、爱因斯坦张量等。
 
-- 具体使用方法和例子见[**Document_CN.nb**](https://github.com/Jayce-Ping/SpTm/blob/main/Document_CN.nb)。
+- 具体使用方法和例子见[**Documentation_CN.nb**](https://github.com/Jayce-Ping/SpTm/blob/main/Document_CN.nb)。
 
 
 ### 安装
@@ -59,7 +59,7 @@
 
 - You can calculate the components of some common tensors, such as Riemann tensor, Ricc tensor and Einstein tensor, etc.
 
-- For details and examples of use, see [**Document_EN.nb**](https://github.com/Jayce-Ping/SpTm/blob/main/Document_EN.nb).
+- For details and examples of use, see [**Documentation_EN.nb**](https://github.com/Jayce-Ping/SpTm/blob/main/Document_EN.nb).
 
 ### Installation
 
