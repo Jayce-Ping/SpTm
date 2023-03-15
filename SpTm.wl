@@ -931,7 +931,7 @@ STensorCalcRule:={
 	(*\:5206\:914d\:5f8b*)
 	T_STensor*(P_STensor+Q_STensor):>T*P+T*Q,
 	T_STensor*((\[Alpha]_?NumberQ|_Symbol)*P_STensor+ Q_STensor):>\[Alpha]*T*P+T*Q,
-	T_STensor*((\[Alpha]_?NumberQ|_Symbol)*P_STensor+(\[Beta]_?NumberQ|_Symbol)*Q_STensor):>\[Alpha]*T*P+\[Beta]*T*Q,
+	T_STensor*((\[Alpha]_?NumberQ|_Symbol)*P_STensor+(\[Beta]_?NumberQ|_Symbol)*Q_STensor):>\[Alpha]*T*P+\[Beta]*T*Q
 };
 
 
