@@ -708,8 +708,8 @@ InputExplain[expr__] := Module[
 	};
 	powerplusRule =
 	{
-		Power[Subscript[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol], Plus[a_Symbol, b___Symbol]] :> Times[ STensor[x, split[y], split[a]], Power[Subscript[x, y], Plus[b]]],
-		Power[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, Plus[a_Symbol, b___Symbol]] :> Times[ STensor[x, {}, split[a]], Power[x, Plus[b]]]
+		Power[Subscript[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol], Plus[a_Symbol, b___]] :> Times[ STensor[x, split[y], split[a]], Power[Subscript[x, y], Plus[b]]],
+		Power[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, Plus[a_Symbol, b___]] :> Times[ STensor[x, {}, split[a]], Power[x, Plus[b]]]
 	};
 	
 	(*\:7279\:6b8a\:5904\:7406Mathematica\:7b14\:8bb0\:672c\:5c06\:81ea\:52a8\:5c06\:6307\:6570\:76f8\:52a0\:7684\:60c5\:51b5*)
@@ -908,15 +908,16 @@ IndicesDown[T_STensor] := Module[
 (*\:5ea6\:89c4\:8fd0\:7b97\:5f8b*)
 MetricInverseRule := {
 	(*g\:4e0e\:5176\:9006\:6620\:5c04\:7f29\:5e76\:5f97\:5230\[Delta]*)
-	STensor[g_, {a_,b_} ,{}] STensor[g_, {}, {a_,c_}] :> STensor[\[Delta], {a}, {c}] /; g == MetricSymbol
+	STensor[g_, {a_, b_} ,{}] STensor[g_, {}, {a_,c_}] :> STensor[Global`\[Delta], {a}, {c}] /; g == MetricSymbol
 };
+
 MetricDownIndex := {
 	(*\:5ea6\:89c4\:964d\:6307\:6807*)
-	STensor[T_, Tsub__, Tsup__]STensor[g_,{a_,b_} ,Null|{}] :> STensor[T, Append[Tsub,b], DeleteElements[Tsup,{a}]] /; g == MetricSymbol && MemberQ[Tsup,a]
+	STensor[T_, Tsub__, Tsup__]STensor[g_,{a_,b_} ,{}] :> STensor[T, Append[Tsub,b], DeleteElements[Tsup,{a}]] /; g == MetricSymbol && MemberQ[Tsup,a]
 };
 MetricUpIndex :={
 	(*\:5ea6\:89c4\:5347\:6307\:6807*)
-	STensor[T_, Tsub__, Tsup__] STensor[g_, Null|{}, {a_,b_}] :> STensor[T, DeleteElements[Tsup,{a}], Append[Tsub,b]] /; g == MetricSymbol && MemberQ[Tsub,a]
+	STensor[T_, Tsub__, Tsup__] STensor[g_, {}, {a_,b_}] :> STensor[T, DeleteElements[Tsup,{a}], Append[Tsub,b]] /; g == MetricSymbol && MemberQ[Tsub,a]
 };
 
 
@@ -927,11 +928,10 @@ MetricUpIndex :={
 (*\:5f20\:91cf\:8fd0\:7b97\:5f8b*)
 STensorCalcRule:={
 	(*\:81ea\:5e26\:52a0\:6cd5\:548c\:4e58\:6cd5\:7684\:4ea4\:6362\:5f8b\:3001\:7ed3\:5408\:5f8b*)
-
 	(*\:5206\:914d\:5f8b*)
 	T_STensor*(P_STensor+Q_STensor):>T*P+T*Q,
 	T_STensor*((\[Alpha]_?NumberQ|_Symbol)*P_STensor+ Q_STensor):>\[Alpha]*T*P+T*Q,
-	T_STensor*((\[Alpha]_?NumberQ|_Symbol)*P_STensor+(\[Beta]_?NumberQ|_Symbol)*Q_STensor):>\[Alpha]*T*P+\[Beta]*T*Q
+	T_STensor*((\[Alpha]_?NumberQ|_Symbol)*P_STensor+(\[Beta]_?NumberQ|_Symbol)*Q_STensor):>\[Alpha]*T*P+\[Beta]*T*Q,
 };
 
 
