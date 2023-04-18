@@ -739,8 +739,8 @@ ShowSTensor[T_STensor] := Module[
 	out = T[[1]],
 	r = {{} -> "", List -> Sequence}
 },
-	If[Length[T[[2]]] > 0, out = Subscript[out, T[[2]] /.r]];
-	If[Length[T[[3]]] > 0, out = Superscript[out, T[[3]] /.r]];
+	If[Length[T[[2]]] > 0, out = SpTm`Private`Superscript[out, T[[2]] /.r]];
+	If[Length[T[[3]]] > 0, out = SpTm`Private`Subscript[out, T[[3]] /.r]];
 	out
 ];
 
