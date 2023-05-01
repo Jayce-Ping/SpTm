@@ -1341,7 +1341,7 @@ SCalcSpecificExpression[expr__] := Module[
 		(*\:4e00\:822c\:5f20\:91cf\:4e58\:6cd5*)
 		Times[T_ATensor, S_ATensor] :> ATensorTimes[T, S],
 		(*\:5f20\:91cf\:6570\:4e58*)
-		Times[k_, T_ATensor] :> ATensorScalarTimes[k,T]/;!MemberQ[k, _ATensor, All],
+		Times[k_, T_ATensor] :> ATensorScalarTimes[k, T]/;FreeQ[k, _ATensor],
 		(*\:5bfc\:6570\:7b97\:7b26\:8fd0\:7b97*)
 		grad_Grad :> SCovariantDerivative[grad[[1]], grad[[2]], coordinates],
 		(*\:6954\:79ef\:8fd0\:7b97*)
