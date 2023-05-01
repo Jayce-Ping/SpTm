@@ -378,12 +378,12 @@ SetCoordinates[Coordinates_List] := Module[
 	TensorComponents = Association[];
 	Protect[TensorComponents];
 	(*\:8bbe\:7f6e\:5750\:6807\:57fa\:5e95*)
-	For[i = 1, i <= dimension, i++,
+	Function[{i},
 		(*\:5750\:6807\:57fa\:5e95*)
 		SetTensor[ STensor[CapitalDifferentialD[#], {}, {Global`a}], Normal @ SparseArray[{i -> 1}, dimension ,0] ]& [CurrentCoordinates[[i]]];
 		(*\:5bf9\:5076\:5750\:6807\:57fa\:5e95*)
 		SetTensor[ STensor[DifferentialD[#], {Global`a}, {}], Normal @ SparseArray[{i -> 1}, dimension ,0] ]& [CurrentCoordinates[[i]]];
-	]
+	]/@Range[dimension];
 ]
 
 (*\:83b7\:53d6\:5f53\:524d\:5750\:6807\:7cfb\:5217\:8868*)
