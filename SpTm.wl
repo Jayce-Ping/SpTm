@@ -726,9 +726,9 @@ InputExplain[expr__] := Module[
 
 
 (*\:5e26\:4e0aPrivate`\:9632\:6b62\:5f71\:54cd\:5916\:90e8*)
-SpTm`Private`Superscript[x_, y_, superIndex__] := Superscript[x, Row[{y, superIndex}]];
+SpTm`Private`Superscript[x_, y_, superIndex___] := Superscript[x, Row[{y, superIndex}]];
 
-SpTm`Private`Subscript[x_, y_, subIndex__] := Subscript[x, Row[{y, subIndex},""]];
+SpTm`Private`Subscript[x_, y_, subIndex___] := Subscript[x, Row[{y, subIndex}]];
 
 
 
