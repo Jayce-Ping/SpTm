@@ -153,7 +153,7 @@ SpTmHelp::usage = "\:83b7\:53d6\:4e00\:4e9b\:5e2e\:52a9\:4fe1\:606f."
 SpTmHelp::usage = "Get some help."
 
 
-Begin["SpTm`Private`"]
+Begin["Private`"]
 
 
 (* ::Section::Closed:: *)
@@ -686,38 +686,23 @@ SVolumeElement[indices_List] := Module[
 
 
 (*\:8f93\:5165\:89e3\:91ca\:ff0c\:6307\:6807\:4e0d\:9700\:8981\:9694\:5f00\:ff0c\:6bcf\:4e2a\:82f1\:6587\:5b57\:6bcd\:88ab\:8ba4\:4e3a\:662f\:4e00\:4e2a\:6307\:6807*)
-
+SetAttributes[InputExplain, HoldFirst];
 InputExplain::DuplicateSubIndex = "\:4e0b\:6307\:6807\:4e2d\:6709\:91cd\:590d. Duplicate Subindex.";
 InputExplain::DuplicateSupIndex = "\:4e0a\:6307\:6807\:4e2d\:6709\:91cd\:590d. Duplicate Superindex.";
-InputExplain[expr__] := Module[
+InputExplain[expr_] := Module[
 {
-	res,
-	sup,
-	sub,
-	InputExplainRule,
-	split,
-	powerplusRule
+	interpreteRule,
+	split
 },
 	
 	split[x_] := ToExpression[StringSplit[ToString[x], ""]];
 	
-	InputExplainRule = {
+	interpreteRule = {
 		Power[Subscript[x_Symbol, y_Symbol], z_Symbol] :> STensor[x, split[y], split[z]],
 		Subscript[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol] :> STensor[x, split[y], {}],
 		Power[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol] :> STensor[x, {}, split[y]]
 	};
-	powerplusRule =
-	{
-		Power[Subscript[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol], Plus[a_Symbol, b___]] :> Times[ STensor[x, split[y], split[a]], Power[Subscript[x, y], Plus[b]]],
-		Power[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, Plus[a_Symbol, b___]] :> Times[ STensor[x, {}, split[a]], Power[x, Plus[b]]]
-	};
-	
-	(*\:7279\:6b8a\:5904\:7406Mathematica\:7b14\:8bb0\:672c\:5c06\:81ea\:52a8\:5c06\:6307\:6570\:76f8\:52a0\:7684\:60c5\:51b5*)
-	res = expr //. powerplusRule;
-	
-	res = res /. InputExplainRule;
-	
-	res
+	expr/. interpreteRule
 ];
 
 
