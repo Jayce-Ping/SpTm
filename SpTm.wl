@@ -32,8 +32,8 @@ ShowForm::usage = "ShowForm[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] 
 ShowForm[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Make STensor into a more readable form. The rest of expression will be shown in StandardForm."
 
 
-InputExplain::usage = "InputExplain[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8f6c\:5316\:4e3a\:5185\:90e8\:8ba1\:7b97\:65f6\:4f7f\:7528\:7684\:5f62\:5f0f.
-InputExplain[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Transform the \!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\) into the form with STensors."
+ToTensorExpression::usage = "ToTensorExpression[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0fexpr\:8f6c\:5316\:4e3a\:5185\:90e8\:8ba1\:7b97\:65f6\:4f7f\:7528\:7684\:5f62\:5f0f.
+ToTensorExpression[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Transform the \!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\) into the form with STensors."
 
 
 STensorInfo::usage = "STensorInfo[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \!\(\*SuperscriptBox[SubscriptBox[\(expr\:662f\:4e00\:4e2a\:5f62\:5982T\), \(a\)], \(b\)]\)\:7684\:5f20\:91cf\:ff0c\:7ed9\:51fa\:8be5\:5f20\:91cf\:7684\:5206\:91cf\:4fe1\:606f.
@@ -95,16 +95,12 @@ STAntiSymmetrize::usage = "STAntiSymmetrize[\!\(\*StyleBox[\"expr\",\nFontSlant-
 STAntiSymmetrize[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\), \!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)] Antisymmetrize the abstract index notation expression \!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\".\",\nFontSlant->\"Italic\"]\) \!\(\*StyleBox[\"indices\",\nFontSlant->\"Italic\"]\)\!\(\*StyleBox[\" \",\nFontSlant->\"Italic\"]\)is the list of indices to be antisymmetrized."
 
 
-STCalculate::usage = "STCalculate[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \*StyleBox[\(\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0f\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80\)].
-STCalculate[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] simplify the tensors expression with abstract index notation."
+STCalcAbstractExpression::usage = "STCalcAbstractExpression[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \*StyleBox[\(\:5c06\:62bd\:8c61\:6307\:6807\:5f20\:91cf\:8868\:8fbe\:5f0f\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\:8fdb\:884c\:8ba1\:7b97\:548c\:5316\:7b80\)].
+STCalcAbstractExpression[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] simplify the tensors expression with abstract index notation."
 
 
-STSpecify::usage = "STSpecify[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97\:ff0c\:5f97\:5230\:7ed3\:679c\:5f20\:91cf\:7684\:5177\:4f53\:6307\:6807\:5206\:91cf\:5f62\:5f0f.
-STSpecify[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Specify the abstract expression. Calculate the components of expression in current coordinate system and metric."
-
-
-STSimSpecify::usage = "STSimSpecify[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06\:8868\:8fbe\:5f0f\:5148\:8fdb\:884c\:53ef\:80fd\:7684\:7b80\:5316\:518d\:8ba1\:7b97\:5176\:5177\:4f53\:6307\:6807\:7684\:5206\:91cf\:5f62\:5f0f.
-STSimSpecify[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Do STCalculate to simplify first. Then, do STSpecify."
+STCalcComponents::usage = "STCalcComponents[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] \:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8fdb\:884c\:8ba1\:7b97\:ff0c\:5f97\:5230\:7ed3\:679c\:5f20\:91cf\:7684\:5177\:4f53\:6307\:6807\:5206\:91cf\:5f62\:5f0f.
+STCalcComponents[\!\(\*StyleBox[\"expr\",\nFontSlant->\"Italic\"]\)] Specify the abstract expression. Calculate the components of expression in current coordinate system and metric."
 
 
 STCalcTensor::usage = "STCalcTensor[\"Tensor\"] \:8ba1\:7b97\:540d\:4e3aTensor\:7684\:5f20\:91cf.Tensor\:53ef\:9009:Christoffel, RiemannTensor, RicciTensor, RicciScalar, EinsteinTensor, WeylTensor.
@@ -162,14 +158,13 @@ Begin["Private`"]
 
 SpTmHelpInfo = {
 	"\:6b22\:8fce\:4f7f\:7528SpTm\:ff01\n",
-	"\[FilledSmallCircle] \:5f20\:91cf\:7684\:4e0b\:6807\:901a\:8fc7Ctrl+-\:8f93\:5165\:ff0c\:4e0a\:6807\:901a\:8fc7Ctrl+^\:8f93\:5165\:ff0c\:901a\:8fc7InputExplain\:51fd\:6570\:53ef\:4ee5\:67e5\:770b\:8868\:8fbe\:5f0f\:5728\:7a0b\:5e8f\:5305\:4e2d\:8f6c\:5316\:540e\:7684\:5f62\:5f0f.\n",
+	"\[FilledSmallCircle] \:5f20\:91cf\:7684\:4e0b\:6807\:901a\:8fc7Ctrl+-\:8f93\:5165\:ff0c\:4e0a\:6807\:901a\:8fc7Ctrl+^\:8f93\:5165\:ff0c\:901a\:8fc7ToTensorExpression\:51fd\:6570\:53ef\:4ee5\:67e5\:770b\:8868\:8fbe\:5f0f\:5728\:7a0b\:5e8f\:5305\:4e2d\:8f6c\:5316\:540e\:7684\:5f62\:5f0f.\n",
 	"\[FilledSmallCircle] \:7a0b\:5e8f\:5305\:4e2d\:4f7f\:7528STensor[T, subIndices, supIndices]\:6765\:8868\:793a\:540d\:79f0\:4e3aT\:ff0c\:4e0b\:6807\:5217\:8868\:4e3asubIndices\:ff0c\:4e0a\:6807\:5217\:8868\:4e3asupIndices\:7684\:5f20\:91cf.\n",
 	"\[FilledSmallCircle] \:7b26\:53f7g\:5c06\:88ab\:8ba4\:4e3a\:662f\:9ed8\:8ba4\:7684\:5ea6\:89c4\:5f20\:91cf\:8868\:793a\:7b26\:53f7\:ff0c\:53ef\:4ee5\:901a\:8fc7SetMetric\:6765\:4fee\:6539. \[Del]\:4e3a\:4e0e\:5176\:76f8\:9002\:914d\:7684\:534f\:53d8\:5bfc\:6570\:7b97\:7b26.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528STensorInfo[T]\:6765\:83b7\:53d6\:5f20\:91cfT\:7684\:5206\:91cf\:4fe1\:606f.\n",
-	"\[FilledSmallCircle] \:4f7f\:7528STCalculate[expr]\:6765\:5316\:7b80\:62bd\:8c61\:6307\:6807\:7684\:5f20\:91cf\:8868\:8fbe\:5f0fexpr.\n",
+	"\[FilledSmallCircle] \:4f7f\:7528STCalcAbstractExpression[expr]\:6765\:5316\:7b80\:62bd\:8c61\:6307\:6807\:7684\:5f20\:91cf\:8868\:8fbe\:5f0fexpr.\n",
 	"\[FilledSmallCircle] \:4f7f\:7528ShowForm[expr]\:5c06\:8868\:8fbe\:5f0f\:663e\:793a\:4e3a\:6807\:51c6\:683c\:5f0f.\n",
-	"\[FilledSmallCircle] \:4f7f\:7528STSpecify[expr]\:5c06\:8868\:8fbe\:5f0f\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:5e76\:8ba1\:7b97.\n",
-	"\[FilledSmallCircle] \:4f7f\:7528STSimSpecify[expr]\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:9002\:5f53\:5316\:7b80\:540e\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:8ba1\:7b97.\n",
+	"\[FilledSmallCircle] \:4f7f\:7528STCalcComponents[expr]\:5c06\:8868\:8fbe\:5f0f\:76f4\:63a5\:8f6c\:5316\:4e3a\:5177\:4f53\:6307\:6807\:8868\:8fbe\:5f0f\:5e76\:8ba1\:7b97.\n",
 	"\[FilledSmallCircle] \:5728\:4f7f\:7528SpTm\:65f6\:ff0c\:6240\:6709\:5c0f\:5199\:82f1\:6587\:5b57\:6bcd(a,b...)\:548c\:5e0c\:814a\:5b57\:6bcd(\[Alpha],\[Beta]...)\:90fd\:4f1a\:88ab\:4fdd\:62a4\:ff0c\:7528\:4e8e\:8868\:793a\:5f20\:91cf\:6307\:6807\:ff0c\:8bf7\:4e0d\:8981\:5c06\:5b83\:4eec\:4f5c\:4e3a\:53d8\:91cf\:540d\:ff0c\:4f46\:53ef\:4ee5\:4f5c\:4e3a\:5750\:6807\:7cfb\:7b26\:53f7\:6216\:5f20\:91cf\:7b26\:53f7.\n",
 	"\[FilledSmallCircle] \:8f93\:5165\"?SpTm`*\"\:67e5\:770b\:53ef\:7528\:51fd\:6570\:4ee5\:53ca\:4f7f\:7528\:65b9\:6cd5."
 };
@@ -248,7 +243,7 @@ STensorInfo::NoTensorName = "\:540d\:4e3a`1`\:7684\:5f20\:91cf\:672a\:8bbe\:7f6e
 (*\:83b7\:53d6\:5f20\:91cf\:4fe1\:606f*)
 STensorInfo[expr__] := Module[
 {
-	tensor = InputExplain[expr]
+	tensor = ToTensorExpression[expr]
 },
 	If[
 		(Head @ tensor =!= STensor|Symbol|DifferentialD|CapitalDifferentialD),
@@ -310,7 +305,7 @@ SetTensor[T_Symbol, components_?NumericQ] := Module[
 ]
 SetTensor[expr__, components_List] := Module[
 {
-	T = InputExplain[expr]
+	T = ToTensorExpression[expr]
 },
 	(*\:5224\:65ad\:683c\:5f0f\:662f\:5426\:6b63\:786e*)
 	If[
@@ -682,27 +677,34 @@ SVolumeElement[indices_List] := Module[
 
 
 (* ::Section::Closed:: *)
-(*\:8f93\:5165\:89e3\:91ca Input Explain*)
+(*\:8f93\:5165\:89e3\:91ca ToTensorExpression*)
 
 
 (*\:8f93\:5165\:89e3\:91ca\:ff0c\:6307\:6807\:4e0d\:9700\:8981\:9694\:5f00\:ff0c\:6bcf\:4e2a\:82f1\:6587\:5b57\:6bcd\:88ab\:8ba4\:4e3a\:662f\:4e00\:4e2a\:6307\:6807*)
-SetAttributes[InputExplain, HoldFirst];
-InputExplain::DuplicateSubIndex = "\:4e0b\:6307\:6807\:4e2d\:6709\:91cd\:590d. Duplicate Subindex.";
-InputExplain::DuplicateSupIndex = "\:4e0a\:6307\:6807\:4e2d\:6709\:91cd\:590d. Duplicate Superindex.";
-InputExplain[expr_] := Module[
+ToTensorExpression::DuplicateSubIndex = "\:4e0b\:6307\:6807\:4e2d\:6709\:91cd\:590d. Duplicate Subindex.";
+ToTensorExpression::DuplicateSupIndex = "\:4e0a\:6307\:6807\:4e2d\:6709\:91cd\:590d. Duplicate Superindex.";
+ToTensorExpression[expr_] := Module[
 {
 	interpreteRule,
-	split
+	split,
+	powerplusRule
 },
-	
 	split[x_] := ToExpression[StringSplit[ToString[x], ""]];
 	
 	interpreteRule = {
-		Power[Subscript[x_Symbol, y_Symbol], z_Symbol] :> STensor[x, split[y], split[z]],
+		(Superscript|Power)[Subscript[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol], z_Symbol] :> STensor[x, split[y], split[z]],
 		Subscript[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol] :> STensor[x, split[y], {}],
-		Power[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol] :> STensor[x, {}, split[y]]
+		(Superscript|Power)[x_Symbol|x_DifferentialD|x_CapitalDifferentialD, y_Symbol] :> STensor[x, {}, split[y]]
 	};
-	expr/. interpreteRule
+	(*interpreteRule = {
+		(Superscript|Power)[Subscript[x:Except[_?NumericQ], y:Except[_?NumericQ]], z:Except[_?NumericQ]] :> STensor[x, split[y], split[z]],
+		Subscript[x:Except[_?NumericQ], y:Except[_?NumericQ]] :> STensor[x, split[y], {}],
+		(Superscript|Power)[x:Except[_?NumericQ], y:Except[_?NumericQ]] :> STensor[x, {}, split[y]]
+	};*)
+	powerplusRule = {
+		Power[x_, Plus[y_, z__]] :> Times[Superscript[x, y], Power[x, Plus[z]]]
+	};
+	expr//.powerplusRule/. interpreteRule
 ];
 
 
@@ -743,7 +745,7 @@ ShowSTensor[T_STensor, components_] := Row[{ShowSTensor[T], "=", MatrixForm[comp
 (*\:5173\:4e8eperlist\:7684\:6307\:6807\:5bf9\:79f0\:5316\:67d0\:4e2a\:8868\:8fbe\:5f0f*)
 STSymmetrize[expr__, perList_List] := Module[
 {
-	exp = InputExplain[expr],
+	exp = ToTensorExpression[expr],
 	terms
 },
 	terms = Flatten[exp //.{Plus[x_,y_] :> {x,y}}];
@@ -799,7 +801,7 @@ STSymmetrizeTerm[term_, perList_List] := Module[
 STAntiSymmetrize::WrongInput = "\:8f93\:5165\:683c\:5f0f\:9519\:8bef.";
 STAntiSymmetrize[expr__, perList_List]  := Module[
 {
-	exp = InputExplain[expr],
+	exp = ToTensorExpression[expr],
 	terms
 },
 	terms = Flatten[exp //.{Plus[x_,y_] :> {x,y}}];
@@ -955,11 +957,11 @@ DerivativeCalcRule:={
 (*\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:5316\:7b80 Simplify the Abstract Expression*)
 
 
-STCalculate[expr__]:= Module[
+STCalcAbstractExpression[expr__]:= Module[
 {
 	CalcRule = Join[DerivativeCalcRule, STensorCalcRule, MetricInverseRule]
 },
-	InputExplain[expr]//.CalcRule
+	ToTensorExpression[expr]//.CalcRule
 ];
 
 
@@ -1274,31 +1276,15 @@ SOrdinaryDerivative[T_ATensor, dIndex_Symbol, coordinates_List] := Module[
 
 
 (*\:76f4\:63a5\:8ba1\:7b97\:8868\:8fbe\:5f0f\:7684\:5206\:91cf*)
-STSpecify[expr__] := Module[{},
-	SCalcSpecificExpression @ InputExplain @ expr
-]
-
-
-(*\:5148\:5c06\:62bd\:8c61\:6307\:6807\:8868\:8fbe\:5f0f\:8fdb\:884c\:4e00\:5b9a\:7684\:7b80\:5316*)
-STSimSpecify[expr__] := Module[
-{
-	t
-},
-	(*\:5148\:8fdb\:884c\:7b80\:5316*)
-	t = STCalculate[expr];
-	(*\:5982\:679c\:8fd4\:56de\:4e860,\:5373\:96f6\:5411\:91cf*)
-	If[
-		t === 0,
-		Row[{"Result is a None Tensor"}],
-		SCalcSpecificExpression[t]
-	]
+STCalcComponents[expr_] := Module[{},
+	SCalcSpecificExpression[ToTensorExpression[expr]]
 ]
 
 
 SCalcSpecificExpression::componentsMiss = "\!\(\*SuperscriptBox[SubscriptBox[\(\:5f20\:91cf`1`\), \(`2`\)], \(`3`\)]\)\:672a\:8bbe\:7f6e\:5206\:91cf.";
 SCalcSpecificExpression::coordinatesMiss = "\:672a\:9009\:53d6\:5750\:6807\:7cfb.";
 
-SCalcSpecificExpression[expr__] := Module[
+SCalcSpecificExpression[expr_] := Module[
 {
 	expression,
 	coordinates,
